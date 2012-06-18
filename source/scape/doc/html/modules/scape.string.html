@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.complex.html">scape.math.complex</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li><strong>scape.string</strong></li>
+	
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.string</code></h1>
+
+<p><p><b>Module:</b> String extensions. </p> </p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#_replace">_replace</a>&nbsp;(str, tab)</td>
+	<td class="summary"> </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#chop">chop</a>&nbsp;(str)</td>
+	<td class="summary">Chop off last character in string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#compilestring">compilestring</a>&nbsp;(string)</td>
+	<td class="summary">Compile a chunk of source code from a string </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#getiden">getiden</a>&nbsp;(str, ttab)</td>
+	<td class="summary">Get identifier from beginning of string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#getnumber">getnumber</a>&nbsp;(str)</td>
+	<td class="summary">Get number from beginning of string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#interpolate">interpolate</a>&nbsp;(str, arg)</td>
+	<td class="summary">String interpolation.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ltrim">ltrim</a>&nbsp;(str)</td>
+	<td class="summary">Trim leading whitespaces.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#reverse">reverse</a>&nbsp;(str)</td>
+	<td class="summary">Reverse string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#rtrim">rtrim</a>&nbsp;(str)</td>
+	<td class="summary">Trim trailing whitespaces.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#split">split</a>&nbsp;(str, delim, plain, maxnum)</td>
+	<td class="summary">Split string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#trim">trim</a>&nbsp;(str)</td>
+	<td class="summary">Trim trailing and leading whitespaces.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="_replace"></a><strong>_replace</strong>&nbsp;(str, tab)</dt>
+<dd>
+
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: 
+	</li>
+	
+	<li>
+	  tab: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="chop"></a><strong>chop</strong>&nbsp;(str)</dt>
+<dd>
+Chop off last character in string.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="compilestring"></a><strong>compilestring</strong>&nbsp;(string)</dt>
+<dd>
+Compile a chunk of source code from a string
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  string: a string which contains a chunk of lua source code
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+byte-code string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="getiden"></a><strong>getiden</strong>&nbsp;(str, ttab)</dt>
+<dd>
+Get identifier from beginning of string.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+	<li>
+	  ttab: token tablex
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+token and character count
+
+
+
+</dd>
+
+
+
+
+<dt><a name="getnumber"></a><strong>getnumber</strong>&nbsp;(str)</dt>
+<dd>
+Get number from beginning of string.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+number and character count
+
+
+
+</dd>
+
+
+
+
+<dt><a name="interpolate"></a><strong>interpolate</strong>&nbsp;(str, arg)</dt>
+<dd>
+String interpolation.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+	<li>
+	  arg: argument table (or single scalar argument)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ltrim"></a><strong>ltrim</strong>&nbsp;(str)</dt>
+<dd>
+Trim leading whitespaces.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="reverse"></a><strong>reverse</strong>&nbsp;(str)</dt>
+<dd>
+Reverse string.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+reverse of string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="rtrim"></a><strong>rtrim</strong>&nbsp;(str)</dt>
+<dd>
+Trim trailing whitespaces.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="split"></a><strong>split</strong>&nbsp;(str, delim, plain, maxnum)</dt>
+<dd>
+Split string. Partition string into a number of fragments using the specified delimiter. If the maximum number of fragments is set to <tt>nil</tt> then the string will be completely partitioned.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string to split
+	</li>
+	
+	<li>
+	  delim: delimiter string or pattern [" "]
+	</li>
+	
+	<li>
+	  plain: use plain matching for delimiter [<tt>false</tt>]
+	</li>
+	
+	<li>
+	  maxnum: maximum number of partitions [<i>str:len()</i>]
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>table</i> of fragments
+
+
+
+</dd>
+
+
+
+
+<dt><a name="trim"></a><strong>trim</strong>&nbsp;(str)</dt>
+<dd>
+Trim trailing and leading whitespaces.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  str: string
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result string
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

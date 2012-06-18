@@ -1,0 +1,1497 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li><strong>scape.math.complex</strong></li>
+	
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.math.complex</code></h1>
+
+<p><p><b>Prototype:</b> complex numbers. </p> </p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#__add">__add</a>&nbsp;(a, b)</td>
+	<td class="summary">Addition operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__div">__div</a>&nbsp;(a, b)</td>
+	<td class="summary">Division operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__eq">__eq</a>&nbsp;(a, b)</td>
+	<td class="summary">Equality operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__mul">__mul</a>&nbsp;(a, b)</td>
+	<td class="summary">Multiplication operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__ne">__ne</a>&nbsp;(a, b)</td>
+	<td class="summary">Non-equality operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__sub">__sub</a>&nbsp;(a, b)</td>
+	<td class="summary">Substraction operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__tostring">__tostring</a>&nbsp;(self)</td>
+	<td class="summary"><i>tostring()</i> operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__unm">__unm</a>&nbsp;(a)</td>
+	<td class="summary">Unary minus operator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#abs">abs</a>&nbsp;(self)</td>
+	<td class="summary">Return absolute value (radius) of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#acos">acos</a>&nbsp;(self)</td>
+	<td class="summary">Inverse cosine of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#acosh">acosh</a>&nbsp;(self)</td>
+	<td class="summary">Inverse hyperbolic cosine.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#arg">arg</a>&nbsp;(self)</td>
+	<td class="summary">Return argument (angle) of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#asin">asin</a>&nbsp;(self)</td>
+	<td class="summary">Inverse sine of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#asinh">asinh</a>&nbsp;(self)</td>
+	<td class="summary">Inverse hyperbolic sine.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#atan">atan</a>&nbsp;(self)</td>
+	<td class="summary">Inverse tangens of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#atanh">atanh</a>&nbsp;(self)</td>
+	<td class="summary">Inverse hyperbolic tangens.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#cast">cast</a>&nbsp;(z)</td>
+	<td class="summary">Cast to complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#conj">conj</a>&nbsp;(self)</td>
+	<td class="summary">Return conjugate of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#cos">cos</a>&nbsp;(self)</td>
+	<td class="summary">Cosine of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#cosh">cosh</a>&nbsp;(self)</td>
+	<td class="summary">Hyperbolic cosine of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#exp">exp</a>&nbsp;(self)</td>
+	<td class="summary">Natural exponential of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#im">im</a>&nbsp;(self)</td>
+	<td class="summary">Return imaginary part.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#log">log</a>&nbsp;(self)</td>
+	<td class="summary">Natural logarithm of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#log10">log10</a>&nbsp;(self)</td>
+	<td class="summary">Base-10 logarithm of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#new">new</a>&nbsp;(re, im)</td>
+	<td class="summary">Create new complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#polar">polar</a>&nbsp;(radius, angle)</td>
+	<td class="summary">Create complex from polar coordinates.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#pow">pow</a>&nbsp;(a, b)</td>
+	<td class="summary">Power function.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#re">re</a>&nbsp;(self)</td>
+	<td class="summary">Return real part.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#round">round</a>&nbsp;(self, prec)</td>
+	<td class="summary">Round complex number to given precision.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#set">set</a>&nbsp;(self, re, im)</td>
+	<td class="summary">Replace real and imaginary part.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#sin">sin</a>&nbsp;(self)</td>
+	<td class="summary">Sine of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#sinh">sinh</a>&nbsp;(self)</td>
+	<td class="summary">Hyperbolic sine of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#sqrt">sqrt</a>&nbsp;(self)</td>
+	<td class="summary">Square root of complex numer.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#tan">tan</a>&nbsp;(self)</td>
+	<td class="summary">Tangens of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#tanh">tanh</a>&nbsp;(self)</td>
+	<td class="summary">Hyperbolic tangens of complex number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#trunc">trunc</a>&nbsp;(self, prec)</td>
+	<td class="summary">Truncate complex number to given precision.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="__add"></a><strong>__add</strong>&nbsp;(a, b)</dt>
+<dd>
+Addition operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex/real number
+	</li>
+	
+	<li>
+	  b: complex/real number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+a+b
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__div"></a><strong>__div</strong>&nbsp;(a, b)</dt>
+<dd>
+Division operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex/real number
+	</li>
+	
+	<li>
+	  b: complex/real number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+a/b
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__eq"></a><strong>__eq</strong>&nbsp;(a, b)</dt>
+<dd>
+Equality operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex number
+	</li>
+	
+	<li>
+	  b: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+a == b
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__mul"></a><strong>__mul</strong>&nbsp;(a, b)</dt>
+<dd>
+Multiplication operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex/real number
+	</li>
+	
+	<li>
+	  b: complex/real number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+a*b
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__ne"></a><strong>__ne</strong>&nbsp;(a, b)</dt>
+<dd>
+Non-equality operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex number
+	</li>
+	
+	<li>
+	  b: comple number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+a ~= b
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__sub"></a><strong>__sub</strong>&nbsp;(a, b)</dt>
+<dd>
+Substraction operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex/real number
+	</li>
+	
+	<li>
+	  b: complex/real number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+a-b
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__tostring"></a><strong>__tostring</strong>&nbsp;(self)</dt>
+<dd>
+<i>tostring()</i> operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+string which represents complex number
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__unm"></a><strong>__unm</strong>&nbsp;(a)</dt>
+<dd>
+Unary minus operator.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+-a
+
+
+
+</dd>
+
+
+
+
+<dt><a name="abs"></a><strong>abs</strong>&nbsp;(self)</dt>
+<dd>
+Return absolute value (radius) of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+absolute value
+
+
+
+</dd>
+
+
+
+
+<dt><a name="acos"></a><strong>acos</strong>&nbsp;(self)</dt>
+<dd>
+Inverse cosine of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="acosh"></a><strong>acosh</strong>&nbsp;(self)</dt>
+<dd>
+Inverse hyperbolic cosine.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="arg"></a><strong>arg</strong>&nbsp;(self)</dt>
+<dd>
+Return argument (angle) of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+argument
+
+
+
+</dd>
+
+
+
+
+<dt><a name="asin"></a><strong>asin</strong>&nbsp;(self)</dt>
+<dd>
+Inverse sine of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="asinh"></a><strong>asinh</strong>&nbsp;(self)</dt>
+<dd>
+Inverse hyperbolic sine.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="atan"></a><strong>atan</strong>&nbsp;(self)</dt>
+<dd>
+Inverse tangens of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="atanh"></a><strong>atanh</strong>&nbsp;(self)</dt>
+<dd>
+Inverse hyperbolic tangens.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="cast"></a><strong>cast</strong>&nbsp;(z)</dt>
+<dd>
+Cast to complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  z: real or complex
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+complex number
+
+
+
+</dd>
+
+
+
+
+<dt><a name="conj"></a><strong>conj</strong>&nbsp;(self)</dt>
+<dd>
+Return conjugate of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+conjugate of complex number
+
+
+
+</dd>
+
+
+
+
+<dt><a name="cos"></a><strong>cos</strong>&nbsp;(self)</dt>
+<dd>
+Cosine of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="cosh"></a><strong>cosh</strong>&nbsp;(self)</dt>
+<dd>
+Hyperbolic cosine of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="exp"></a><strong>exp</strong>&nbsp;(self)</dt>
+<dd>
+Natural exponential of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="im"></a><strong>im</strong>&nbsp;(self)</dt>
+<dd>
+Return imaginary part.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+imaginary part
+
+
+
+</dd>
+
+
+
+
+<dt><a name="log"></a><strong>log</strong>&nbsp;(self)</dt>
+<dd>
+Natural logarithm of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="log10"></a><strong>log10</strong>&nbsp;(self)</dt>
+<dd>
+Base-10 logarithm of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="new"></a><strong>new</strong>&nbsp;(re, im)</dt>
+<dd>
+Create new complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  re: real part
+	</li>
+	
+	<li>
+	  im: imaginary part
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+complex number
+
+
+
+</dd>
+
+
+
+
+<dt><a name="polar"></a><strong>polar</strong>&nbsp;(radius, angle)</dt>
+<dd>
+Create complex from polar coordinates.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  radius: radius
+	</li>
+	
+	<li>
+	  angle: angle
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+complex number
+
+
+
+</dd>
+
+
+
+
+<dt><a name="pow"></a><strong>pow</strong>&nbsp;(a, b)</dt>
+<dd>
+Power function.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: complex number
+	</li>
+	
+	<li>
+	  b: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+a^b
+
+
+
+</dd>
+
+
+
+
+<dt><a name="re"></a><strong>re</strong>&nbsp;(self)</dt>
+<dd>
+Return real part.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+real part
+
+
+
+</dd>
+
+
+
+
+<dt><a name="round"></a><strong>round</strong>&nbsp;(self, prec)</dt>
+<dd>
+Round complex number to given precision.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+	<li>
+	  prec: precision
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="set"></a><strong>set</strong>&nbsp;(self, re, im)</dt>
+<dd>
+Replace real and imaginary part.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+	<li>
+	  re: real part
+	</li>
+	
+	<li>
+	  im: imaginary part
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+complex number
+
+
+
+</dd>
+
+
+
+
+<dt><a name="sin"></a><strong>sin</strong>&nbsp;(self)</dt>
+<dd>
+Sine of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="sinh"></a><strong>sinh</strong>&nbsp;(self)</dt>
+<dd>
+Hyperbolic sine of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="sqrt"></a><strong>sqrt</strong>&nbsp;(self)</dt>
+<dd>
+Square root of complex numer. The branch cut is on the negative axis.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="tan"></a><strong>tan</strong>&nbsp;(self)</dt>
+<dd>
+Tangens of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="tanh"></a><strong>tanh</strong>&nbsp;(self)</dt>
+<dd>
+Hyperbolic tangens of complex number.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+
+
+<dt><a name="trunc"></a><strong>trunc</strong>&nbsp;(self, prec)</dt>
+<dd>
+Truncate complex number to given precision.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: complex number
+	</li>
+	
+	<li>
+	  prec: precision
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+result
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

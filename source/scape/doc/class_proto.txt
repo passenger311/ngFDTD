@@ -1,0 +1,25 @@
+1. prototype model
+
+inheritance by cloning
+
+A = proto.clone( B, {} )
+create new prototype with parent B.
+
+parent = getmetatable(A) 
+A.__index = A
+
+operators are not inherited and must be redefined.
+
+2. class model
+
+A = class.def({}, B, C ) 
+create new class with ancestors B,C using supplied table for members.
+
+proxy = getmetatable(A)
+is proxy which contains dispatch functions searching all ancestors for members.
+
+a = A({})
+creates instance of class (using supplied table)
+
+getmetatable(a) == proxy
+

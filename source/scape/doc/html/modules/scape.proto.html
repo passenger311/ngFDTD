@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.complex.html">scape.math.complex</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li><strong>scape.proto</strong></li>
+	
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.proto</code></h1>
+
+<p><p><b>Module</b>: super light-weight prototyping. </p> The metatable of a prototype always points to its parent. Delegation (rather than copying) is used to search ancestors for data and function members. Instantation is therefore generally fast but dispatch slows down for deep hierarchies. Fusion allows to flatten the hierarchy of ancestors. First-order instances are empty tables with a metatable pointing to the ancestor prototype. Tagging adds an identifier to the prototype which enables isa-checks. </p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#clone">clone</a>&nbsp;(parent, tab)</td>
+	<td class="summary">Create new offspring from parent prototype.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fuse">fuse</a>&nbsp;(self)</td>
+	<td class="summary">Fuse all ancestor tables into prototype.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#isa">isa</a>&nbsp;(self, other)</td>
+	<td class="summary">Check whether prototype is an offspring of other prototype.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#parent">parent</a>&nbsp;(self)</td>
+	<td class="summary">Get parent of prototype.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#scrub">scrub</a>&nbsp;(self)</td>
+	<td class="summary">Scrub prototype removing module related variables.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#seal">seal</a>&nbsp;(self)</td>
+	<td class="summary">Seal protoype by using tag, fuse and scrub (in this order).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#tag">tag</a>&nbsp;(self)</td>
+	<td class="summary">Tag prototype object by adding an id.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#type">type</a>&nbsp;(self)</td>
+	<td class="summary">Return type of prototype.</td>
+	</tr>
+
+</table>
+
+
+
+
+<h2>Tables</h2>
+<table class="table_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#root">root</a></td>
+	<td class="summary">Root prototype.</td>
+	</tr>
+
+</table>
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="clone"></a><strong>clone</strong>&nbsp;(parent, tab)</dt>
+<dd>
+Create new offspring from parent prototype.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  parent: parent
+	</li>
+	
+	<li>
+	  tab: table for offspring
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+new offspring
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fuse"></a><strong>fuse</strong>&nbsp;(self)</dt>
+<dd>
+Fuse all ancestor tables into prototype. This increases performance of function dispatch at cost of dynamicity.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: prototype
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="isa"></a><strong>isa</strong>&nbsp;(self, other)</dt>
+<dd>
+Check whether prototype is an offspring of other prototype. Requires parent prototype to be tagged using <i>tag()</i> function.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: prototype
+	</li>
+	
+	<li>
+	  other: other prototype
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> or <tt>nil</tt>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="parent"></a><strong>parent</strong>&nbsp;(self)</dt>
+<dd>
+Get parent of prototype.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: prototype
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+parent prototype
+
+
+
+</dd>
+
+
+
+
+<dt><a name="scrub"></a><strong>scrub</strong>&nbsp;(self)</dt>
+<dd>
+Scrub prototype removing module related variables.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: prototype
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="seal"></a><strong>seal</strong>&nbsp;(self)</dt>
+<dd>
+Seal protoype by using tag, fuse and scrub (in this order).
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: prototype
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="tag"></a><strong>tag</strong>&nbsp;(self)</dt>
+<dd>
+Tag prototype object by adding an id. This enables <i>isa</i> checks for this type.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: prototype
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="type"></a><strong>type</strong>&nbsp;(self)</dt>
+<dd>
+Return type of prototype.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: prototype
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+metatable of self
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+<h2><a name="tables"></a>Tables</h2>
+<dl class="table">
+
+<dt><a name="root"></a><strong>root</strong></dt>
+<dd>Root prototype. All prototypes are offsprings of <i>root</i>.
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

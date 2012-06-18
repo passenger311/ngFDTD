@@ -1,0 +1,13 @@
+
+- implement luasml classes as prototypes
+- matrix/vector math
+- optional import semantics
+
+local lib = require "scape.lib"
+lib.import("math.complex", "math.vector", "container" )
+
+...
+
+local math = lib.math
+local vec = math.vector
+

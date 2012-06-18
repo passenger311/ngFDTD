@@ -1,0 +1,1 @@
+/usr/bin/gcc  -fPIC   -shared -Wl,-soname,core.so -o ../../core.so CMakeFiles/core-dll.dir/lib.c.o CMakeFiles/core-dll.dir/sysclock.c.o CMakeFiles/core-dll.dir/bytecast.c.o -Wl,-rpath,::::::: 

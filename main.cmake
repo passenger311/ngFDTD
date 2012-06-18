@@ -1,0 +1,205 @@
+#### -*- cmake -*- 
+##
+## main
+##
+## global hook - include this file from any subdirectory!
+##
+
+if( NOT MAIN_CMAKE_GUARD )
+
+set(MAIN_CMAKE_GUARD 1)
+
+#### version string
+
+set(PROJECT_VERSION 
+  "${PROJECT_MAJOR_VERSION}.${PROJECT_MINOR_VERSION}.${PROJECT_PATCH_VERSION}")
+
+#### find top level directory
+
+function(find_top_dir CURRENT_DIR RESULT_NAME)
+  get_filename_component(CURRENT_DIR ${CURRENT_DIR} ABSOLUTE)
+  if ( EXISTS "${CURRENT_DIR}/main.cmake" )
+    set(${RESULT_NAME} ${CURRENT_DIR} PARENT_SCOPE)
+  else()
+    find_top_dir("${CURRENT_DIR}/.." ${RESULT_NAME})    
+    set(${RESULT_NAME} ${${RESULT_NAME}} PARENT_SCOPE)
+  endif()
+endfunction()
+
+find_top_dir(${CMAKE_CURRENT_SOURCE_DIR} PROJECT_HOME)
+
+#### process install PREFIX variable
+
+if( NOT PREFIX )
+  set(PREFIX ${PROJECT_HOME}/build/INSTALL)
+endif()
+
+set(CMAKE_INSTALL_PREFIX ${PREFIX})
+
+#### select architecture file
+
+#### setup "distclean" target
+
+add_custom_target(distclean
+  COMMAND ${CMAKE_MAKE_PROGRAM} clean
+  COMMAND ${CMAKE_COMMAND} -D PROJECT_HOME:PATH=${PROJECT_HOME} -P ${PROJECT_HOME}/cmake/custom/distclean.cmake
+  )
+
+#### top build or local build?
+
+if ( ${PROJECT_HOME} STREQUAL ${CMAKE_SOURCE_DIR} )
+  set(TOP_BUILD ON)
+endif()
+
+#### set module directory
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_HOME}/cmake/macros ${PROJECT_HOME}/cmake/modules)
+
+#### require macro
+
+macro(require PATH)
+
+  # set TARGET_PATH, TARGET_NAME, TARGET, TARGET_DIR global
+
+  message("-> require: ${TARGET_PATH}")
+  set(TARGET_PATH ${PATH})
+  get_filename_component(TARGET_NAME ${TARGET_PATH} NAME)
+  get_filename_component(TARGET_DIR ${PROJECT_HOME}/${TARGET_PATH} ABSOLUTE)
+  string(TOUPPER ${TARGET_NAME} TARGET)
+  set(NAME ${TARGET_NAME})
+  if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
+
+    message("-> configuring: ${TARGET_PATH}")
+    set(G_VARS BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE)
+
+    # default values
+    set(BUILD on)
+    set(SOURCE_NAME )
+    set(BUILD_VERSION 0.0.0)
+    set(FIND_VERSION 0.0.0)
+    set(UNTAR_CMD tar xzf)
+    
+    if( EXISTS "${TARGET_DIR}/CONTROL.cmake" ) 
+      message("-> include CONTROL.cmake")
+      include(${TARGET_DIR}/CONTROL.cmake)
+    endif()
+
+    set(${TARGET}_BUILD ${BUILD})
+
+    if( BUILD ) 
+      if( EXISTS "${TARGET_DIR}/PATCH/" ) 
+	message("-> has PATCH directory")
+	set(PATCH_DIR ${TARGET_DIR}/PATCH/)
+      endif()    
+      if( TARBALL ) 
+	set(SOURCE_DIR ${CMAKE_BINARY_DIR}/SOURCE/${SOURCE_NAME})
+      else()
+	set(SOURCE_DIR ${TARGET_DIR}/${SOURCE_NAME})
+      endif()
+      if (BUILD_IN_SOURCE)
+	set(BINARY_DIR ${SOURCE_DIR})
+      else()
+	set(BINARY_DIR ${CMAKE_BINARY_DIR}/${TARGET_PATH}/${SOURCE_NAME})
+      endif()
+      unset(X)
+      foreach(SUBDIR ${INCLUDE_DIR})
+	set(X ${X} ${SOURCE_DIR}/${SUBDIR}) 
+      endforeach()
+      set(INCLUDE_DIR ${X})
+      if ( LIBRARY_DIR )
+	set(LIBRARY_DIR ${BINARY_DIR}/${LIBRARY_DIR})
+      endif()
+      
+      # assign to target variables
+      foreach(VAR ${G_VARS})
+	set(${TARGET}_${VAR} ${${VAR}})
+	message("${TARGET}_${VAR} = ${${VAR}}")
+      endforeach()
+    
+      # unpack tarball and patch source
+      if ( TARBALL AND NOT EXISTS "${SOURCE_DIR}/")
+	message("-> ${UNTAR_CMD} ${TARBALL} in ${CMAKE_BINARY_DIR}/SOURCE")
+	file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/SOURCE)
+	execute_process(COMMAND ${CMAKE_COMMAND} -E ${UNTAR_CMD} ${TARGET_DIR}/${TARBALL} 
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/SOURCE )
+      endif()
+      file( COPY ${PATCH_DIR}/
+	DESTINATION ${SOURCE_DIR}/
+	PATTERN * ) 
+
+    else() # try to find package
+    
+      if( EXISTS "${TARGET_DIR}/FIND.cmake" ) 
+	message("-> include FIND.cmake")
+	include(${TARGET_DIR}/FIND.cmake)
+	if ( NOT ${TARGET}_FOUND )
+	  message("-> WARNING: missing package ${NAME}!")
+	endif()
+	foreach(VAR ${G_VARS})
+	  message("${TARGET}_${VAR} = ${${TARGET}_${VAR}}")
+	endforeach()
+      else()
+	message("-> WARNING: skipping ${TARGET} (no FIND.cmake script)!")
+      endif()
+
+    endif()
+    
+    # add subdirectory if BUILD flag is set
+    if ( ${TARGET}_BUILD )
+      message("-> add ${${TARGET}_SOURCE_DIR}")
+      add_subdirectory(${${TARGET}_SOURCE_DIR} ${${TARGET}_BINARY_DIR})
+    endif()
+    set(${TARGET}_REQUIRE_GUARD 1)
+  endif()
+
+endmacro()
+
+#### install path defaults
+
+set(INSTALL_DIR_BINARY bin)
+set(INSTALL_DIR_LIBRARY lib)
+set(INSTALL_DIR_INCLUDE include)
+set(INSTALL_DIR_LUA lua)
+set(INSTALL_DIR_SHARE share)
+set(INSTALL_DIR_DOC doc)
+
+#### include macro scripts from macro/
+
+include(macro_install_lua)
+
+#### load cmake modules
+
+include(CheckCCompilerFlag)
+include(CheckCXXCompilerFlag)
+#include(CheckFortranCompilerFlag)
+
+#### 
+
+if ( CMAKE_CROSSCOMPILING ) 
+  message("XXXXXXXXXXXX")
+endif()
+
+#### global project header file
+
+if( EXISTS ${PROJECT_HOME}/config.h.in )
+  configure_file(${PROJECT_HOME}/config.h.in ${PROJECT_HOME}/config.h)
+  set_directory_properties(PROPERTIES
+    ADDITIONAL_MAKE_CLEAN_FILES ${PROJECT_HOME}/config.h
+    )
+endif()
+
+#### make build/tools directory
+
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/tools)
+
+#### summary
+
+message("PROJECT_NAME = ${PROJECT_NAME}")
+message("PROJECT_HOME = ${PROJECT_HOME}")
+message("PROJECT_VERSION = ${PROJECT_VERSION}")
+message("PREFIX = ${PREFIX}")
+message("TOP_BUILD = ${TOP_BUILD}")
+
+####
+
+endif(NOT MAIN_CMAKE_GUARD)

@@ -1,0 +1,907 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.complex.html">scape.math.complex</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li><strong>scape.struct.bag</strong></li>
+	
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.struct.bag</code></h1>
+
+<p><p><b>Prototype:</b> an unordered bag of values. </p> The bag holds a maximum of one item of a kind. Adding an item to bag which is already in the bag will not alter the bag. </p></p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#__add">__add</a>&nbsp;(a, b)</td>
+	<td class="summary">Create union of two bags.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__call">__call</a>&nbsp;(self, key, value)</td>
+	<td class="summary">Return count of item or increment by value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__mod">__mod</a>&nbsp;(self, other)</td>
+	<td class="summary">Check whether bag contains item(s).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__mul">__mul</a>&nbsp;(a, b, self, other)</td>
+	<td class="summary">Create intersection of two bags.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__sub">__sub</a>&nbsp;(a, b, self, other)</td>
+	<td class="summary">Create difference of two bags.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#__tostring">__tostring</a>&nbsp;(self)</td>
+	<td class="summary">Build a printable string from bag.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#add">add</a>&nbsp;(self, other)</td>
+	<td class="summary">Add item(s) to bag.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#clone">clone</a>&nbsp;(self, object)</td>
+	<td class="summary">Create a clone of self.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#contains">contains</a>&nbsp;(self, other)</td>
+	<td class="summary">Check whether bag contains item(s).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#count">count</a>&nbsp;(self, item)</td>
+	<td class="summary">Count for specific item.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#del">del</a>&nbsp;(self, other)</td>
+	<td class="summary">Delete from bag.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fromtable">fromtable</a>&nbsp;(self, tab)</td>
+	<td class="summary">Load from table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#intersect">intersect</a>&nbsp;(self, other)</td>
+	<td class="summary">Intersect with other.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#isempty">isempty</a>&nbsp;(self)</td>
+	<td class="summary">Check whether self is empty.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#items">items</a>&nbsp;(self)</td>
+	<td class="summary">Iterate over items.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#new">new</a>&nbsp;(tab)</td>
+	<td class="summary">Create bag and initialize with table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#purge">purge</a>&nbsp;(self)</td>
+	<td class="summary">Purge all items.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#size">size</a>&nbsp;(self)</td>
+	<td class="summary">Number of items.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="__add"></a><strong>__add</strong>&nbsp;(a, b)</dt>
+<dd>
+Create union of two bags.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: bag
+	</li>
+	
+	<li>
+	  b: other bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+union of items
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__call"></a><strong>__call</strong>&nbsp;(self, key, value)</dt>
+<dd>
+Return count of item or increment by value.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  key: value (optional)
+	</li>
+	
+	<li>
+	  value: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+item count
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__mod"></a><strong>__mod</strong>&nbsp;(self, other)</dt>
+<dd>
+Check whether bag contains item(s).
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  other: item, table of items or bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>true</i> if self contains item(s), otherwise <i>false</i>
+
+
+
+<h3>See also:</h3>
+<ul>
+	
+	<li><a href="../modules/scape.struct.bag.html#contains">
+		contains
+	</a>
+	
+</ul>
+
+</dd>
+
+
+
+
+<dt><a name="__mul"></a><strong>__mul</strong>&nbsp;(a, b, self, other)</dt>
+<dd>
+Create intersection of two bags.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: 
+	</li>
+	
+	<li>
+	  b: 
+	</li>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  other: other bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+intersection of items
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__sub"></a><strong>__sub</strong>&nbsp;(a, b, self, other)</dt>
+<dd>
+Create difference of two bags.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: 
+	</li>
+	
+	<li>
+	  b: 
+	</li>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  other: other bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+difference of items
+
+
+
+</dd>
+
+
+
+
+<dt><a name="__tostring"></a><strong>__tostring</strong>&nbsp;(self)</dt>
+<dd>
+Build a printable string from bag.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="add"></a><strong>add</strong>&nbsp;(self, other)</dt>
+<dd>
+Add item(s) to bag.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  other: item, table of items, or set/bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="clone"></a><strong>clone</strong>&nbsp;(self, object)</dt>
+<dd>
+Create a clone of self.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  object: new object [{}]
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+clone of bag.
+
+
+
+</dd>
+
+
+
+
+<dt><a name="contains"></a><strong>contains</strong>&nbsp;(self, other)</dt>
+<dd>
+Check whether bag contains item(s).
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  other: item, table of items or bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>true</i> if self contains item(s), otherwise <i>false</i>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="count"></a><strong>count</strong>&nbsp;(self, item)</dt>
+<dd>
+Count for specific item.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: reference
+	</li>
+	
+	<li>
+	  item: item
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+count of item
+
+
+
+</dd>
+
+
+
+
+<dt><a name="del"></a><strong>del</strong>&nbsp;(self, other)</dt>
+<dd>
+Delete from bag.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  other: item, table of items, or set/bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fromtable"></a><strong>fromtable</strong>&nbsp;(self, tab)</dt>
+<dd>
+Load from table.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  tab: item table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="intersect"></a><strong>intersect</strong>&nbsp;(self, other)</dt>
+<dd>
+Intersect with other.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+	<li>
+	  other: item, table of items or set/bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="isempty"></a><strong>isempty</strong>&nbsp;(self)</dt>
+<dd>
+Check whether self is empty.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if empty; <tt>false</tt> otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="items"></a><strong>items</strong>&nbsp;(self)</dt>
+<dd>
+Iterate over items.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+iterator
+
+
+
+</dd>
+
+
+
+
+<dt><a name="new"></a><strong>new</strong>&nbsp;(tab)</dt>
+<dd>
+Create bag and initialize with table.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  tab: table of items
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+new bag
+
+
+
+</dd>
+
+
+
+
+<dt><a name="purge"></a><strong>purge</strong>&nbsp;(self)</dt>
+<dd>
+Purge all items.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="size"></a><strong>size</strong>&nbsp;(self)</dt>
+<dd>
+Number of items.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: bag
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+number of items
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

@@ -1,0 +1,29 @@
+
+set(LOCATIONS
+  ${LOCATIONS}
+  $ENV{LUAJIT_DIR}
+)
+
+find_path(LUAJIT_INCLUDE_DIR luajit.h
+  PATHS
+  ${LOCATIONS}
+  PATH_SUFFIXES include/luajit include
+)
+
+find_library(LUAJIT_LIBRARY
+  NAMES luajit
+  PATHS
+  ${LOCATIONS}
+  PATH_SUFFIXES lib64 lib
+)
+
+include(FindPackageHandleStandardArgs)
+
+find_package_handle_standard_args(LuaJIT DEFAULT_MSG LUAJIT_LIBRARIES LUAJIT_INCLUDE_DIR)
+
+if(LUAJIT_LIBRARIES AND LUAJIT_INCLUDE_DIR)
+  set(LUAJIT_FOUND TRUE)
+endif()
+
+mark_as_advanced(LUAJIT_INCLUDE_DIR LUAJIT_LIBRARIES LUAJIT_LIBRARY LUAJIT_MATH_LIBRARY)
+

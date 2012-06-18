@@ -1,0 +1,56 @@
+
+_________________
+__PREREQUISITES__
+
+* lua (= 5.2) or luajit (= 2.0)
+* cmake (>= 2.8)
+* make
+* luadoc 
+
+_________________
+__RUN SCRIPTS____
+
+lua run/make   <project>           -- build binary components of project
+lua run/clean  <project>           -- cleanup build
+lua run/install <project> <prefix> -- install in <prefix> directory
+lua run/refdoc <project>           -- build documentation for project
+lua run/import <project>           -- run import, listing all imported module
+lua run/tests  <project>  	   -- run tests for <project>
+lua run/sign   <project>  	   -- sign source files of <project> 
+lua run/version <project>	   -- list project version
+
+_________________
+__INSTALLATION___
+
+Each sub-project resides in a separate directory. After building the binary 
+components / reference documentation the directory may be copied to a global
+location within the lua search path.
+
+
+_________________
+__DIRECTORIES____
+
+main-directory:
+
+<project>.lua
+<project>     --+- Readme.txt 
+	      	|
+		+- Copyright.txt
+	        | 
+		+- lib.lua
+	        | 
+	        +- src --+- CMakeLists.txt
+		|        |     
+		|        +- ...
+		|     
+		+- build
+		|
+		+- tests 
+		|
+		+- ....
+
+
+Binary dll's reside in build/lib, include files in build/include. Dependend 
+libraries and executables are stored directly in the main directory.
+
+

@@ -1,0 +1,721 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.complex.html">scape.math.complex</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li><strong>scape.object</strong></li>
+	
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.object</code></h1>
+
+<p><p><b>Module</b>: core object model. </p> Allows to create and derive objects using <i>create</i>, <i>fuse</i>, <i>delegate</i> and <i>merge</i> functions. In combination with base linearizers and the various dispatch mechanisms these functions allow to implement a variety of object models. </p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#abstractmethod">abstractmethod</a>&nbsp;(...)</td>
+	<td class="summary">Return the abstract method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ancestors">ancestors</a>&nbsp;(self)</td>
+	<td class="summary">Return an iterator over all ancestor objects.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#c3bases">c3bases</a>&nbsp;(...)</td>
+	<td class="summary">C3 linearization of all ancestors.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#create">create</a>&nbsp;(self, objects, dispatch)</td>
+	<td class="summary">Create a new object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#delegate">delegate</a>&nbsp;(self, delegate)</td>
+	<td class="summary">Create a delegate to a parent object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#dfbases">dfbases</a>&nbsp;(...)</td>
+	<td class="summary">Simple depth-first linearization of all ancestors.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#dummymethod">dummymethod</a>&nbsp;(...)</td>
+	<td class="summary">Return the dummy method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fuse">fuse</a>&nbsp;(self)</td>
+	<td class="summary">Fuse ancestors into a single object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#implements">implements</a>&nbsp;(self, object)</td>
+	<td class="summary">Check whether an object has another object as ancestor.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#isobject">isobject</a>&nbsp;(self)</td>
+	<td class="summary">Check whether the argument is an object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#merge">merge</a>&nbsp;(self)</td>
+	<td class="summary">Merge the parent object into the delegate and return it as a new object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#parent">parent</a>&nbsp;(self)</td>
+	<td class="summary">Return the parent object of a delegate.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#proxydispatch">proxydispatch</a>&nbsp;(self, meta)</td>
+	<td class="summary">Proxy-dispatch.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#selfdispatch">selfdispatch</a>&nbsp;(self, meta)</td>
+	<td class="summary">Self-dispatch.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="abstractmethod"></a><strong>abstractmethod</strong>&nbsp;(...)</dt>
+<dd>
+Return the abstract method. Abstract methods throw an error when invoked and are not allowed to remain exposed after fusion.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  ...: dummy arguments
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+abstract method
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ancestors"></a><strong>ancestors</strong>&nbsp;(self)</dt>
+<dd>
+Return an iterator over all ancestor objects.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: object
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>ipairs()</i> style iterator
+
+
+
+</dd>
+
+
+
+
+<dt><a name="c3bases"></a><strong>c3bases</strong>&nbsp;(...)</dt>
+<dd>
+C3 linearization of all ancestors.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  ...: list of objects
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+linearized table of ancestor objects
+
+
+
+</dd>
+
+
+
+
+<dt><a name="create"></a><strong>create</strong>&nbsp;(self, objects, dispatch)</dt>
+<dd>
+Create a new object.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: 
+	</li>
+	
+	<li>
+	  objects: table of ancestor objects (optional)
+	</li>
+	
+	<li>
+	  dispatch: dispatcher (optional, default: proxydispatch)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="delegate"></a><strong>delegate</strong>&nbsp;(self, delegate)</dt>
+<dd>
+Create a delegate to a parent object.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: parent object
+	</li>
+	
+	<li>
+	  delegate: <i>optional</i> table used for delegate
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+delegate
+
+
+
+</dd>
+
+
+
+
+<dt><a name="dfbases"></a><strong>dfbases</strong>&nbsp;(...)</dt>
+<dd>
+Simple depth-first linearization of all ancestors.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  ...: list of objects
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+linearized table of ancestor objects
+
+
+
+</dd>
+
+
+
+
+<dt><a name="dummymethod"></a><strong>dummymethod</strong>&nbsp;(...)</dt>
+<dd>
+Return the dummy method. A dummy methods does nothing and is used when a default do-nothing operation is required.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  ...: dummy arguments
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+dummy method
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fuse"></a><strong>fuse</strong>&nbsp;(self)</dt>
+<dd>
+Fuse ancestors into a single object.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: object table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="implements"></a><strong>implements</strong>&nbsp;(self, object)</dt>
+<dd>
+Check whether an object has another object as ancestor.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: object
+	</li>
+	
+	<li>
+	  object: potential ancestor or parent object
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>true</i> if other is an ancestor, <i>false</i> otherwise.
+
+
+
+</dd>
+
+
+
+
+<dt><a name="isobject"></a><strong>isobject</strong>&nbsp;(self)</dt>
+<dd>
+Check whether the argument is an object.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: object
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>true</i> or <i>false</i>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="merge"></a><strong>merge</strong>&nbsp;(self)</dt>
+<dd>
+Merge the parent object into the delegate and return it as a new object.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: delegate
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+object
+
+
+
+</dd>
+
+
+
+
+<dt><a name="parent"></a><strong>parent</strong>&nbsp;(self)</dt>
+<dd>
+Return the parent object of a delegate. Note, this function gives only predictable results if the argument is a delegate.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: delegate
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+parent object
+
+
+
+</dd>
+
+
+
+
+<dt><a name="proxydispatch"></a><strong>proxydispatch</strong>&nbsp;(self, meta)</dt>
+<dd>
+Proxy-dispatch. Setup metatable index function which searches the array elements of the metatable for dispatch.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: object table
+	</li>
+	
+	<li>
+	  meta: metatable
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+object table
+
+
+
+</dd>
+
+
+
+
+<dt><a name="selfdispatch"></a><strong>selfdispatch</strong>&nbsp;(self, meta)</dt>
+<dd>
+Self-dispatch.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: object
+	</li>
+	
+	<li>
+	  meta: object metatable
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+object
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>
