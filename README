@@ -1,51 +1,59 @@
 
-_________________
-__SYPNOSIS_______
 
-_________________
-__CONFIGURATION__
+CONFIGURATION
+_______________________________________________________________________________
 
-1. edit CMakeLists.txt for project
+1. edit top-level "CMakeLists.txt" for project
    
    set project name, version number and targets (at end of file).
 
-2. edit files in setup/ directory
+2. setup components 
 
-   defining compiler flags (compiler.cmake), install location (install.cmake) 
-   packaging (package.cmake), and third party package search locations 
-   (search.cmake). 
+   customize/add components including "CONTROL.cmake", "FIND.cmake" and 
+   "PATCH/" in "extras/". Add components to "source/" including 
+   "CMakeLists.txt" files.
 
-3. edit config.h.in
+3. edit "config.h.in"
 
-  customizing c/c++ projects.
+   to customize the C/C++ project header.
 
-5. setup extras 
+4. edit files in "setup/"
 
-   customize/add CONTROL.cmake, FIND.cmake and PATCH  CMakeLists.txt in target
-   directory
+   define compiler flags in "compiler.cmake", install locations in 
+   "install.cmake", packaging in "package.cmake", and third party package 
+   search locations in "search.cmake". 
 
-_________________
-__BUILD TREE_____
 
-The build tree is constructed using the require(<package>) function tying 
-directories into the build process. 
 
-If present the CONTROL.cmake file is is processed in the target directory. If 
-not the directory (containing a CMakeLists.txt) file is directly tied into the 
-build process. In CONTROL.cmake: if BUILD is not "on" the FIND.cmake script is 
-used to search system for package component. If BUILD is "on" with a "TARBALL" 
-is set, then the tarball will be unpacked, the content of PATCH (if present) 
-copied into the unpacked source directory and this directory added to the cmake
-build.
+PROJECT TREE
+_______________________________________________________________________________
 
-_________________
-__BUILD PROCESS__
+The build tree is constructed from components using the require(<component>) 
+function which ties components on-demand into the build process. 
 
-Within "build" directory run
+In the component directory, the "CONTROL.cmake" file is is processed if present.
+If not the directory (containing a "CMakeLists.txt") file is directly added to 
+the cmake build process. In "CONTROL.cmake": if BUILD is not "on" the 
+"FIND.cmake" script is used to search system for package component. If BUILD 
+is "on" and a TARBALL specified, then the tarball will be unpacked, the content
+of "PATCH/" (if present) copied into the unpacked source directory and the 
+directory added to the cmake build.
+
+
+
+BUILD PROCESS
+_______________________________________________________________________________
+
+Create a "build" directory and enter it
+
+> mkdir build
+> cd build
+
+Then run
 
 > cmake .. [<options>]       
 
-to configure the build. Use the following options
+to configure the build. Consider the following options
 
 -DPREFIX=<install-prefix> 
 -DCMAKE_TOOLCHAIN_FILE=../cmake/toolchain/<file>
@@ -56,39 +64,43 @@ to specify the installation directory and the toolchain file. Use
 
 to build project. 
 
-_________________
-__INSTALLATION___
 
-Install location can be customized by editing setup/install.cmake. To install
+
+INSTALLATION
+_______________________________________________________________________________
+
+Install location can be customized by editing "setup/install.cmake". To install
 libraries, headers and runtime componenent type 
  
 > make install  
 
-from within the "build" directory. Default install directory is "build/INSTALL" 
-within the project tree.
+from within the "build/" directory. Default install directory is "install/" 
+within the current "build/" directory.
 
-_________________
-__CLEANUP________
 
-To cleanup build run
+
+CLEANUP
+_______________________________________________________________________________
+
+To cleanup the build run
 
 > make clean
 
-from within "build" directory or
+from within "build/" directory or
 
 > make distclean
 
-to remove INSTALL and wipe content of "build" directory
+to wipe the content of the "build/" directory
 
 
-_________________
-__PACKAGING______
+PACKAGING
+_______________________________________________________________________________
 
 Run
 
 > cpack 
 
-from within the "build" directory to generate standard package types or  
+from within the "build/" directory to generate standard package types or  
 
 > cpack -G<generator>
 
