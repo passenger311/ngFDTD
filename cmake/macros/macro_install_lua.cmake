@@ -1,5 +1,5 @@
 
-## macro_install_lua
+## install_lua
 ##
 ## run the macro with same name from within lua project directory.
 
