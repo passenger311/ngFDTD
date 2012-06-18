@@ -31,7 +31,7 @@ find_top_dir(${CMAKE_CURRENT_SOURCE_DIR} PROJECT_HOME)
 #### process install PREFIX variable
 
 if( NOT PREFIX )
-  set(PREFIX ${PROJECT_HOME}/build/INSTALL)
+  set(PREFIX ${PROJECT_HOME}/build/install)
 endif()
 
 set(CMAKE_INSTALL_PREFIX ${PREFIX})
@@ -92,7 +92,7 @@ macro(require PATH)
 	set(PATCH_DIR ${TARGET_DIR}/PATCH/)
       endif()    
       if( TARBALL ) 
-	set(SOURCE_DIR ${CMAKE_BINARY_DIR}/SOURCE/${SOURCE_NAME})
+	set(SOURCE_DIR ${CMAKE_BINARY_DIR}/unpack/${SOURCE_NAME})
       else()
 	set(SOURCE_DIR ${TARGET_DIR}/${SOURCE_NAME})
       endif()
@@ -118,10 +118,10 @@ macro(require PATH)
     
       # unpack tarball and patch source
       if ( TARBALL AND NOT EXISTS "${SOURCE_DIR}/")
-	message("-> ${UNTAR_CMD} ${TARBALL} in ${CMAKE_BINARY_DIR}/SOURCE")
-	file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/SOURCE)
+	message("-> ${UNTAR_CMD} ${TARBALL} in ${CMAKE_BINARY_DIR}/unpack")
+	file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/unpack)
 	execute_process(COMMAND ${CMAKE_COMMAND} -E ${UNTAR_CMD} ${TARGET_DIR}/${TARBALL} 
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/SOURCE )
+          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/unpack )
       endif()
       if( PATCH_DIR ) 
 	file( COPY ${PATCH_DIR}/

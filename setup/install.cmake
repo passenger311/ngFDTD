@@ -3,7 +3,7 @@
 
 # override install prefix
 
-# default: set(PREFIX ${PROJECT_HOME}/build/INSTALL)
+# default: set(PREFIX ${PROJECT_HOME}/build/install)
 
 #### runtime
 

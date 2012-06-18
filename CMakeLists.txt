@@ -2,12 +2,12 @@ cmake_minimum_required(VERSION 2.8)
 
 #### set project name and language support
 
-project(scape CXX C Fortran)
+project(ngFDTD CXX C Fortran)
 
 #### set project version
 
 set(PROJECT_MAJOR_VERSION 0) 
-set(PROJECT_MINOR_VERSION 1)
+set(PROJECT_MINOR_VERSION 0)
 set(PROJECT_PATCH_VERSION 1)
 
 #### main hook (* do not change *)
@@ -26,7 +26,7 @@ include(setup/package.cmake)     # packaging settings
 require(extras/lua)
 require(source/geo)
 
-#require(extras/boost)
+require(extras/boost)
 #require(extras/fftw)
 #require(extras/eigen3)
 
