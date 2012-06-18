@@ -1,9 +1,9 @@
 
-## install_libs
+## install_binaries
 ##
 ## install libs, dlls and executables
 
-macro(macro_install_libs TARGETS)
+macro(macro_install_binaries TARGETS)
 
 install(TARGETS 
   ${TARGETS}

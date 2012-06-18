@@ -1,8 +1,13 @@
 cmake_minimum_required(VERSION 2.8)
 
-#include("../main.cmake")
+include("../../main.cmake")
 
+### requirements
 
-add_executable(main main.cxx)
+require(extras/lua)
+require(extras/eigen3)
+require(extras/boost)
 
-macro_install_libs(main)
+### source directories
+
+add_subdirectory(src)

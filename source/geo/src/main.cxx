@@ -1,10 +1,8 @@
 
-#include<iostream>
+#include <iostream>
 
-
-
-int main() {
-
+int
+main() {
   std::cout << "Hello\n";
 
   return 1;

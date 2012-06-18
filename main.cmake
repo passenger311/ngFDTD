@@ -31,7 +31,7 @@ find_top_dir(${CMAKE_CURRENT_SOURCE_DIR} PROJECT_HOME)
 #### process install PREFIX variable
 
 if( NOT PREFIX )
-  set(PREFIX ${PROJECT_HOME}/build/install)
+  set(PREFIX ${CMAKE_BINARY_DIR}/install)
 endif()
 
 set(CMAKE_INSTALL_PREFIX ${PREFIX})
@@ -147,9 +147,9 @@ macro(require PATH)
     endif()
     
     # add subdirectory if BUILD flag is set
-    if ( ${TARGET}_BUILD )
-      message("-> add ${${TARGET}_SOURCE_DIR}")
-      add_subdirectory(${${TARGET}_SOURCE_DIR} ${${TARGET}_BINARY_DIR})
+    if ( BUILD )
+      message("-> add ${SOURCE_DIR}")
+      add_subdirectory(${SOURCE_DIR} ${BINARY_DIR})
     endif()
 
     set(${TARGET}_REQUIRE_GUARD 1)
@@ -168,8 +168,8 @@ set(INSTALL_DIR_DOC doc)
 
 #### include macro scripts
 
-include(macro_install_lua)
-include(macro_install_libs)
+include(macro_install_lua_all)
+include(macro_install_binaries)
 include(macro_install_headers)
 
 #### load cmake modules

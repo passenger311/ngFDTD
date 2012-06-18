@@ -23,13 +23,12 @@ include(setup/package.cmake)     # packaging settings
 
 #### specify build targets below this line ...
 
-require(extras/lua)
 require(source/geo)
 
-require(extras/boost)
+#require(extras/lua)
+#require(extras/boost)
 #require(extras/fftw)
 #require(extras/eigen3)
-
 #require(extras/LuaJIT)
 #require(extras/luasocket)
 #require(source/scape)
