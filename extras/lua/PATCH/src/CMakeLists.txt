@@ -36,12 +36,15 @@ set_target_properties(lua-exe
 )
 target_link_libraries(lua-exe lua-dll ${LD_LIBS})
 
-install(TARGETS 
-  lua-exe
-  lua-dll
-  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
-  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
-  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
-)
+macro_install_libs( lua-exe lua-dll )
+#install(TARGETS 
+#  lua-exe
+#  lua-dll
+#  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
+#  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
+#  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
+#)
 
-install(FILES ${DEV_HDRS} DESTINATION ${INSTALL_DIR_INCLUDE})
+macro_install_headers( ${DEV_HDRS} )
+
+#install(FILES ${DEV_HDRS} DESTINATION ${INSTALL_DIR_INCLUDE})

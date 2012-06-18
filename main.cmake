@@ -72,12 +72,12 @@ macro(require PATH)
     message("-> configuring: ${TARGET_PATH}")
     set(G_VARS BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE)
 
-    # default values
+    # erase values
+    foreach(VAR ${G_VARS})
+      unset(${VAR} )
+    endforeach()
+    
     set(BUILD on)
-    set(SOURCE_NAME )
-    set(BUILD_VERSION 0.0.0)
-    set(FIND_VERSION 0.0.0)
-    set(UNTAR_CMD tar xzf)
     
     if( EXISTS "${TARGET_DIR}/CONTROL.cmake" ) 
       message("-> include CONTROL.cmake")
@@ -123,9 +123,11 @@ macro(require PATH)
 	execute_process(COMMAND ${CMAKE_COMMAND} -E ${UNTAR_CMD} ${TARGET_DIR}/${TARBALL} 
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/SOURCE )
       endif()
-      file( COPY ${PATCH_DIR}/
-	DESTINATION ${SOURCE_DIR}/
-	PATTERN * ) 
+      if( PATCH_DIR ) 
+	file( COPY ${PATCH_DIR}/
+	  DESTINATION ${SOURCE_DIR}/
+	  PATTERN * ) 
+      endif()
 
     else() # try to find package
     
@@ -149,6 +151,7 @@ macro(require PATH)
       message("-> add ${${TARGET}_SOURCE_DIR}")
       add_subdirectory(${${TARGET}_SOURCE_DIR} ${${TARGET}_BINARY_DIR})
     endif()
+
     set(${TARGET}_REQUIRE_GUARD 1)
   endif()
 
@@ -163,9 +166,11 @@ set(INSTALL_DIR_LUA lua)
 set(INSTALL_DIR_SHARE share)
 set(INSTALL_DIR_DOC doc)
 
-#### include macro scripts from macro/
+#### include macro scripts
 
 include(macro_install_lua)
+include(macro_install_libs)
+include(macro_install_headers)
 
 #### load cmake modules
 
