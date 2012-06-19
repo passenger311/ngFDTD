@@ -54,29 +54,40 @@ set_target_properties(${NAME}-threads-lib
 ##   note: rpath is set to :::... as otherwise cmake can not change it during 
 ##   install
 
+file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/configure_complete_tag)
 file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag)
 
+# configure command
+
 add_custom_command( 
-  OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag
-  COMMAND ${CMAKE_COMMAND} -E remove build_complete_tag
+  OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/configure_complete_tag
   COMMAND LDFLAGS=-Wl,-rpath=:::::::::::::: CC=${CMAKE_C_COMPILER} F77=${CMAKE_Fortan_COMPILER} ./configure -C ${FFTW_CONFIGURE_OPTIONS} --enable-shared --enable-threads --prefix=${CMAKE_CURRENT_SOURCE_DIR}
-  COMMAND make 
-  COMMAND make install
-  COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag
+  COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/configure_complete_tag
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   VERBATIM
 )
 
-# configure target
+# build command
+
+add_custom_command( 
+  OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag
+  COMMAND make 
+  COMMAND make install
+  COMMAND ${CMAKE_COMMAND} -E touch ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag
+  DEPENDS 
+  ${CMAKE_CURRENT_SOURCE_DIR}/configure_complete_tag
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
 add_custom_target( 
-  ${NAME}-configure ALL
+  ${NAME}-build ALL
   DEPENDS 
   ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-add_dependencies(${NAME}-configure ${NAME}-dll ${NAME}-lib ${NAME}-threads-dll ${NAME}-threads-lib )
+
+add_dependencies(${NAME}-build ${NAME}-dll ${NAME}-lib ${NAME}-threads-dll ${NAME}-threads-lib )
 
 install(TARGETS 
   ${NAME}-dll

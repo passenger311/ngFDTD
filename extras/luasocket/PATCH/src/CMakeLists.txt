@@ -51,18 +51,18 @@ set(UNIX_SRCS
 )
 endif()
 
-add_library(socket-dll SHARED ${SOCKET_SRCS})
-add_library(mime-dll SHARED ${MIME_SRCS})
+add_library(${NAME}-socket-dll SHARED ${SOCKET_SRCS})
+add_library(${NAME}-mime-dll SHARED ${MIME_SRCS})
 
-target_link_libraries(socket-dll mime-dll ${LD_LIBS})
+target_link_libraries(${NAME}-socket-dll ${NAME}-mime-dll ${LD_LIBS})
 
 if( UNIX )
-  add_library(unix-dll SHARED ${UNIX_SRCS})
-  target_link_libraries(unix-dll ${LD_LIBS})
+  add_library(${NAME}-unix-dll SHARED ${UNIX_SRCS})
+  target_link_libraries(${NAME}-unix-dll ${LD_LIBS})
 endif()
 
 
-set_target_properties(socket-dll
+set_target_properties(${NAME}-socket-dll
   PROPERTIES 
   LIBRARY_OUTPUT_DIRECTORY socket
   ARCHIVE_OUTPUT_DIRECTORY socket
@@ -72,7 +72,7 @@ set_target_properties(socket-dll
   COMPILE_FLAGS "${C_FLAGS}"
 )
 
-set_target_properties(mime-dll
+set_target_properties(${NAME}-mime-dll
   PROPERTIES 
   LIBRARY_OUTPUT_DIRECTORY mime
   ARCHIVE_OUTPUT_DIRECTORY mime
@@ -83,7 +83,7 @@ set_target_properties(mime-dll
 )
 
 if ( UNIX )
-set_target_properties(unix-dll
+set_target_properties(${NAME}-unix-dll
   PROPERTIES 
   OUTPUT_NAME unix
   PREFIX ""
@@ -92,33 +92,34 @@ set_target_properties(unix-dll
 endif()
 
 if(WIN32)
-  target_link_libraries(socket-dll ${LUA_LIBRARIES})
-  target_link_libraries(mime-dll ${LUA_LIBRARIES})
+  target_link_libraries(${NAME}-socket-dll ${LUA_LIBRARIES})
+  target_link_libraries(${NAME}-mime-dll ${LUA_LIBRARIES})
 endif()
 
 
 install(TARGETS 
-  socket-dll
+  ${NAME}-socket-dll
   RUNTIME DESTINATION ${INSTALL_DIR_BINARY}/socket
   LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}/socket
   ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}/socket
 )
 
-if( UNIX )
-  install(TARGETS 
-    socket-dll
-    RUNTIME DESTINATION ${INSTALL_DIR_BINARY}/socket
-    LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}/socket
-    ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}/socket
-    )
-endif()
 
 install(TARGETS 
-  mime-dll
+  ${NAME}-mime-dll
   RUNTIME DESTINATION ${INSTALL_DIR_BINARY}/mime
   LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}/mime
   ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}/mime
 )
+
+if( UNIX )
+  install(TARGETS 
+    ${NAME}-unix-dll
+    RUNTIME DESTINATION ${INSTALL_DIR_BINARY}/unix
+    LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}/unix
+    ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}/unix
+    )
+endif()
 
 set(SOCKET_LUA
   http.lua 

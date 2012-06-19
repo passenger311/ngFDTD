@@ -36,5 +36,5 @@ set_target_properties(lua-exe
 )
 target_link_libraries(lua-exe lua-dll ${LD_LIBS})
 
-macro_install_binaries(lua-exe lua-dll)
+macro_install_binaries( lua-exe lua-dll )
 macro_install_headers( ${DEV_HDRS} )

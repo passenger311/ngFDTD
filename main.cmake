@@ -59,103 +59,113 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_HOME}/cmake/macros ${PROJEC
 
 macro(require PATH)
 
-  # set TARGET_PATH, TARGET_NAME, TARGET, TARGET_DIR global
-
-  message("-> require: ${TARGET_PATH}")
+  message("-> require ${TARGET_PATH}")
   set(TARGET_PATH ${PATH})
   get_filename_component(TARGET_NAME ${TARGET_PATH} NAME)
   get_filename_component(TARGET_DIR ${PROJECT_HOME}/${TARGET_PATH} ABSOLUTE)
   string(TOUPPER ${TARGET_NAME} TARGET)
   set(NAME ${TARGET_NAME})
-  if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
+  set(TARGET_NAME ${TARGET_NAME})
+  set(TARGET_PATH ${TARGET_PATH})
+  set(TARGET_DIR ${TARGET_DIR})
 
-    message("-> configuring: ${TARGET_PATH}")
-    set(G_VARS BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE)
+  get_property(${TARGET}_REQUIRE_GUARD GLOBAL PROPERTY ${TARGET}_REQUIRE_GUARD)
+  
+  set(G_VARS BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE)
 
-    # erase values
+  # erase values
+  foreach(VAR ${G_VARS})
+    unset(${VAR} )
+  endforeach()
+    
+  set(BUILD on)
+    
+  if( EXISTS "${TARGET_DIR}/CONTROL.cmake" ) 
+    message("-> include ${TARGET_DIR}/CONTROL.cmake")
+    include(${TARGET_DIR}/CONTROL.cmake)
+  endif()
+  
+  set(${TARGET}_BUILD ${BUILD})
+  
+  if( BUILD ) 
+    if( EXISTS "${TARGET_DIR}/PATCH/" ) 
+      message("-> ${TARGET_DIR}/PATCH/ exists")
+      set(PATCH_DIR ${TARGET_DIR}/PATCH/)
+    endif()    
+    if( TARBALL ) 
+      set(SOURCE_DIR ${CMAKE_BINARY_DIR}/unpack/${SOURCE_NAME})
+    else()
+      set(SOURCE_DIR ${TARGET_DIR}/${SOURCE_NAME})
+    endif()
+    if (BUILD_IN_SOURCE)
+      set(BINARY_DIR ${SOURCE_DIR})
+    else()
+      set(BINARY_DIR ${CMAKE_BINARY_DIR}/${TARGET_PATH}/${SOURCE_NAME})
+    endif()
+    unset(X)
+    foreach(SUBDIR ${INCLUDE_DIR})
+      set(X ${X} ${SOURCE_DIR}/${SUBDIR}) 
+    endforeach()
+    set(INCLUDE_DIR ${X})
+    if ( LIBRARY_DIR )
+      set(LIBRARY_DIR ${BINARY_DIR}/${LIBRARY_DIR})
+    endif()
+    
+    # assign to target variables
     foreach(VAR ${G_VARS})
-      unset(${VAR} )
+      set(${TARGET}_${VAR} ${${VAR}})
     endforeach()
     
-    set(BUILD on)
-    
-    if( EXISTS "${TARGET_DIR}/CONTROL.cmake" ) 
-      message("-> include CONTROL.cmake")
-      include(${TARGET_DIR}/CONTROL.cmake)
+    # unpack tarball and patch source
+    if ( TARBALL AND NOT EXISTS "${SOURCE_DIR}/")
+      message("-> ${UNTAR_CMD} ${TARBALL} in ${CMAKE_BINARY_DIR}/unpack")
+      file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/unpack)
+      execute_process(COMMAND ${CMAKE_COMMAND} -E ${UNTAR_CMD} ${TARGET_DIR}/${TARBALL} 
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/unpack )
     endif()
-
-    set(${TARGET}_BUILD ${BUILD})
-
-    if( BUILD ) 
-      if( EXISTS "${TARGET_DIR}/PATCH/" ) 
-	message("-> has PATCH directory")
-	set(PATCH_DIR ${TARGET_DIR}/PATCH/)
-      endif()    
-      if( TARBALL ) 
-	set(SOURCE_DIR ${CMAKE_BINARY_DIR}/unpack/${SOURCE_NAME})
-      else()
-	set(SOURCE_DIR ${TARGET_DIR}/${SOURCE_NAME})
-      endif()
-      if (BUILD_IN_SOURCE)
-	set(BINARY_DIR ${SOURCE_DIR})
-      else()
-	set(BINARY_DIR ${CMAKE_BINARY_DIR}/${TARGET_PATH}/${SOURCE_NAME})
-      endif()
-      unset(X)
-      foreach(SUBDIR ${INCLUDE_DIR})
-	set(X ${X} ${SOURCE_DIR}/${SUBDIR}) 
-      endforeach()
-      set(INCLUDE_DIR ${X})
-      if ( LIBRARY_DIR )
-	set(LIBRARY_DIR ${BINARY_DIR}/${LIBRARY_DIR})
-      endif()
+    
+    if( PATCH_DIR ) 
+      file( COPY ${PATCH_DIR}/
+	DESTINATION ${SOURCE_DIR}/
+	PATTERN * ) 
+    endif()
       
-      # assign to target variables
-      foreach(VAR ${G_VARS})
-	set(${TARGET}_${VAR} ${${VAR}})
-	message("${TARGET}_${VAR} = ${${VAR}}")
-      endforeach()
+  else() # try to find package
     
-      # unpack tarball and patch source
-      if ( TARBALL AND NOT EXISTS "${SOURCE_DIR}/")
-	message("-> ${UNTAR_CMD} ${TARBALL} in ${CMAKE_BINARY_DIR}/unpack")
-	file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/unpack)
-	execute_process(COMMAND ${CMAKE_COMMAND} -E ${UNTAR_CMD} ${TARGET_DIR}/${TARBALL} 
-          WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/unpack )
+    if( EXISTS "${TARGET_DIR}/FIND.cmake" ) 
+      message("-> include ${TARGET_DIR}/FIND.cmake")
+      include(${TARGET_DIR}/FIND.cmake)
+      if ( NOT ${TARGET}_FOUND )
+	message("-> WARNING: missing package ${NAME}!")
       endif()
-      if( PATCH_DIR ) 
-	file( COPY ${PATCH_DIR}/
-	  DESTINATION ${SOURCE_DIR}/
-	  PATTERN * ) 
-      endif()
-
-    else() # try to find package
-    
-      if( EXISTS "${TARGET_DIR}/FIND.cmake" ) 
-	message("-> include FIND.cmake")
-	include(${TARGET_DIR}/FIND.cmake)
-	if ( NOT ${TARGET}_FOUND )
-	  message("-> WARNING: missing package ${NAME}!")
-	endif()
-	foreach(VAR ${G_VARS})
-	  message("${TARGET}_${VAR} = ${${TARGET}_${VAR}}")
-	endforeach()
-      else()
-	message("-> WARNING: skipping ${TARGET} (no FIND.cmake script)!")
-      endif()
-
+    else()
+      message("-> WARNING: skipping ${TARGET} (no FIND.cmake script)!")
     endif()
     
-    # add subdirectory if BUILD flag is set
+  endif()
+
+  # add subdirectory if BUILD flag is set
+  if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
+
+    foreach(VAR ${G_VARS})
+      message("${TARGET}_${VAR} = ${${TARGET}_${VAR}}")
+    endforeach()
+
+    set_property(GLOBAL
+      PROPERTY
+      ${TARGET}_REQUIRE_GUARD 1)
+    
     if ( BUILD )
       message("-> add ${SOURCE_DIR}")
       add_subdirectory(${SOURCE_DIR} ${BINARY_DIR})
     endif()
-
-    set(${TARGET}_REQUIRE_GUARD 1)
+  
   endif()
 
+  # endif()
+  
 endmacro()
+
 
 #### install path defaults
 

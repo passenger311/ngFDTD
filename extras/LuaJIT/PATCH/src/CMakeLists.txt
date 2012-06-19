@@ -62,8 +62,8 @@ set(LJCORE_SRCS
 
 #### build targets
 
-add_executable(buildvm-exe ${BUILDVM_SRCS} )
-set_target_properties(buildvm-exe 
+add_executable(luajit-buildvm-exe ${BUILDVM_SRCS} )
+set_target_properties(luajit-buildvm-exe 
   PROPERTIES 
   COMPILE_FLAGS ${C_FLAGS}
   OUTPUT_NAME "buildvm"
