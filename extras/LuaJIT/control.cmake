@@ -10,6 +10,8 @@ set(TARBALL ${SOURCE_NAME}.tar.gz)
 set(INCLUDE_DIR ${NAME}-${VERSION}/src)
 set(LIBRARY_DIR ${NAME}-${VERSION}/src)
 set(LIBRARIES ${NAME}-dll)
+set(ARCHIVES )
+set(HEADERS )
 set(BUILD_IN_SOURCE off)
 
 ### build flags

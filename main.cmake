@@ -5,9 +5,13 @@
 ## global hook - include this file from any subdirectory!
 ##
 
-if( NOT MAIN_CMAKE_GUARD )
+get_property(PROJECT_MAIN_GUARD GLOBAL PROPERTY PROJECT_MAIN_GUARD)
 
-set(MAIN_CMAKE_GUARD 1)
+if( NOT PROJECT_MAIN_GUARD )
+
+set_property(GLOBAL
+  PROPERTY
+  PROJECT_MAIN_GUARD 1)
 
 #### version string
 
@@ -27,6 +31,29 @@ function(find_top_dir CURRENT_DIR RESULT_NAME)
 endfunction()
 
 find_top_dir(${CMAKE_CURRENT_SOURCE_DIR} PROJECT_HOME)
+
+#### set module directory
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_HOME}/cmake/modules)
+
+#### setup project
+
+include(${PROJECT_HOME}/setup/project.cmake)
+
+if ( NOT PROJECT ) 
+   get_filename_component(PROJECT ${PROJECT_HOME} NAME)
+endif()
+
+if ( NOT PROJECT_LANGUAGES )
+  set(PROJECT_LANGUAGES CXX C Fortran)
+endif()
+
+project(${PROJECT} ${PROJECT_LANGUAGES})
+
+include(${PROJECT_HOME}/setup/compiler.cmake)
+include(${PROJECT_HOME}/setup/search.cmake)
+include(${PROJECT_HOME}/setup/install.cmake)
+include(${PROJECT_HOME}/setup/package.cmake)
 
 #### process install PREFIX variable
 
@@ -51,10 +78,6 @@ if ( ${PROJECT_HOME} STREQUAL ${CMAKE_SOURCE_DIR} )
   set(TOP_BUILD ON)
 endif()
 
-#### set module directory
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_HOME}/cmake/macros ${PROJECT_HOME}/cmake/modules)
-
 #### require macro
 
 macro(require PATH)
@@ -71,7 +94,7 @@ macro(require PATH)
 
   get_property(${TARGET}_REQUIRE_GUARD GLOBAL PROPERTY ${TARGET}_REQUIRE_GUARD)
   
-  set(G_VARS BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE)
+  set(G_VARS BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES HEADERS PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE)
 
   # erase values
   foreach(VAR ${G_VARS})
@@ -80,21 +103,21 @@ macro(require PATH)
     
   set(BUILD on)
     
-  if( EXISTS "${TARGET_DIR}/CONTROL.cmake" ) 
+  if( EXISTS "${TARGET_DIR}/control.cmake" ) 
     if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
-      message("-> include ${TARGET_DIR}/CONTROL.cmake")
+      message("-> include ${TARGET_DIR}/control.cmake")
     endif()
-    include(${TARGET_DIR}/CONTROL.cmake)
+    include(${TARGET_DIR}/control.cmake)
   endif()
   
   set(${TARGET}_BUILD ${BUILD})
   
   if( BUILD ) 
-    if( EXISTS "${TARGET_DIR}/PATCH/" ) 
+    if( EXISTS "${TARGET_DIR}/patch/" ) 
       if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
-	message("-> ${TARGET_DIR}/PATCH/ exists")
+	message("-> ${TARGET_DIR}/patch/ exists")
       endif()
-      set(PATCH_DIR ${TARGET_DIR}/PATCH/)
+      set(PATCH_DIR ${TARGET_DIR}/patch/)
     endif()    
     if( TARBALL ) 
       set(SOURCE_DIR ${CMAKE_BINARY_DIR}/unpack/${SOURCE_NAME})
@@ -136,16 +159,16 @@ macro(require PATH)
       
   else() # try to find package
     
-    if( EXISTS "${TARGET_DIR}/FIND.cmake" ) 
+    if( EXISTS "${TARGET_DIR}/find.cmake" ) 
       if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
-	message("-> include ${TARGET_DIR}/FIND.cmake")
+	message("-> include ${TARGET_DIR}/find.cmake")
       endif()
-      include(${TARGET_DIR}/FIND.cmake)
+      include(${TARGET_DIR}/find.cmake)
       if ( NOT ${TARGET}_FOUND )
 	message("-> WARNING: missing package ${NAME}!")
       endif()
     else()
-      message("-> WARNING: skipping ${TARGET} (no FIND.cmake script)!")
+      message("-> WARNING: skipping ${TARGET} (no find.cmake script)!")
     endif()
     
   endif()
@@ -184,9 +207,9 @@ set(INSTALL_DIR_DOC doc)
 
 #### include macro scripts
 
-include(macro_install_lua_all)
-include(macro_install_binaries)
-include(macro_install_headers)
+include(${PROJECT_HOME}/cmake/macros/install_lua_all.cmake)
+include(${PROJECT_HOME}/cmake/macros/install_binaries.cmake)
+include(${PROJECT_HOME}/cmake/macros/install_headers.cmake)
 
 #### load cmake modules
 
@@ -223,4 +246,4 @@ message("TOP_BUILD = ${TOP_BUILD}")
 
 ####
 
-endif(NOT MAIN_CMAKE_GUARD)
+endif()

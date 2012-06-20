@@ -9,7 +9,8 @@ set(TARBALL ${SOURCE_NAME}.tar.gz)
 set(UNTAR_CMD tar xzf)
 set(INCLUDE_DIR srlua)
 set(LIBRARY_DIR )
-set(LIBRARIES )
+set(ARCHIVES )
+set(HEADERS )
 set(BUILD_IN SOURCE off)
 
 ### build flags

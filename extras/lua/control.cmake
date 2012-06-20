@@ -10,6 +10,8 @@ set(UNTAR_CMD tar xzf)
 set(INCLUDE_DIR src)
 set(LIBRARY_DIR src)
 set(LIBRARIES ${NAME}-dll)
+set(ARCHIVES ${NAME}-lib)
+set(HEADERS lua.h)
 set(BUILD_IN_SOURCE off)
 
 ### build flags

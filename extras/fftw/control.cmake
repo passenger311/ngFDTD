@@ -10,6 +10,8 @@ set(UNTAR_CMD tar xzf)
 set(INCLUDE_DIR include)
 set(LIBRARY_DIR lib)
 set(LIBRARIES ${NAME}-dll ${NAME}-threads-dll)
+set(ARCHIVES )
+set(HEADERS )
 set(BUILD_IN_SOURCE on)
 
 ### build flags

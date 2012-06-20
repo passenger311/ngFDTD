@@ -10,6 +10,8 @@ set(UNTAR_CMD tar xzf)
 set(INCLUDE_DIR eigen)
 set(LIBRARY_DIR )
 set(LIBRARIES )
+set(ARCHIVES )
+set(HEADERS )
 set(BUILD_IN_SOURCE off)
 
 ### build flags
