@@ -3,25 +3,21 @@
 CONFIGURATION
 _______________________________________________________________________________
 
-1. edit top-level "CMakeLists.txt" for project
+1. setup project components 
+
+   Add/customize extra components. This involves creating/modifying 
+   "control.cmake", "find.cmake" and "patch/". Add components to "source/" 
+   by modifying the "CMakeLists.txt" file.
+
+2. edit files in "setup/" to customize build process
    
-   set project name, version number and targets (at end of file).
-
-2. setup components 
-
-   customize/add components including "CONTROL.cmake", "FIND.cmake" and 
-   "PATCH/" in "extras/". Add components to "source/" including 
-   "CMakeLists.txt" files.
+   set project name, version number in "project.cmake". Define compiler flags 
+   in "compiler.cmake", install locations in "install.cmake", packaging in 
+   "package.cmake", and third party package search locations in "search.cmake". 
 
 3. edit "config.h.in"
 
    to customize the C/C++ project header.
-
-4. edit files in "setup/"
-
-   define compiler flags in "compiler.cmake", install locations in 
-   "install.cmake", packaging in "package.cmake", and third party package 
-   search locations in "search.cmake". 
 
 
 
@@ -102,7 +98,7 @@ Run
 
 from within the "build/" directory to generate standard package types or  
 
-> cpack -G<generator>
+> cpack -G <generator>
 
 where <generator> specifies a generator. Choices are:
  

@@ -9,6 +9,7 @@ set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_HOME}/setup/copyright.txt")
 set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_MAJOR_VERSION})
 set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_MINOR_VERSION})
 set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_PATCH_VERSION})
+
 if(WIN32 AND NOT UNIX)
   # There is a bug in NSI that does not handle full unix paths properly. Make
   # sure there is at least one set of four (4) backlasshes.
