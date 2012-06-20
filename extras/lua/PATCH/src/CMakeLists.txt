@@ -27,6 +27,13 @@ set_target_properties(lua-dll
   OUTPUT_NAME "lua5.1"
 )
 
+add_library(lua-lib STATIC ${LIBLUA_SRCS} )
+set_target_properties(lua-lib 
+  PROPERTIES 
+  COMPILE_FLAGS "${C_FLAGS}"
+  OUTPUT_NAME "lua5.1"
+)
+
 add_executable(lua-exe ${LUA_SRCS} )
 
 set_target_properties(lua-exe 
@@ -36,5 +43,5 @@ set_target_properties(lua-exe
 )
 target_link_libraries(lua-exe lua-dll ${LD_LIBS})
 
-macro_install_binaries( lua-exe lua-dll )
+macro_install_binaries( lua-exe lua-dll lua-lib )
 macro_install_headers( ${DEV_HDRS} )

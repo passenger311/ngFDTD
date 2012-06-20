@@ -59,7 +59,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_HOME}/cmake/macros ${PROJEC
 
 macro(require PATH)
 
-  message("-> require ${TARGET_PATH}")
+  message("-> require ${PATH}")
   set(TARGET_PATH ${PATH})
   get_filename_component(TARGET_NAME ${TARGET_PATH} NAME)
   get_filename_component(TARGET_DIR ${PROJECT_HOME}/${TARGET_PATH} ABSOLUTE)
@@ -81,7 +81,9 @@ macro(require PATH)
   set(BUILD on)
     
   if( EXISTS "${TARGET_DIR}/CONTROL.cmake" ) 
-    message("-> include ${TARGET_DIR}/CONTROL.cmake")
+    if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
+      message("-> include ${TARGET_DIR}/CONTROL.cmake")
+    endif()
     include(${TARGET_DIR}/CONTROL.cmake)
   endif()
   
@@ -89,7 +91,9 @@ macro(require PATH)
   
   if( BUILD ) 
     if( EXISTS "${TARGET_DIR}/PATCH/" ) 
-      message("-> ${TARGET_DIR}/PATCH/ exists")
+      if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
+	message("-> ${TARGET_DIR}/PATCH/ exists")
+      endif()
       set(PATCH_DIR ${TARGET_DIR}/PATCH/)
     endif()    
     if( TARBALL ) 
@@ -133,7 +137,9 @@ macro(require PATH)
   else() # try to find package
     
     if( EXISTS "${TARGET_DIR}/FIND.cmake" ) 
-      message("-> include ${TARGET_DIR}/FIND.cmake")
+      if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
+	message("-> include ${TARGET_DIR}/FIND.cmake")
+      endif()
       include(${TARGET_DIR}/FIND.cmake)
       if ( NOT ${TARGET}_FOUND )
 	message("-> WARNING: missing package ${NAME}!")
