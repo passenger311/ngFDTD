@@ -2,10 +2,10 @@
 #include "LuaClass.hpp"
 
 
-class A : public Lua::LuaClass {
+class A : public neo::LuaClass {
 
 public:
-  A(const Lua::LuaContext& context) : Lua::LuaClass(context,"A") 
+  A(const neo::LuaContext& context) : neo::LuaClass(context,"A") 
   {} 
 
 };
@@ -14,7 +14,7 @@ public:
 
 int main() {
 
-  Lua::LuaContext context;
+  neo::LuaContext context;
 
   A a(context);
 

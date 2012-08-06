@@ -25,14 +25,14 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "LuaContext.h"
+#include "LuaContext.hpp"
 
-Lua::LuaContext::LuaContext() {
+neo::LuaContext::LuaContext() {
 	_state = luaL_newstate();
 	luaL_openlibs(_state);
 }
 
-void Lua::LuaContext::executeCode(std::istream& code) {
+void neo::LuaContext::executeCode(std::istream& code) {
 	std::lock_guard<std::mutex> stateLock(_stateMutex);
 
 	// since the lua_load function requires a static function, we use this structure
@@ -74,7 +74,7 @@ void Lua::LuaContext::executeCode(std::istream& code) {
 	}
 }
 
-void Lua::LuaContext::_getGlobal(const std::string& variableName) const {
+void neo::LuaContext::_getGlobal(const std::string& variableName) const {
 	// variableName is split by dots '.' in arrays and subarrays
 	// the nextVar variable contains a pointer to the next part to proceed
 	auto nextVar = variableName.begin();
@@ -122,7 +122,7 @@ void Lua::LuaContext::_getGlobal(const std::string& variableName) const {
 	} while (nextVar != variableName.end());
 }
 
-void Lua::LuaContext::_setGlobal(const std::string& variable) {
+void neo::LuaContext::_setGlobal(const std::string& variable) {
 	try {
 		assert(lua_gettop(_state) >= 1);		// making sure there's something on the stack (ie. the value to set)
 
@@ -157,7 +157,7 @@ void Lua::LuaContext::_setGlobal(const std::string& variable) {
 	}
 }
 
-bool Lua::LuaContext::isVariableArray(const std::string& variableName) const {
+bool neo::LuaContext::isTable(const std::string& variableName) const {
 	std::lock_guard<std::mutex> lock(_stateMutex);
 	_getGlobal(variableName);
 	bool answer = lua_istable(_state, -1);
@@ -165,13 +165,13 @@ bool Lua::LuaContext::isVariableArray(const std::string& variableName) const {
 	return answer;
 }
 
-void Lua::LuaContext::writeArrayIntoVariable(const std::string& variableName) {
+void neo::LuaContext::createTable(const std::string& variableName) {
 	std::lock_guard<std::mutex> lock(_stateMutex);
 	lua_newtable(_state);
 	_setGlobal(variableName);
 }
 
-int Lua::LuaContext::_push(std::function<int (lua_State*)> fn) {
+int neo::LuaContext::_push(std::function<int (lua_State*)> fn) {
 	if (!fn)	throw(std::runtime_error("Trying to write an empty function to a lua variable"));
 
 	// when the lua script calls the thing we will push on the stack, we want "fn" to be executed

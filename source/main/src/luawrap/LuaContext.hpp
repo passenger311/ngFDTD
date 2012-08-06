@@ -1,4 +1,9 @@
 /*
+Modified 2012, Joachim Hamm
+
+renamed some functions for convenience.
+
+
 Copyright (c) 2010, Pierre KRIEGER
 All rights reserved.
 
@@ -25,8 +30,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef INCLUDE_LUA_LUACONTEXT_H
-#define INCLUDE_LUA_LUACONTEXT_H
+#ifndef INCLUDE_LUA_LUACONTEXT_HPP
+#define INCLUDE_LUA_LUACONTEXT_HPP
 
 #include <algorithm>
 #include <cassert>
@@ -66,7 +71,7 @@ extern "C" {
 	}
 #endif
 
-namespace Lua {
+namespace neo {
 	/**	\brief Defines a Lua context
 		\details A Lua context is used to interpret Lua code. Since everything in Lua is a variable (including functions),
 				we only provide few functions like readVariable and writeVariable. Note that these functions can visit arrays,
@@ -199,12 +204,12 @@ namespace Lua {
 		
 
 		/// \brief Returns true if the value of the variable is an array \param variableName Name of the variable to check
-		bool							isVariableArray(const std::string& variableName) const;
+		bool							isTable(const std::string& variableName) const;
 		/// \brief Writes an empty array into the given variable \note To write something in the array, use writeVariable. Example: writeArrayIntoVariable("myArr"); writeVariable("myArr.something", 5);
-		void							writeArrayIntoVariable(const std::string& variableName);
+		void							createTable(const std::string& variableName);
 
 		/// \brief Returns true if variable exists (ie. not nil)
-		bool							doesVariableExist(const std::string& variableName) const			{ std::lock_guard<std::mutex> lock(_stateMutex); _getGlobal(variableName); bool answer = lua_isnil(_state, -1); lua_pop(_state, 1); return answer; }
+		bool							isVariable(const std::string& variableName) const			{ std::lock_guard<std::mutex> lock(_stateMutex); _getGlobal(variableName); bool answer = lua_isnil(_state, -1); lua_pop(_state, 1); return answer; }
 
 		/// \brief Destroys a variable \details Puts the nil value into it
 		void							clearVariable(const std::string& variableName)							{ std::lock_guard<std::mutex> lock(_stateMutex); lua_pushnil(_state); _setGlobal(variableName); }
