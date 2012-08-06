@@ -1,13 +1,12 @@
 
-
-CONFIGURATION
 _______________________________________________________________________________
+__ CONFIGURATION ______________________________________________________________
 
 1. setup project components 
 
    Add/customize extra components. This involves creating/modifying 
    "control.cmake", "find.cmake" and "patch/". Add components to "source/" 
-   by modifying the "CMakeLists.txt" file.
+   by modifying the hierarchy of "CMakeLists.txt" files.
 
 2. edit files in "setup/" to customize build process
    
@@ -19,10 +18,8 @@ _______________________________________________________________________________
 
    to customize the C/C++ project header.
 
-
-
-PROJECT TREE
 _______________________________________________________________________________
+__ PROJECT TREE _______________________________________________________________
 
 The build tree is constructed from components using the require(<component>) 
 function which ties components on-demand into the build process. 
@@ -35,10 +32,8 @@ is "on" and a TARBALL specified, then the tarball will be unpacked, the content
 of "PATCH/" (if present) copied into the unpacked source directory and the 
 directory added to the cmake build.
 
-
-
-BUILD PROCESS
 _______________________________________________________________________________
+__ BUILD PROCESS ______________________________________________________________
 
 Create a "build" directory and enter it
 
@@ -60,10 +55,8 @@ to specify the installation directory and the toolchain file. Use
 
 to build project. 
 
-
-
-INSTALLATION
 _______________________________________________________________________________
+__ INSTALLATION _______________________________________________________________
 
 Install location can be customized by editing "setup/install.cmake". To install
 libraries, headers and runtime componenent type 
@@ -73,10 +66,8 @@ libraries, headers and runtime componenent type
 from within the "build/" directory. Default install directory is "install/" 
 within the current "build/" directory.
 
-
-
-CLEANUP
 _______________________________________________________________________________
+__ CLEANUP ____________________________________________________________________
 
 To cleanup the build run
 
@@ -88,9 +79,8 @@ from within "build/" directory or
 
 to wipe the content of the "build/" directory
 
-
-PACKAGING
 _______________________________________________________________________________
+__ PACKAGING __________________________________________________________________
 
 Run
 
@@ -111,3 +101,6 @@ ZIP
 or 
 
 NSIS (nullsoft installer)
+
+_______________________________________________________________________________
+J Hamm (3/8/2012)

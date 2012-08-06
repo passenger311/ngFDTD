@@ -5,8 +5,7 @@ include("../../main.cmake")
 ### requirements
 
 require(extras/lua)
-require(extras/eigen3)
-require(extras/boost)
+#require(extras/boost)
 
 ### source directories
 

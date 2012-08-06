@@ -4,8 +4,9 @@ include(./main.cmake)
 
 require(source)
 
-require(extras/srlua)
-require(extras/lua)
+# activate for testing purposes ...
+#require(extras/srlua)
+#require(extras/lua)
 #require(extras/boost)
 #require(extras/fftw)
 #require(extras/eigen3)
