@@ -1,0 +1,118 @@
+#include <lua.h>
+#include <lauxlib.h>
+
+int luaopen_neon_start(lua_State*);
+int luaopen_xlib_file_ostream(lua_State*);
+int luaopen_xlib(lua_State*);
+int luaopen_xlib_string_encode(lua_State*);
+int luaopen_xlib_math_vector(lua_State*);
+int luaopen_xlib_utils(lua_State*);
+int luaopen_xlib_coroutine(lua_State*);
+int luaopen_xlib_file(lua_State*);
+int luaopen_xlib_debug(lua_State*);
+int luaopen_xlib_os(lua_State*);
+int luaopen_xlib_math_units(lua_State*);
+int luaopen_xlib_string(lua_State*);
+int luaopen_xlib_string_version(lua_State*);
+int luaopen_xlib_io_fs(lua_State*);
+int luaopen_xlib_math(lua_State*);
+int luaopen_xlib_struct_deque(lua_State*);
+int luaopen_xlib_struct_bag(lua_State*);
+int luaopen_xlib_config(lua_State*);
+int luaopen_xlib_struct_set(lua_State*);
+int luaopen_xlib_module(lua_State*);
+int luaopen_xlib_table(lua_State*);
+int luaopen_xlib_object(lua_State*);
+int luaopen_xlib_math_consts(lua_State*);
+int luaopen_xlib_os_info(lua_State*);
+int luaopen_xlib_math_complex(lua_State*);
+int luaopen_xlib_math_dists(lua_State*);
+int luaopen_xlib_proto(lua_State*);
+int luaopen_xlib_struct(lua_State*);
+int luaopen_xlib_unit(lua_State*);
+int luaopen_xlib_io(lua_State*);
+int luaopen_xlib_math_vec3(lua_State*);
+int luaopen_xlib_math_quants(lua_State*);
+int luaopen_xlib_class(lua_State*);
+int luaopen_fdtd_array(lua_State*);
+int luaopen_fdtd(lua_State*);
+
+#include "lua_preload.h"
+
+LUAOPEN_API int lua_preload(lua_State *L) {
+	luaL_findtable(L, LUA_GLOBALSINDEX, "package.preload", 35);
+	
+	lua_pushcfunction(L, luaopen_neon_start);
+	lua_setfield(L, -2, "neon_start");
+	lua_pushcfunction(L, luaopen_xlib_file_ostream);
+	lua_setfield(L, -2, "xlib.file.ostream");
+	lua_pushcfunction(L, luaopen_xlib);
+	lua_setfield(L, -2, "xlib");
+	lua_pushcfunction(L, luaopen_xlib_string_encode);
+	lua_setfield(L, -2, "xlib.string.encode");
+	lua_pushcfunction(L, luaopen_xlib_math_vector);
+	lua_setfield(L, -2, "xlib.math.vector");
+	lua_pushcfunction(L, luaopen_xlib_utils);
+	lua_setfield(L, -2, "xlib.utils");
+	lua_pushcfunction(L, luaopen_xlib_coroutine);
+	lua_setfield(L, -2, "xlib.coroutine");
+	lua_pushcfunction(L, luaopen_xlib_file);
+	lua_setfield(L, -2, "xlib.file");
+	lua_pushcfunction(L, luaopen_xlib_debug);
+	lua_setfield(L, -2, "xlib.debug");
+	lua_pushcfunction(L, luaopen_xlib_os);
+	lua_setfield(L, -2, "xlib.os");
+	lua_pushcfunction(L, luaopen_xlib_math_units);
+	lua_setfield(L, -2, "xlib.math.units");
+	lua_pushcfunction(L, luaopen_xlib_string);
+	lua_setfield(L, -2, "xlib.string");
+	lua_pushcfunction(L, luaopen_xlib_string_version);
+	lua_setfield(L, -2, "xlib.string.version");
+	lua_pushcfunction(L, luaopen_xlib_io_fs);
+	lua_setfield(L, -2, "xlib.io.fs");
+	lua_pushcfunction(L, luaopen_xlib_math);
+	lua_setfield(L, -2, "xlib.math");
+	lua_pushcfunction(L, luaopen_xlib_struct_deque);
+	lua_setfield(L, -2, "xlib.struct.deque");
+	lua_pushcfunction(L, luaopen_xlib_struct_bag);
+	lua_setfield(L, -2, "xlib.struct.bag");
+	lua_pushcfunction(L, luaopen_xlib_config);
+	lua_setfield(L, -2, "xlib.config");
+	lua_pushcfunction(L, luaopen_xlib_struct_set);
+	lua_setfield(L, -2, "xlib.struct.set");
+	lua_pushcfunction(L, luaopen_xlib_module);
+	lua_setfield(L, -2, "xlib.module");
+	lua_pushcfunction(L, luaopen_xlib_table);
+	lua_setfield(L, -2, "xlib.table");
+	lua_pushcfunction(L, luaopen_xlib_object);
+	lua_setfield(L, -2, "xlib.object");
+	lua_pushcfunction(L, luaopen_xlib_math_consts);
+	lua_setfield(L, -2, "xlib.math.consts");
+	lua_pushcfunction(L, luaopen_xlib_os_info);
+	lua_setfield(L, -2, "xlib.os.info");
+	lua_pushcfunction(L, luaopen_xlib_math_complex);
+	lua_setfield(L, -2, "xlib.math.complex");
+	lua_pushcfunction(L, luaopen_xlib_math_dists);
+	lua_setfield(L, -2, "xlib.math.dists");
+	lua_pushcfunction(L, luaopen_xlib_proto);
+	lua_setfield(L, -2, "xlib.proto");
+	lua_pushcfunction(L, luaopen_xlib_struct);
+	lua_setfield(L, -2, "xlib.struct");
+	lua_pushcfunction(L, luaopen_xlib_unit);
+	lua_setfield(L, -2, "xlib.unit");
+	lua_pushcfunction(L, luaopen_xlib_io);
+	lua_setfield(L, -2, "xlib.io");
+	lua_pushcfunction(L, luaopen_xlib_math_vec3);
+	lua_setfield(L, -2, "xlib.math.vec3");
+	lua_pushcfunction(L, luaopen_xlib_math_quants);
+	lua_setfield(L, -2, "xlib.math.quants");
+	lua_pushcfunction(L, luaopen_xlib_class);
+	lua_setfield(L, -2, "xlib.class");
+	lua_pushcfunction(L, luaopen_fdtd_array);
+	lua_setfield(L, -2, "fdtd.array");
+	lua_pushcfunction(L, luaopen_fdtd);
+	lua_setfield(L, -2, "fdtd");
+	
+	lua_pop(L, 1);
+	return 0;
+}

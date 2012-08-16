@@ -5,11 +5,11 @@ AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "fdtd.field",
+FILE      = "fdtd.array",
 -------------------------------------------------------------------------------
 }
 
-local ffi = require "ffi"
+local _ffi = require "ffi"
 local X = require( "xlib" )
 local F = require( _H.PROJECT )
 local module = X.module
@@ -25,34 +25,44 @@ local _math_max, _print = math.max, print
 local _rawget = rawget
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> field. </p>
+--- <p><b>Prototype:</b> array. </p>
 -- </p>
-module("fdtd.field")
+module("fdtd.array")
 -------------------------------------------------------------------------------
 
-ffi.cdef[[
+_ffi.cdef[[
 void *memmove(void *dest, const void *src, size_t n);
+void *malloc(size_t size);
+void free(void *ptr);
 ]]
 
 this = proto:_adopt( _M )
 
---- Create and initialize with table.
--- @param tab table with items
--- @return new vec3
-function new(tab)
-   local size = tab or { 0,0,0 }
-   local ret = this:_adopt( { size = size } )
+--- Create array.
+-- @param ctype C-type of array ("double")
+-- @param size size of arrays
+-- @return new array
+function new(ctype,size)
+   size = size or 0
+   local rawptr = _ffi.gc(_ffi.C.malloc(size*_ffi.sizeof(ctype)), _ffi.C.free)
+   _assert(rawptr ~= nil, "out of memory")
+   local data = _ffi.cast(ctype.." *", rawptr)
+   local ret = this:_adopt( { data = data, rawptr = rawptr, size = size, ctype=ctype } )
    return ret
-end
+end 
 
---- Purge all items.
--- @param self vector 
--- @return self
-function purge(self)
-   for i=1,3 do 
-      self[i]=nil
+
+--- Free data.
+-- @param ctype C-type of array ("double")
+-- @param size size of arrays
+-- @return new array
+function free(self)
+   if self.rawptr ~= nil then
+      _ffi.C.free(_ffi.gc(self.rawptr, nil))
+      self.data = nil
+      self.rawptr = nil
+      self.size = 0
    end
-   return self
 end
 
 --- Create a clone of self.
