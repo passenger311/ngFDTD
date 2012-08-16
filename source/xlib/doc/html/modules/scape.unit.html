@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.complex.html">scape.math.complex</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li><strong>scape.unit</strong></li>
+	
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.unit</code></h1>
+
+<p><p><b>Prototype:</b> unit and performance testing. </p> Offsprings of the unit prototype are considered unit tests. The functions of a unit test form a collection of independent tests which are executed in order of definition. </p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#assert">assert</a>&nbsp;(assertion)</td>
+	<td class="summary">Assertion.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#clock">clock</a>&nbsp;(self, test)</td>
+	<td class="summary">Check clock for a specific test.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fail">fail</a>&nbsp;()</td>
+	<td class="summary">Fail test.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#invoke">invoke</a>&nbsp;(self)</td>
+	<td class="summary">Invoke unit.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#launch">launch</a>&nbsp;(self, tab)</td>
+	<td class="summary">Launch other test units from within the given unit.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#new">new</a>&nbsp;(offspring, parms)</td>
+	<td class="summary">Create a new unit.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ok">ok</a>&nbsp;(self, test)</td>
+	<td class="summary">Check whether a specific test succeeded.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#reset">reset</a>&nbsp;(self)</td>
+	<td class="summary">Reset test results and timings.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#run">run</a>&nbsp;(self, name, count)</td>
+	<td class="summary">Run a test.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#runall">runall</a>&nbsp;(self)</td>
+	<td class="summary">Run all tests.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#setup">setup</a>&nbsp;(self)</td>
+	<td class="summary">Setup test environment.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#teardown">teardown</a>&nbsp;(self)</td>
+	<td class="summary">Teardown test environment.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="assert"></a><strong>assert</strong>&nbsp;(assertion)</dt>
+<dd>
+Assertion. Test will fail if assertion does not hold. Note, that Lua's assert will also cause the test to to fail with an error instead.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  assertion: assertion
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="clock"></a><strong>clock</strong>&nbsp;(self, test)</dt>
+<dd>
+Check clock for a specific test. If no test is specified this method will return the clock for all tests.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+	<li>
+	  test: name of test
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> or <tt>false</tt>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fail"></a><strong>fail</strong>&nbsp;()</dt>
+<dd>
+Fail test.
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="invoke"></a><strong>invoke</strong>&nbsp;(self)</dt>
+<dd>
+Invoke unit. Setup and run all embedded tests. The instance table may contain the following options: <ul> <li><tt>silent</tt>=<tt>true</tt> will suppress output</li> <li><tt>repetition</tt>=<i>N</i> will cause each test to run <i>N</i> times <li><tt>name</tt>=<i>Name</i> set test unit name to <i>Name</i> </ul>
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if all tests passed; <tt>false</tt> otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="launch"></a><strong>launch</strong>&nbsp;(self, tab)</dt>
+<dd>
+Launch other test units from within the given unit.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+	<li>
+	  tab: table of other test classes
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="new"></a><strong>new</strong>&nbsp;(offspring, parms)</dt>
+<dd>
+Create a new unit. The optional parameter table may contain the following options: <ul> <li><tt>silent</tt>=<tt>true</tt> will suppress output</li> <li><tt>repetition</tt>=<i>N</i> will cause each test to run <i>N</i> times <li><tt>name</tt>=<i>Name</i> set test unit name to <i>Name</i> </ul>
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  offspring: offspring unit table
+	</li>
+	
+	<li>
+	  parms: parameter table [{}]
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+unit table
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ok"></a><strong>ok</strong>&nbsp;(self, test)</dt>
+<dd>
+Check whether a specific test succeeded. If no test is specified this method will check whether all tests succeeded.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+	<li>
+	  test: name of test
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> or <tt>false</tt>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="reset"></a><strong>reset</strong>&nbsp;(self)</dt>
+<dd>
+Reset test results and timings.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="run"></a><strong>run</strong>&nbsp;(self, name, count)</dt>
+<dd>
+Run a test. This method is invoked by <i>runall()</i> for each test. If run seperately make sure to call <i>reset()</i> and <i>setup()</i> before the first and <i>teardown()</i> after invoking the last test.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+	<li>
+	  name: 
+	</li>
+	
+	<li>
+	  count: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if passed; <tt>false</tt> if failed
+
+
+
+</dd>
+
+
+
+
+<dt><a name="runall"></a><strong>runall</strong>&nbsp;(self)</dt>
+<dd>
+Run all tests. This method invokes <i>reset()</i> and <i>setup()</i> first, then runs all tests and finally calls the <i>teardown()</i> method. If <i>self.silent</i> is set it will run silently.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="setup"></a><strong>setup</strong>&nbsp;(self)</dt>
+<dd>
+Setup test environment. The default method does nothing but can be overwritten by the subclass.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="teardown"></a><strong>teardown</strong>&nbsp;(self)</dt>
+<dd>
+Teardown test environment. The default method does nothing but can be overwritten by the subclass.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: instance table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

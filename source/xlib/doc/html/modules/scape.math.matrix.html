@@ -1,0 +1,775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.lib.html">scape.lib</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li><strong>scape.math.matrix</strong></li>
+	
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.math.matrix</code></h1>
+
+<p><p><b>Prototype:</b> a matrix of numerical values. </p> </p></p>
+
+<p><b>Author:</b>
+<table class="authors_list">
+
+	<tr><td class="name">$author$</td></tr>
+
+</table>
+</p>
+
+
+<p>Copyright&copy; $date$</p>
+
+
+<p><small><b>Release:</b> $release$ </small></p>
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#__tostring">__tostring</a>&nbsp;(self)</td>
+	<td class="summary">Build a printable string from set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#add">add</a>&nbsp;(self, other)</td>
+	<td class="summary">Arithmetic elementwise addition.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#apply">apply</a>&nbsp;(self, fun)</td>
+	<td class="summary">Apply function to elements of matrix.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#clone">clone</a>&nbsp;(self, object)</td>
+	<td class="summary">Create a clone of self.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#count">count</a>&nbsp;(self, item)</td>
+	<td class="summary">Count of specific item.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#div">div</a>&nbsp;(self, other)</td>
+	<td class="summary">Arithmetic elementwise division.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fill">fill</a>&nbsp;(self, items)</td>
+	<td class="summary">Fill with items.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#mmul">mmul</a>&nbsp;(a, b)</td>
+	<td class="summary">Matrix - Matrix multiplication.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#mul">mul</a>&nbsp;(self, other)</td>
+	<td class="summary">Arithmetic elementwise multiplication.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#new">new</a>&nbsp;(items, nc, nr)</td>
+	<td class="summary">Create matrix and initialize with table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#pad">pad</a>&nbsp;(self)</td>
+	<td class="summary">Pad nil values with zeroes making matrix dense.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#purge">purge</a>&nbsp;(self)</td>
+	<td class="summary">Purge all items.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#sub">sub</a>&nbsp;(self, other)</td>
+	<td class="summary">Arithmetic elementwise substraction.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#tomatrix">tomatrix</a>&nbsp;(self)</td>
+	<td class="summary">Promote to matrix type.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#transpose">transpose</a>&nbsp;(self)</td>
+	<td class="summary">transpose matrix </td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="__tostring"></a><strong>__tostring</strong>&nbsp;(self)</dt>
+<dd>
+Build a printable string from set.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+string
+
+
+
+</dd>
+
+
+
+
+<dt><a name="add"></a><strong>add</strong>&nbsp;(self, other)</dt>
+<dd>
+Arithmetic elementwise addition.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+	<li>
+	  other: scalar or matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="apply"></a><strong>apply</strong>&nbsp;(self, fun)</dt>
+<dd>
+Apply function to elements of matrix.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+	<li>
+	  fun: function
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="clone"></a><strong>clone</strong>&nbsp;(self, object)</dt>
+<dd>
+Create a clone of self.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+	<li>
+	  object: new object [{}]
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+clone of matrix.
+
+
+
+</dd>
+
+
+
+
+<dt><a name="count"></a><strong>count</strong>&nbsp;(self, item)</dt>
+<dd>
+Count of specific item.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: reference
+	</li>
+	
+	<li>
+	  item: item
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+count of item
+
+
+
+</dd>
+
+
+
+
+<dt><a name="div"></a><strong>div</strong>&nbsp;(self, other)</dt>
+<dd>
+Arithmetic elementwise division.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+	<li>
+	  other: scalar or matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fill"></a><strong>fill</strong>&nbsp;(self, items)</dt>
+<dd>
+Fill with items.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: vector
+	</li>
+	
+	<li>
+	  items: table of items
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="mmul"></a><strong>mmul</strong>&nbsp;(a, b)</dt>
+<dd>
+Matrix - Matrix multiplication.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  a: matrix
+	</li>
+	
+	<li>
+	  b: matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+vector
+
+
+
+</dd>
+
+
+
+
+<dt><a name="mul"></a><strong>mul</strong>&nbsp;(self, other)</dt>
+<dd>
+Arithmetic elementwise multiplication.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+	<li>
+	  other: scalar or matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="new"></a><strong>new</strong>&nbsp;(items, nc, nr)</dt>
+<dd>
+Create matrix and initialize with table.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  items: table of items
+	</li>
+	
+	<li>
+	  nc: number of columes (optional)
+	</li>
+	
+	<li>
+	  nr: number of rows (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+new matrix
+
+
+
+</dd>
+
+
+
+
+<dt><a name="pad"></a><strong>pad</strong>&nbsp;(self)</dt>
+<dd>
+Pad nil values with zeroes making matrix dense.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: vector
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="purge"></a><strong>purge</strong>&nbsp;(self)</dt>
+<dd>
+Purge all items.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="sub"></a><strong>sub</strong>&nbsp;(self, other)</dt>
+<dd>
+Arithmetic elementwise substraction.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+	<li>
+	  other: scalar or matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="tomatrix"></a><strong>tomatrix</strong>&nbsp;(self)</dt>
+<dd>
+Promote to matrix type.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+self
+
+
+
+</dd>
+
+
+
+
+<dt><a name="transpose"></a><strong>transpose</strong>&nbsp;(self)</dt>
+<dd>
+transpose matrix
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  self: matrix
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+new matrix
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

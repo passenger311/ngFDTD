@@ -1,0 +1,529 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.fs.html">scape.io.fs</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.complex.html">scape.math.complex</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li><strong>scape.table</strong></li>
+	
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.table</code></h1>
+
+<p><p><b>Module:</b> table utility library. </p> </p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#clone">clone</a>&nbsp;(struct)</td>
+	<td class="summary">Create a clone of table structure by performing a deep copy.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fcopy">fcopy</a>&nbsp;(source, dest, filter)</td>
+	<td class="summary">Filter copy.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#indexof">indexof</a>&nbsp;(tab, value)</td>
+	<td class="summary">Retrieve index associated with array value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#invert">invert</a>&nbsp;(tab)</td>
+	<td class="summary">Invert table by swapping keys with values and vice versa.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#keyof">keyof</a>&nbsp;(arr, value, tab)</td>
+	<td class="summary">Retrieve key associated with table value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#pcopy">pcopy</a>&nbsp;(source, dest, prot)</td>
+	<td class="summary">Protected copy.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#query">query</a>&nbsp;(tab, strkey)</td>
+	<td class="summary">Query table by string key.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#valueset">valueset</a>&nbsp;(array, value)</td>
+	<td class="summary">Create a set from array values.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="clone"></a><strong>clone</strong>&nbsp;(struct)</dt>
+<dd>
+Create a clone of table structure by performing a deep copy. Metatables are shallow copied.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  struct: data structure or scalar
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+clone of data structure
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fcopy"></a><strong>fcopy</strong>&nbsp;(source, dest, filter)</dt>
+<dd>
+Filter copy. The only entries which are copied from source to destination are those with keys in the filter table.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  source: source table
+	</li>
+	
+	<li>
+	  dest: destination table (optional)
+	</li>
+	
+	<li>
+	  filter: filter table (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+dest
+
+
+
+</dd>
+
+
+
+
+<dt><a name="indexof"></a><strong>indexof</strong>&nbsp;(tab, value)</dt>
+<dd>
+Retrieve index associated with array value.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  tab: array table
+	</li>
+	
+	<li>
+	  value: array value to search for
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+return index of value if found; <tt>nil</tt> otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="invert"></a><strong>invert</strong>&nbsp;(tab)</dt>
+<dd>
+Invert table by swapping keys with values and vice versa.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  tab: table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+inverted table
+
+
+
+</dd>
+
+
+
+
+<dt><a name="keyof"></a><strong>keyof</strong>&nbsp;(arr, value, tab)</dt>
+<dd>
+Retrieve key associated with table value.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  arr: 
+	</li>
+	
+	<li>
+	  value: table value to search for
+	</li>
+	
+	<li>
+	  tab: table
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+return key of value if found; <tt>nil</tt> otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="pcopy"></a><strong>pcopy</strong>&nbsp;(source, dest, prot)</dt>
+<dd>
+Protected copy. Existing entries are protected if the the key is is set in protection table.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  source: source table
+	</li>
+	
+	<li>
+	  dest: destination table (optional)
+	</li>
+	
+	<li>
+	  prot: protection table (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+dest
+
+
+
+</dd>
+
+
+
+
+<dt><a name="query"></a><strong>query</strong>&nbsp;(tab, strkey)</dt>
+<dd>
+Query table by string key. Instead of <i>tab["one"]["two"]["three"]</i> for example one may use <i>query(tab,"one.two.three")</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  tab: table to query
+	</li>
+	
+	<li>
+	  strkey: string key
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+the referenced entry or <tt>nil</ii> if it does not exist.
+
+
+
+</dd>
+
+
+
+
+<dt><a name="valueset"></a><strong>valueset</strong>&nbsp;(array, value)</dt>
+<dd>
+Create a set from array values. This function returns a table where the array values are the keys and the values are all set to the given value or <tt>true</tt>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  array: array of keys
+	</li>
+	
+	<li>
+	  value: value [<tt>true</tt>]
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+value set table
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

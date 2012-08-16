@@ -1,0 +1,25 @@
+
+#ifndef NEO_GUARD_OPERATOR_TABLE_HPP
+#define NEO_GUARD_OPERATOR_TABLE_HPP
+
+#include <Entity.hpp>
+
+#include <map>
+#include <string>
+#include <vector>
+#include <iostream>
+
+
+class OperatorTable : public EntityTable<Operator> {
+
+private:
+
+public:
+
+
+};
+
+
+
+
+#endif // NEO_GUARD_OPERATOR_TABLE_HPP

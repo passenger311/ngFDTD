@@ -1,0 +1,1 @@
+/usr/bin/gcc     CMakeFiles/lua-exe.dir/lua.c.o  -o ../../../lua -rdynamic ../../../liblua5.1.so -lm -ldl -lreadline -Wl,-rpath,/home/achim/Desktop/Projects/luascape: 

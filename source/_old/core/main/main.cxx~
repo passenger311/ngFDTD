@@ -1,0 +1,15 @@
+
+
+#include "SequenceTable.hpp"
+
+using namespace neo;
+
+int main()
+{
+
+  SequenceTable<int> a;
+
+
+
+
+}

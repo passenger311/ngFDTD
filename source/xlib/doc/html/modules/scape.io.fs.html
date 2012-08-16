@@ -1,0 +1,919 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+<h1>Modules</h1>
+<ul>
+
+	<li>
+		<a href="../modules/scape.html">scape</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.class.html">scape.class</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.config.html">scape.config</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.coroutine.html">scape.coroutine</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.debug.html">scape.debug</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.html">scape.file</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.file.ostream.html">scape.file.ostream</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.io.html">scape.io</a>
+	</li>
+
+	<li><strong>scape.io.fs</strong></li>
+	
+	<li>
+		<a href="../modules/scape.math.html">scape.math</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.complex.html">scape.math.complex</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.consts.html">scape.math.consts</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.dists.html">scape.math.dists</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.quants.html">scape.math.quants</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.units.html">scape.math.units</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vec3.html">scape.math.vec3</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.math.vector.html">scape.math.vector</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.module.html">scape.module</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.object.html">scape.object</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.html">scape.os</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.os.info.html">scape.os.info</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.proto.html">scape.proto</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.html">scape.string</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.encode.html">scape.string.encode</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.string.version.html">scape.string.version</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.html">scape.struct</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.bag.html">scape.struct.bag</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.deque.html">scape.struct.deque</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.struct.set.html">scape.struct.set</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.table.html">scape.table</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.unit.html">scape.unit</a>
+	</li>
+
+	<li>
+		<a href="../modules/scape.utils.html">scape.utils</a>
+	</li>
+
+</ul>
+
+
+
+<!-- File list -->
+
+
+
+
+
+
+</div><!-- id="navigation" -->
+
+<div id="content">
+
+<h1>Module <code>scape.io.fs</code></h1>
+
+<p><p><b>Module:</b> filesytem utility library. Requires <i>luafilesystem</i>. </p> </p>
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#chdir">chdir</a>&nbsp;(dirpath)</td>
+	<td class="summary">Change current working directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#dir">dir</a>&nbsp;(dirpath)</td>
+	<td class="summary">Create iterator over directory content.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fnconvert">fnconvert</a>&nbsp;(path, sep)</td>
+	<td class="summary">Convert path into platform specific form.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fndecode">fndecode</a>&nbsp;(path, sep)</td>
+	<td class="summary">Decode file or directory path into platform specific form.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fnencode">fnencode</a>&nbsp;(path)</td>
+	<td class="summary">Encode file or directory path into universal form.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fnsplice">fnsplice</a>&nbsp;(...)</td>
+	<td class="summary">Combine encoded path segments to form spliced path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#fnsplit">fnsplit</a>&nbsp;(path)</td>
+	<td class="summary">Return a tuple of (base,dir,sfx) strings associated with file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#getcwd">getcwd</a>&nbsp;(dirpath)</td>
+	<td class="summary">Return current working directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#info">info</a>&nbsp;(filepath, aname)</td>
+	<td class="summary">Retrieve file attributes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#isdir">isdir</a>&nbsp;(path)</td>
+	<td class="summary">Check whether path points to a directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#lock">lock</a>&nbsp;(filehandle, mode, offset, length)</td>
+	<td class="summary">Lock a file or part of it using the specified mode.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#mkdir">mkdir</a>&nbsp;(dirpath)</td>
+	<td class="summary">Create a directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#remove">remove</a>&nbsp;(path)</td>
+	<td class="summary">Remove a file, symlink or empty directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#rename">rename</a>&nbsp;(oldname, newname)</td>
+	<td class="summary">Rename file or directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#rmdir">rmdir</a>&nbsp;(dirpath)</td>
+	<td class="summary">Remove a directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#setmode">setmode</a>&nbsp;(filehandle, mode)</td>
+	<td class="summary">Set writing mode for a file (Windows only).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#syminfo">syminfo</a>&nbsp;(filepath, aname)</td>
+	<td class="summary">Retrieve symbolic link attributes (Unix only).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#touch">touch</a>&nbsp;(filepath, atime, mtime)</td>
+	<td class="summary">Touch existing file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#unlock">unlock</a>&nbsp;(filehandle, offset, length)</td>
+	<td class="summary">Unlock a file or part of it.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="chdir"></a><strong>chdir</strong>&nbsp;(dirpath)</dt>
+<dd>
+Change current working directory. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  dirpath: directory path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if successful; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="dir"></a><strong>dir</strong>&nbsp;(dirpath)</dt>
+<dd>
+Create iterator over directory content. <i>dir(path)</i> returns a <i>next</i> function which on call returns one directory entry after the other until the content is exhausted (and it return <tt>nil</tt>).
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  dirpath: directory path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>next</i> function; or <tt>nil</tt>, <i>error-str</i> if operation fails
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fnconvert"></a><strong>fnconvert</strong>&nbsp;(path, sep)</dt>
+<dd>
+Convert path into platform specific form.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  path: file or directory path
+	</li>
+	
+	<li>
+	  sep: directory seperator (defaults to <i>dirsep()</i>)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+platform specific path
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fndecode"></a><strong>fndecode</strong>&nbsp;(path, sep)</dt>
+<dd>
+Decode file or directory path into platform specific form. The universal seperator is replaced with <i>dirsep</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  path: path
+	</li>
+	
+	<li>
+	  sep: directory seperator (defaults to <i>dirsep()</i>)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+platform specific path
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fnencode"></a><strong>fnencode</strong>&nbsp;(path)</dt>
+<dd>
+Encode file or directory path into universal form. The characters '/' and '\' are replaced with a universal serperator. Trailing seperators are removed.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  path: path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+encoded path
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fnsplice"></a><strong>fnsplice</strong>&nbsp;(...)</dt>
+<dd>
+Combine encoded path segments to form spliced path.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  ...: encoded path segments
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+spliced path in encoded form
+
+
+
+</dd>
+
+
+
+
+<dt><a name="fnsplit"></a><strong>fnsplit</strong>&nbsp;(path)</dt>
+<dd>
+Return a tuple of (base,dir,sfx) strings associated with file.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  path: encoded file/directory path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+list of path components
+
+
+
+</dd>
+
+
+
+
+<dt><a name="getcwd"></a><strong>getcwd</strong>&nbsp;(dirpath)</dt>
+<dd>
+Return current working directory. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  dirpath: directory path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+current working directory; or (<tt>nil</tt>, <i>error-string</i>)
+
+
+
+</dd>
+
+
+
+
+<dt><a name="info"></a><strong>info</strong>&nbsp;(filepath, aname)</dt>
+<dd>
+Retrieve file attributes. Attributes are <ul> <li><tt>dev</tt>: the device the file resides on (Unix), or the drive number of the disk containing the file (Windows)</li> <li><tt>ino</tt>: the inode number (Unix only)</li> <li><tt>mode</tt>: protection mode string which has the value <i>file, directory, link, socket, named pipe, char device, block device</i> or <i>other</i></li> <li><tt>nlink</tt>: number of hard links</li> <li><tt>uid</tt>: uid of owner (Unix only, 0 on Windows)</li> <li><tt>gid</tt>: gid of owner (Unix only, 0 on Windows)</li> <li><tt>rdev</tt>: device type (Unix only, same as <i>dev</i> on Windows)</li> <li><tt>access</tt>: time of last access</li> <li><tt>modification</tt>: time of last modification</li> <li><tt>change</tt>: time of last status change</li> <li><tt>blocks</tt>: blocks allocated for file (Unix only)</li> <li><tt>blksize</tt>: optimal file system I/O blocksize (Unix only)</li> </ul> This function follows symbolic links to their destination. Use <i>symstat()</i> instead to retrieve information about symbolic links. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  filepath: file path
+	</li>
+	
+	<li>
+	  aname: attribute (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>table</i> of file attributes or if <i>aname</i> is given a string which corresponds to <i>table.aname</i>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="isdir"></a><strong>isdir</strong>&nbsp;(path)</dt>
+<dd>
+Check whether path points to a directory. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  path: path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if path points to a directory; <tt>false</tt> otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="lock"></a><strong>lock</strong>&nbsp;(filehandle, mode, offset, length)</dt>
+<dd>
+Lock a file or part of it using the specified mode. If <i>offset</i>, <i>length</i> are specified then only that part of the file is locked. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  filehandle: file handle
+	</li>
+	
+	<li>
+	  mode: lock mode (<tt>r</tt> for read/shared lock or <tt>w</tt> for write/exclusive lock)
+	</li>
+	
+	<li>
+	  offset: offset in bytes (optional)
+	</li>
+	
+	<li>
+	  length: length in bytes (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if operation successful; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="mkdir"></a><strong>mkdir</strong>&nbsp;(dirpath)</dt>
+<dd>
+Create a directory. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  dirpath: directory path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if directory was created; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="remove"></a><strong>remove</strong>&nbsp;(path)</dt>
+<dd>
+Remove a file, symlink or empty directory. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  path: file/directory path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if entity was removed; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="rename"></a><strong>rename</strong>&nbsp;(oldname, newname)</dt>
+<dd>
+Rename file or directory.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  oldname: old name
+	</li>
+	
+	<li>
+	  newname: new name
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if entity was renamed; (<tt>nil</tt>, <i>error-string</i>) otherwise.
+
+
+
+</dd>
+
+
+
+
+<dt><a name="rmdir"></a><strong>rmdir</strong>&nbsp;(dirpath)</dt>
+<dd>
+Remove a directory. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  dirpath: directory path
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if directory was created; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="setmode"></a><strong>setmode</strong>&nbsp;(filehandle, mode)</dt>
+<dd>
+Set writing mode for a file (Windows only). Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  filehandle: file handle
+	</li>
+	
+	<li>
+	  mode: file mode (<tt>binary</tt> or <tt>text</tt>)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if operation successful; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="syminfo"></a><strong>syminfo</strong>&nbsp;(filepath, aname)</dt>
+<dd>
+Retrieve symbolic link attributes (Unix only). Returned attributes are same as for <i>filestat()</i>. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  filepath: file path
+	</li>
+	
+	<li>
+	  aname: attribute (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<i>table</i> of file attributes or if <i>aname</i> is given a string which corresponds to <i>table.aname</i>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="touch"></a><strong>touch</strong>&nbsp;(filepath, atime, mtime)</dt>
+<dd>
+Touch existing file. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  filepath: file path
+	</li>
+	
+	<li>
+	  atime: access time (optional)
+	</li>
+	
+	<li>
+	  mtime: modification time (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if file was touched; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+
+
+<dt><a name="unlock"></a><strong>unlock</strong>&nbsp;(filehandle, offset, length)</dt>
+<dd>
+Unlock a file or part of it. If <i>offset</i>, <i>length</i> are specified then only that part of the file is unlocked. Requires <i>luafilesystem</i>.
+
+
+<h3>Parameters</h3>
+<ul>
+	
+	<li>
+	  filehandle: file handle
+	</li>
+	
+	<li>
+	  offset: offset in bytes (optional)
+	</li>
+	
+	<li>
+	  length: length in bytes (optional)
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<tt>true</tt> if operation successful; (<tt>nil</tt>, <i>error-string</i>) otherwise
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>
