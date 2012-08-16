@@ -13,11 +13,6 @@ set_property(GLOBAL
   PROPERTY
   PROJECT_MAIN_GUARD 1)
 
-#### version string
-
-set(PROJECT_VERSION 
-  "${PROJECT_MAJOR_VERSION}.${PROJECT_MINOR_VERSION}.${PROJECT_PATCH_VERSION}")
-
 #### find top level directory
 
 function(find_top_dir CURRENT_DIR RESULT_NAME)
@@ -54,6 +49,11 @@ include(${PROJECT_HOME}/setup/compiler.cmake)
 include(${PROJECT_HOME}/setup/search.cmake)
 include(${PROJECT_HOME}/setup/install.cmake)
 include(${PROJECT_HOME}/setup/package.cmake)
+
+#### set version string
+
+set(PROJECT_VERSION 
+  "${PROJECT_MAJOR_VERSION}.${PROJECT_MINOR_VERSION}.${PROJECT_PATCH_VERSION}")
 
 #### process install PREFIX variable
 

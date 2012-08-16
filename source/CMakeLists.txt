@@ -10,4 +10,4 @@ execute_process(
   OUTPUT_VARIABLE OUT
 )
 
-require(source/main)
+require(source/neon)

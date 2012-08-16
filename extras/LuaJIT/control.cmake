@@ -16,4 +16,4 @@ set(BUILD_IN_SOURCE off)
 
 ### build flags
 
-set(C_FLAGS "${C_REL} ${C_OPT2}")
+set(C_FLAGS "${C_REL} ${C_OPT2} ${C_NOSTACK}")

@@ -5,8 +5,7 @@ lib = require("scripts.lib")
 
 -- output directory for source files
 
-local outdir = "main.src"
-list_bytecode = {}
+local outdir = "neon.src"
 
 -- List of statically linked native modules
 
@@ -18,9 +17,17 @@ list_native = {
 
 -- Create list of lua modules to byte compile
 
+list_bytecode = { "neon_start" }
+
 c = lib.getcomps("xlib")
 for k,v in pairs(c) do
-   io.write("byte compiling "..k.."\t"..tostring(v).."\n")
+   io.write("adding "..k.."\t"..tostring(v).."\n")
+   table.insert(list_bytecode,k)
+end
+
+c = lib.getcomps("fdtd")
+for k,v in pairs(c) do
+   io.write("adding "..k.."\t"..tostring(v).."\n")
    table.insert(list_bytecode,k)
 end
 

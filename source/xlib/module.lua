@@ -27,7 +27,7 @@ module( "xlib.module" )
 
 policy = {
    AUTOLOAD = true,
-   PRELOAD = false
+   PRELOAD = false,
 }
 
 loaded = {}
@@ -40,20 +40,21 @@ IS_JIT = not not _G.jit
 _setmetatable(_M,_M)
 _M.index = _M
 
+
 __call = function(self, modname, ... )
-   local ns = _loaded[modname]
-   if ns ~= 'table' then 
-      ns = {} 
-      _loaded[modname] = ns
-   end
-   ns._M = ns
-   ns._NAME = modname
-   _setfenv(2,ns)
-   for i=1,_select('#',...) do 
-      _select(i,...)(ns)
-   end
-   return ns
-end
+	    local ns = _loaded[modname]
+	    if ns ~= 'table' then 
+	       ns = {}
+	       _loaded[modname] = ns
+	    end
+	    ns._M = ns
+	    ns._NAME = modname
+	    _setfenv(2,ns)
+	    for i=1,_select('#',...) do 
+	       _select(i,...)(ns)
+	    end
+	    return ns
+	 end
 
 --- Split module name into fragments.
 -- @param name module name

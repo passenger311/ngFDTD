@@ -7,14 +7,14 @@ set(LD_LIBS m)
 #### defaults
 
 set(LJVM_MODE elfasm)
-set(LD_LIBS ${LD_LIBS} dl readline)
+set(LD_LIBS ${LD_LIBS} dl)
 
 #### check architecture 
 ## note: this is still very crude; FIXME set compiler flags properly as in
 ## original Makefile
 
 if ( UNIX )
-  set(LD_LIBS ${LD_LIBS} dl readline)
+  set(LD_LIBS ${LD_LIBS} dl)
   set(C_FLAGS "${C_FLAGS} -DLUA_USE_LINUX" )
 endif()
 
@@ -183,6 +183,7 @@ add_dependencies(luajit-exe luajit-gen-files)
 set_target_properties(luajit-exe
   PROPERTIES 
   LINK_FLAGS "${LD_FLAGS}"
+  COMPILE_FLAGS "${C_FLAGS}"
   OUTPUT_NAME luajit
 )
 
