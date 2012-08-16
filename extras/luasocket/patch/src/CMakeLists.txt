@@ -77,7 +77,7 @@ set_target_properties(${NAME}-mime-dll
   LIBRARY_OUTPUT_DIRECTORY mime
   ARCHIVE_OUTPUT_DIRECTORY mime
   RUNTIME_OUTPUT_DIRECTORY mime
-  OUTPUT_NAME core
+  OUTPUT_NAME mine
   PREFIX ""
   COMPILE_FLAGS "${C_FLAGS}"
 )

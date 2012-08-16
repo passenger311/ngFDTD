@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib",
+FILE      = "xlib",
 -------------------------------------------------------------------------------
 }
 
@@ -15,8 +15,8 @@ local module = require( _H.PROJECT..".module" )
 ---<p><b>Module</b>: Main module. </p>
 -- </p>
 -- @class module
--- @name neolib
-module( "neolib" )
+-- @name xlib
+module( "xlib" )
 -------------------------------------------------------------------------------
 
 module.imports{

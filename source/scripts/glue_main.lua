@@ -18,7 +18,7 @@ list_native = {
 
 -- Create list of lua modules to byte compile
 
-c = lib.getcomps("neolib")
+c = lib.getcomps("xlib")
 for k,v in pairs(c) do
    io.write("byte compiling "..k.."\t"..tostring(v).."\n")
    table.insert(list_bytecode,k)

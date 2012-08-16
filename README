@@ -35,9 +35,14 @@ directory added to the cmake build.
 _______________________________________________________________________________
 __ BUILD PROCESS ______________________________________________________________
 
-Create a "build" directory and enter it
+Build host side tools
 
-> mkdir build
+> cd host/build
+> cmake ..
+> make
+
+Enter top-level "build" directory
+
 > cd build
 
 Then run

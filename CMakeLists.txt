@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 2.8)
 
 include(./main.cmake)
 
+#### import build tools
+
+include("${PROJECT_HOME}/tools/build/ImportExecutables.cmake")
+
+#### build in source tree
+
 require(source)
 
 # activate for testing purposes ...

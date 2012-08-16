@@ -161,6 +161,20 @@ set_target_properties(luajit-dll
   OUTPUT_NAME luajit
 )
 
+add_library(luajit-lib STATIC ${LJVM_SRCS} ${LJCORE_SRCS})
+
+add_dependencies(luajit-lib luajit-gen-files)
+
+set_source_files_properties( ${LJCORE_SRCS}
+  PROPERTIES 
+  LINK_FLAGS "${LD_FLAGS}"
+  COMPILE_FLAGS "${C_FLAGS}"
+)
+
+set_target_properties(luajit-lib
+  PROPERTIES 
+  OUTPUT_NAME luajit
+)
 
 add_executable(luajit-exe luajit.c ${LJVM_SRCS} ${LJCORE_SRCS})
 
@@ -176,12 +190,13 @@ target_link_libraries(luajit-exe luajit-dll ${LD_LIBS})
 
 ### install
 
-install(TARGETS 
-  luajit-exe
-  luajit-dll
-  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
-  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
-  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
-)
+#install(TARGETS 
+#  luajit-exe
+#  luajit-dll
+#  luajit-lib
+#  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
+#  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
+#  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
+#)
 
 #install(FILES ${DEV_HDRS} DESTINATION ${INSTALL_DIR_INCLUDE})
