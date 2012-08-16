@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.string.version",
+FILE      = "xlib.string.version",
 -------------------------------------------------------------------------------
 }
         
@@ -21,7 +21,7 @@ local _G, _assert, _table, _string, _ipairs, _print
 --- <p><b>Module:</b> handle version strings.
 -- </p>
 --
-module("neolib.string.version")
+module("xlib.string.version")
 ------------------------------------------------------------------------------
 
 --- Create version number from version string.

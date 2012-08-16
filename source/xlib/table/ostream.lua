@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.table.ostream",
+FILE      = "xlib.table.ostream",
 -------------------------------------------------------------------------------
 }
 
@@ -24,7 +24,7 @@ local _table_insert = table.insert
 --- <p><b>Prototype:</b> Table output stream. </p>
 -- Stream that writes to table.
 -- </p>
-module("neolib.table.ostream")
+module("xlib.table.ostream")
 ----------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

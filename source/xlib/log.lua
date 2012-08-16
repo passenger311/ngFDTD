@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "13/06/2011",
@@ -24,7 +24,7 @@ local _clock, _date, _time = os.clock, os.date, os.time
 --- <p><b>Module:</b> Event logger. 
 -- </p>
 --
-module( "neolib.log" )
+module( "xlib.log" )
 ------------------------------------------------------------------------------
 
 -- TODO need some proper handler to absract writing to tables / string /files

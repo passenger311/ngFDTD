@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.unit",
+FILE      = "xlib.unit",
 -------------------------------------------------------------------------------
 }
 
@@ -27,7 +27,7 @@ local _require = require
 -- of a unit test form a collection of independent tests which are executed
 -- in order of definition. 
 --
-module( "neolib.unit" )
+module( "xlib.unit" )
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )
@@ -56,7 +56,7 @@ function run(self, name, count)
       if ok then 
 	 stat = "OK"
       else 
-	 if err:find("neolib.test.unit") then
+	 if err:find("xlib.test.unit") then
 	    stat = "FAILED"
 	 else
 	    stat = "ERROR"
@@ -147,12 +147,12 @@ end
 -- assert will also cause the test to to fail with an error instead. 
 -- @param assertion assertion
 function assert(assertion)
-   _assert(assertion,"neolib.test.unit")
+   _assert(assertion,"xlib.test.unit")
 end
 
 --- Fail test.
 function fail()
-   _assert(false,"neolib.test.unit")
+   _assert(false,"xlib.test.unit")
 end
 
 --- Launch other test units from within the given unit. 

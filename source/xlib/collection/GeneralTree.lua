@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-module      : neolib.collection.GeneralTree
+module      : xlib.collection.GeneralTree
 version     : 0.9 
 date        : 8/5/2008
 author      : j.hamm
@@ -7,9 +7,9 @@ license     : x11
 lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
-local table_utils = require "neolib.util.table"
-local IGenericTree = require "neolib.collection.IGenericTree"
+local class = require "xlib.oop.class"
+local table_utils = require "xlib.util.table"
+local IGenericTree = require "xlib.collection.IGenericTree"
 local toint = math.floor
 local table_insert, table_remove, table_getn = 
    table.insert, table.remove, table.getn
@@ -21,10 +21,10 @@ local pairs, ipairs, require, assert, type, select
 -- <p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.IGenericTree.html>IGenericTree</a>
+-- <a href=xlib.collection.IGenericTree.html>IGenericTree</a>
 -- </p>
 --
-module("neolib.collection.GeneralTree")
+module("xlib.collection.GeneralTree")
 
 -------------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.DequeSet
+$module      : xlib.collection.DequeSet
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -8,7 +8,7 @@ $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
  
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 local table_insert = table.insert
 local table_remove = table.remove
 
@@ -20,16 +20,16 @@ local pairs, ipairs, require, assert =  pairs, ipairs, require, assert
 -- </p>
 --
 -- <p><b>Implements:</b>
--- <a href="neolib.collection.Deque.html">Deque</a>,
--- <a href=neolib.collection.IGenericSet.html>IGenericSet</a>
+-- <a href="xlib.collection.Deque.html">Deque</a>,
+-- <a href=xlib.collection.IGenericSet.html>IGenericSet</a>
 -- </p>
-module("neolib.collection.DequeSet")
+module("xlib.collection.DequeSet")
 
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.Deque",
-	   require "neolib.collection.IGenericSet" )
+	   require "xlib.collection.Deque",
+	   require "xlib.collection.IGenericSet" )
 
 -------------------------------------------------------------------------------
 

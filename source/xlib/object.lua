@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.object",
+FILE      = "xlib.object",
 -------------------------------------------------------------------------------
 }
 
@@ -26,7 +26,7 @@ local _insert, _remove = table.insert, table.remove
 -- linearizers and the various dispatch mechanisms these functions allow to 
 -- implement a variety of object models. 
 -- 
-module( "neolib.object" )
+module( "xlib.object" )
 -------------------------------------------------------------------------------
 
 local ops = { "__add", "__sub", "__mod", "__div", "__mul", "__pow", "__concat",

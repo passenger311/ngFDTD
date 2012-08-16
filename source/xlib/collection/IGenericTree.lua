@@ -1,6 +1,6 @@
 local FILE = {
 ------------------------------------------------------------------------------
-module      = "neolib.collection.IGenericTree",
+module      = "xlib.collection.IGenericTree",
 version     = "0.9",
 date        = "7/31/2008",
 author      = "j.hamm",
@@ -9,7 +9,7 @@ lua_ver     = "5.1"
 ------------------------------------------------------------------------------
 }
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
 local _G, require, type, ipairs, math, table = 
    _G, require, type, ipairs, math, table
@@ -19,18 +19,18 @@ local _G, require, type, ipairs, math, table =
 -- <p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.IGenericContainer.html>IGenericContainer</a>,
--- <a href=neolib.collection.IEnumerable.html>IEnumerable</a>,
--- <a href=neolib.collection.ISearchable.html>ISearchable</a>,
+-- <a href=xlib.collection.IGenericContainer.html>IGenericContainer</a>,
+-- <a href=xlib.collection.IEnumerable.html>IEnumerable</a>,
+-- <a href=xlib.collection.ISearchable.html>ISearchable</a>,
 -- </p>
-module("neolib.collection.IGenericTree")
+module("xlib.collection.IGenericTree")
 
 ---------------------------------------------------------------------------
 
 class.interface( _M, 
-		 require "neolib.collection.IGenericContainer",
-		 require "neolib.collection.IEnumerable",
-		 require "neolib.collection.ISearchable" )
+		 require "xlib.collection.IGenericContainer",
+		 require "xlib.collection.IEnumerable",
+		 require "xlib.collection.ISearchable" )
 
 ---------------------------------------------------------------------------
 

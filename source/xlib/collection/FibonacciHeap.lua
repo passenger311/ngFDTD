@@ -1,6 +1,6 @@
 local FILE = {
 ------------------------------------------------------------------------------
-module      = "neolib.collection.FibonacciHeap",
+module      = "xlib.collection.FibonacciHeap",
 version     = "0.9",
 date        = "7/31/2008",
 author      = "j.hamm",
@@ -9,8 +9,8 @@ lua_ver     = "5.1"
 ------------------------------------------------------------------------------
 }
 
-local class = require "neolib.oop.class"
-local table_utils = require "neolib.util.table"
+local class = require "xlib.oop.class"
+local table_utils = require "xlib.util.table"
 
 local _G, assert, string, table, math, select, pairs, ipairs, tostring, 
 require, print
@@ -24,7 +24,7 @@ require, print
 -- the maximum time of a single pop() and  changekey() operation can exceed
 -- the amortised up to O(N). This implementation is an experimental adaption
 -- of a Python code by Alistair Rendell.
-module("neolib.collection.FibonacciHeap")
+module("xlib.collection.FibonacciHeap")
 
 ----------------------------------------------------------------------------
 -- private methods
@@ -153,7 +153,7 @@ end
 ----------------------------------------------------------------------------
 
 class.def(_M, 
-	  require "neolib.collection.IGenericPriorityQueue" )
+	  require "xlib.collection.IGenericPriorityQueue" )
 
 function __init__(self,...)
    self:clear()

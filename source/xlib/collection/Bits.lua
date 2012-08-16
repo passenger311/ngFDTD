@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.Bits
+$module      : xlib.collection.Bits
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,34 +7,34 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 local table_insert = table.insert
 
 local pairs, ipairs, tostring, require, next = 
    pairs, ipairs, tostring, require, next
 
 if not _LMAKE_ then
-   local bit = require "neolib.embeds.bit"
+   local bit = require "xlib.embeds.bit"
 end
 
 --- <p><b>Class:</b> a bit-set stores integers as bits.
 -- </p>
 --
 -- <p><b>Interface:</b>
--- <a href=neolib.collection.IGenericSet.html>IGenericSet</a>,
--- <a href=neolib.generic.ICloneable.html>ICloneable</a>, 
--- <a href=neolib.generic.IConvertible.html>IConvertible</a>, 
--- <a href=neolib.serialization.IPrintable.html>IPrintable</a>
+-- <a href=xlib.collection.IGenericSet.html>IGenericSet</a>,
+-- <a href=xlib.generic.ICloneable.html>ICloneable</a>, 
+-- <a href=xlib.generic.IConvertible.html>IConvertible</a>, 
+-- <a href=xlib.serialization.IPrintable.html>IPrintable</a>
 -- </p>
-module("neolib.collection.Bits")
+module("xlib.collection.Bits")
 
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.IGenericSet",
-	   require "neolib.generic.IConvertible",
-	   require "neolib.generic.ICloneable",
-	   require "neolib.generic.IPrintable" )
+	   require "xlib.collection.IGenericSet",
+	   require "xlib.generic.IConvertible",
+	   require "xlib.generic.ICloneable",
+	   require "xlib.generic.IPrintable" )
 
 -------------------------------------------------------------------------------
 

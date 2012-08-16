@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- neolib.math.complex_native
+-- xlib.math.complex_native
 --
 -- @copyright $date
 -- @author    $author$
@@ -8,8 +8,8 @@
 
 -- FIX: complex hyperbolic functions
 
-local proto = require "neolib.proto"
-local math = require "neolib.math"
+local proto = require "xlib.proto"
+local math = require "xlib.math"
 
 local _print, _dofile = print, dofile
 local _pairs, _type, _tostring = pairs, type, tostring
@@ -23,7 +23,7 @@ local _pi_half = math.pi / 2
 -------------------------------------------------------------------------------
 --- <p><b>Prototype:</b> complex number support. </p>
 --
-module("neolib.math.complex")
+module("xlib.math.complex")
 -------------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

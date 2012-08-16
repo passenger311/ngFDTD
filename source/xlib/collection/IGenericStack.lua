@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.IGenericStack
+$module      : xlib.collection.IGenericStack
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,7 +7,7 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
 local require = require
 
@@ -15,17 +15,17 @@ local require = require
 -- <p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.IGenericContainer.html>IGenericContainer</a>,
--- <a href=neolib.collection.IEnumerable.html>IEnumerable</a>
+-- <a href=xlib.collection.IGenericContainer.html>IGenericContainer</a>,
+-- <a href=xlib.collection.IEnumerable.html>IEnumerable</a>
 -- </p>
 --
-module("neolib.collection.IGenericStack")
+module("xlib.collection.IGenericStack")
 
 -------------------------------------------------------------------------------
 
 class.interface( _M, 
-		 require "neolib.collection.IGenericContainer",
-		 require "neolib.collection.IEnumerable" )
+		 require "xlib.collection.IGenericContainer",
+		 require "xlib.collection.IEnumerable" )
 
 -------------------------------------------------------------------------------
 

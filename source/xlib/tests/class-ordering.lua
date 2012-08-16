@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 FILE      = "tests.class-ordering",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
@@ -19,7 +19,7 @@ local class = L.class
 local _pcall, _print = pcall, print
 
 -------------------------------------------------------------------------------
-module( "neolib.tests.class-ordering" )
+module( "xlib.tests.class-ordering" )
 -------------------------------------------------------------------------------
 
 this = unit.new(_M, { name = _H.FILE , repetition=200 } )

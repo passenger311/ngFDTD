@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.struct.list",
+FILE      = "xlib.struct.list",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _type = type
 --- <p><b>Prototype:</b> a list. </p>
 -- The list holds an ordered sequence of items. 
 -- </p>
-module("neolib.struct.list")
+module("xlib.struct.list")
 -------------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

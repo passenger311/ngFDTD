@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
--- neolib.collection.IGenericSet
+-- xlib.collection.IGenericSet
 --
 -- @copyright $date$
 -- @author    $author$
 -- @release   $release$
 -------------------------------------------------------------------------------
       
-local module= require "neolib.module"
-local class = require "neolib.oop.class"
+local module= require "xlib.module"
+local class = require "xlib.oop.class"
 
 -------------------------------------------------------------------------------
 
@@ -20,19 +20,19 @@ local require, tostring = require, tostring
 -- </p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.IGenericContainer.html>IGenericContainer</a>,
--- <a href=neolib.collection.IEnumerable.html>IEnumerable</a>,
--- <a href=neolib.collection.ISearchable.html>ISearchable</a>,
--- <a href=neolib.collection.IPrintable.html>IPrintable</a>
+-- <a href=xlib.collection.IGenericContainer.html>IGenericContainer</a>,
+-- <a href=xlib.collection.IEnumerable.html>IEnumerable</a>,
+-- <a href=xlib.collection.ISearchable.html>ISearchable</a>,
+-- <a href=xlib.collection.IPrintable.html>IPrintable</a>
 -- </p>
-module("neolib.collection.IGenericSet")
+module("xlib.collection.IGenericSet")
 -------------------------------------------------------------------------------
 
 class.interface( _M, 
-		 require "neolib.collection.IGenericContainer",
-		 require "neolib.collection.IEnumerable", 
-		 require "neolib.collection.ISearchable",
-		 require "neolib.generic.IPrintable" 
+		 require "xlib.collection.IGenericContainer",
+		 require "xlib.collection.IEnumerable", 
+		 require "xlib.collection.ISearchable",
+		 require "xlib.generic.IPrintable" 
 	      )
 
 --- Insert an item into the set.

@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.consts",
+FILE      = "xlib.math.consts",
 -------------------------------------------------------------------------------
 }
 
@@ -20,7 +20,7 @@ local _math = math
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> mathematical and scientific constants. </p>
 --
-module("neolib.math.consts")
+module("xlib.math.consts")
 -------------------------------------------------------------------------------
 
 --- Table of mathematical constants.

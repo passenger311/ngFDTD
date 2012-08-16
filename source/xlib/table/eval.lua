@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
--- neolib.table.eval
+-- xlib.table.eval
 --
 -- @copyright $date$
 -- @author    $author$
 -- @release   $release$
 -------------------------------------------------------------------------------
       
-local proto = require "neolib.proto"
+local proto = require "xlib.proto"
 
 -------------------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ local _type = type
 -- delayed (lazy) evaluation for table operations. 
 -- </p>
 --
-module("neolib.table.eval")
+module("xlib.table.eval")
 -------------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.vector",
+FILE      = "xlib.math.vector",
 -------------------------------------------------------------------------------
 }
 
@@ -29,7 +29,7 @@ local _rawget = rawget
 -- operations. Note: any arithmetic operation turns sparse vectors to 
 -- dense vectors.
 -- </p>
-module("neolib.math.vector")
+module("xlib.math.vector")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

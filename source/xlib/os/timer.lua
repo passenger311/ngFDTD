@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.os.timer",
+FILE      = "xlib.os.timer",
 -------------------------------------------------------------------------------
 }
 
@@ -24,7 +24,7 @@ local
 --- <p><Prototype:</b> Stopwatch timer. 
 -- </p>
 --
-module( "neolib.os.timer" )
+module( "xlib.os.timer" )
 ------------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.dists",
+FILE      = "xlib.math.dists",
 -------------------------------------------------------------------------------
 }
 
@@ -26,7 +26,7 @@ local _factorial, _binomial = math.factorial, math.binomial
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> probability distribution functions. </p>
 --
-module("neolib.math.dists")
+module("xlib.math.dists")
 -------------------------------------------------------------------------------
 
 local sqrt2pi = math.sqrt(2*_pi)

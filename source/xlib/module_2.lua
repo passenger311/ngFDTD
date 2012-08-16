@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "31/08/2011 12:21",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.module",
+FILE      = "xlib.module",
 -------------------------------------------------------------------------------
 }
 
@@ -22,7 +22,7 @@ local _module, _select = module, select
 -------------------------------------------------------------------------------
 ---<p><b>Module</b>: Smart module handler. </p>
 --
-module( "neolib.module" )
+module( "xlib.module" )
 -------------------------------------------------------------------------------
 
 policy = {

@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-module      : neolib.collection.BinarySearchTree
+module      : xlib.collection.BinarySearchTree
 version     : 0.9 
 date        : 8/5/2008
 author      : j.hamm
@@ -7,8 +7,8 @@ license     : x11
 lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
-local table_utils = require "neolib.util.table"
+local class = require "xlib.oop.class"
+local table_utils = require "xlib.util.table"
 local toint = math.floor
 local table_insert = table.insert
 
@@ -18,16 +18,16 @@ local pairs, require, assert, type =  pairs, require, assert, type
 -- <p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.BinaryTree.html>BinaryTree</a>,
--- <a href=neolib.collection.ISearchTree.html>ISearchTree</a>
+-- <a href=xlib.collection.BinaryTree.html>BinaryTree</a>,
+-- <a href=xlib.collection.ISearchTree.html>ISearchTree</a>
 -- </p>
-module("neolib.collection.BinarySearchTree")
+module("xlib.collection.BinarySearchTree")
 
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.BinaryTree",
-	   require "neolib.collection.ISearchTree"
+	   require "xlib.collection.BinaryTree",
+	   require "xlib.collection.ISearchTree"
 	)
 
 -------------------------------------------------------------------------------

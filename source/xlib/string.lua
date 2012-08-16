@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.string",
+FILE      = "xlib.string",
 -------------------------------------------------------------------------------
 }
 
@@ -24,7 +24,7 @@ local _tonumber, _tostring = tonumber, tostring
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> String extensions. </p>
 --
-module( "neolib.string" )
+module( "xlib.string" )
 ------------------------------------------------------------------------------
 
 module.extends("string")

@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-module      : neolib.collection.Deque
+module      : xlib.collection.Deque
 version     : 0.9 
 date        : 8/5/2008
 author      : j.hamm
@@ -7,7 +7,7 @@ license     : x11
 lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
      
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 local table_insert = table.insert
 local table_remove = table.remove
 
@@ -20,23 +20,23 @@ local pairs, ipairs, require, assert =  pairs, ipairs, require, assert
 -- </p>
 --
 -- <p><b>Implements:</b>
--- <a href=neolib.collection.IGenericDoubleEndedQueue.html>
+-- <a href=xlib.collection.IGenericDoubleEndedQueue.html>
 --                           IGenericDoubleEndedQueue</a>,
--- <a href=neolib.collection.ISearchable.html>ISearchable</a>, 
--- <a href=neolib.collection.ISortable.html>ISortable</a>, 
--- <a href=neolib.generic.IConvertible.html>IConvertible</a>, 
--- <a href=neolib.generic.ICloneable.html>ICloneable</a> 
+-- <a href=xlib.collection.ISearchable.html>ISearchable</a>, 
+-- <a href=xlib.collection.ISortable.html>ISortable</a>, 
+-- <a href=xlib.generic.IConvertible.html>IConvertible</a>, 
+-- <a href=xlib.generic.ICloneable.html>ICloneable</a> 
 -- </p>
-module("neolib.collection.Deque")
+module("xlib.collection.Deque")
 
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.IGenericDoubleEndedQueue",
-	   require "neolib.collection.ISearchable",
-	   require "neolib.collection.ISortable",
-	   require "neolib.generic.IConvertible",
-	   require "neolib.generic.ICloneable" )
+	   require "xlib.collection.IGenericDoubleEndedQueue",
+	   require "xlib.collection.ISearchable",
+	   require "xlib.collection.ISortable",
+	   require "xlib.generic.IConvertible",
+	   require "xlib.generic.ICloneable" )
 
 -------------------------------------------------------------------------------
 

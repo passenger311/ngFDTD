@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.table",
+FILE      = "xlib.table",
 -------------------------------------------------------------------------------
 }
 
@@ -22,7 +22,7 @@ local _table, _pairs, _ipairs, _setmetatable, _getmetatable, _type
 --- <p><b>Module:</b> table utility library.
 -- </p>
 --
-module( "neolib.table" )
+module( "xlib.table" )
 -------------------------------------------------------------------------------
 
 module.extends("table")

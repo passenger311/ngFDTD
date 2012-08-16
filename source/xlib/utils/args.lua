@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.3",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.utils.options",
+FILE      = "xlib.utils.options",
 -------------------------------------------------------------------------------
 }
 
@@ -17,12 +17,12 @@ local module = L.module
 local _G = _G
 local _select, _setfenv, _getfenv = select, setfenv, getfenv
 local _print = print
-local osinfo = neolib.os.info
+local osinfo = xlib.os.info
 
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Process command line options. </p>
 --
-module( "neolib.utils.options" )
+module( "xlib.utils.options" )
 -------------------------------------------------------------------------------
 
 -- args is the argument table

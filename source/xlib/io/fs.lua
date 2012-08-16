@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.io.fs",
+FILE      = "xlib.io.fs",
 -------------------------------------------------------------------------------
 }
 
@@ -23,7 +23,7 @@ local _lfs = module.load("lfs")
 -- Requires <i>luafilesystem</i>.
 -- </p>
 --
-module("neolib.io.fs")
+module("xlib.io.fs")
 ------------------------------------------------------------------------------
 
 local UDS = config.SAFE_DIRSEP

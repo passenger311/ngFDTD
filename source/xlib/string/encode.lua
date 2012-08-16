@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.string.encode",
+FILE      = "xlib.string.encode",
 -------------------------------------------------------------------------------
 }
 
@@ -24,7 +24,7 @@ local _mime = module.load("mime")
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> utilities for string encoding.</p>
 --
-module("neolib.string.encode")
+module("xlib.string.encode")
 ------------------------------------------------------------------------------
 
 local base64enctable = 

@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 FILE      = "tests.math.complex",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
@@ -21,7 +21,7 @@ local complex = math.complex
 local _pcall, _print, _table, _ipairs = pcall, print, table, ipairs
 
 -------------------------------------------------------------------------------
-module( "neolib.tests.math.complex" )
+module( "xlib.tests.math.complex" )
 -------------------------------------------------------------------------------
 
 this = unit.new(_M, { name = _H.FILE, repetition=100 } )

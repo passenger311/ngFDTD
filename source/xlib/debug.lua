@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.debug",
+FILE      = "xlib.debug",
 -------------------------------------------------------------------------------
 }
 
@@ -23,7 +23,7 @@ local _pairs, _write, _print, _type, _tostring =
 --- <p><b>Module:</b> debug extensions.
 -- </p>
 --
-module( "neolib.debug" )
+module( "xlib.debug" )
 -------------------------------------------------------------------------------
 
 module.extends("debug")

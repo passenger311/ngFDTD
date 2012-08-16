@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.table.istream",
+FILE      = "xlib.table.istream",
 -------------------------------------------------------------------------------
 }
 
@@ -21,7 +21,7 @@ local utils = L.utils
 --- <p><b>Prototype:</b> Table input stream. </p>
 -- Stream that reads from table.
 -- </p>
-module("neolib.table.istream")
+module("xlib.table.istream")
 ----------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

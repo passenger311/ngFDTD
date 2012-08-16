@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.utils",
+FILE      = "xlib.utils",
 -------------------------------------------------------------------------------
 }
 
@@ -27,7 +27,7 @@ local _open, _stderr, _stdout = io.open, io.stderr, io.stdout
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Generic (shared) utilities. </p>
 --
-module( "neolib.utils" )
+module( "xlib.utils" )
 ------------------------------------------------------------------------------
 
 module.imports{ 
@@ -65,7 +65,7 @@ end
 -- @param code exit code (optional)
 -- @param msg message to be printed (optional)
 -- @param ... extra arguments for fprintf (optional)
--- @see neolib.utils.fprintf
+-- @see xlib.utils.fprintf
 function quit(code,msg,...)
     if _type(code) ~= 'number' then
         msg = code

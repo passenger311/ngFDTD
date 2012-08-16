@@ -1,4 +1,4 @@
-local __PROJECT__   = "neolib"
+local __PROJECT__   = "xlib"
 local __FILE__      = ".tests.struct.set"
 local __AUTHOR__    = "J Hamm"
 local __VERSION__   = "0.1"

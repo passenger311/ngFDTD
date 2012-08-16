@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
--- neolib.math.complex_ffi
+-- xlib.math.complex_ffi
 --
 -- @copyright $date
 -- @author    $author$
 -- @release   $release$
 -------------------------------------------------------------------------------
 
-local proto = require "neolib.proto"
-local math = require "neolib.math"
+local proto = require "xlib.proto"
+local math = require "xlib.math"
 local ffi = require "ffi"
 
 -------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ local _pi_half = math.pi / 2
 -------------------------------------------------------------------------------
 --- <p><b>Prototype:</b> complex number support. </p>
 --
-module("neolib.math.complex")
+module("xlib.math.complex")
 -------------------------------------------------------------------------------
 
 --- from complex.h

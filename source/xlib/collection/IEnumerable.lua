@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.IEnumerable
+$module      : xlib.collection.IEnumerable
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -8,13 +8,13 @@ $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
 
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
 --- <p><b>Interface:</b> 
 -- mixin for a container which supports enumeration. 
 -- <p>
 --
-module("neolib.collection.IEnumerable")
+module("xlib.collection.IEnumerable")
 
 -------------------------------------------------------------------------------
 

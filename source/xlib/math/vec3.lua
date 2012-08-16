@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.vec3",
+FILE      = "xlib.math.vec3",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _rawget = rawget
 -------------------------------------------------------------------------------
 --- <p><b>Prototype:</b> 3-component vector. </p>
 -- </p>
-module("neolib.math.vec3")
+module("xlib.math.vec3")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )
@@ -198,7 +198,7 @@ end
 -- @param self vector
 -- @return matrix
 function tomatrix(self)
-   local mat3 = _require "neolib.math.mat3"
+   local mat3 = _require "xlib.math.mat3"
    return mat3.new{ self } 
 end
 

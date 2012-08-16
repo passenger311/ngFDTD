@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.string.ostream",
+FILE      = "xlib.string.ostream",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _table_concat = table.concat
 --- <p><b>Prototype:</b> String output stream. </p>
 -- Stream that appends to string.
 -- </p>
-module("neolib.string.ostream")
+module("xlib.string.ostream")
 ----------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

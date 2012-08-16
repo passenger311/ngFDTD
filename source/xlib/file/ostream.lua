@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.file.ostream",
+FILE      = "xlib.file.ostream",
 -------------------------------------------------------------------------------
 }
 
@@ -24,7 +24,7 @@ local _open = io.open
 --- <p><b>Prototype:</b> File output stream. </p>
 -- Stream that appends to file.
 -- </p>
-module("neolib.file.ostream")
+module("xlib.file.ostream")
 ----------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

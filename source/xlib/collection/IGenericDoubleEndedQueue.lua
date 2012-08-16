@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.IGenericDoubleEndedQueue
+$module      : xlib.collection.IGenericDoubleEndedQueue
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,7 +7,7 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
 local require = require
 
@@ -16,18 +16,18 @@ local require = require
 -- </p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.IGenericQueue.html>IGenericQueue</a>,
--- <a href=neolib.collection.IGenericStack.html>IGenericStack</a>,
--- <a href=neolib.collection.IReverseEnumerable.html>IReverseEnumerable</a>
+-- <a href=xlib.collection.IGenericQueue.html>IGenericQueue</a>,
+-- <a href=xlib.collection.IGenericStack.html>IGenericStack</a>,
+-- <a href=xlib.collection.IReverseEnumerable.html>IReverseEnumerable</a>
 -- </p>
-module("neolib.collection.IGenericDoubleEndedQueue")
+module("xlib.collection.IGenericDoubleEndedQueue")
 
 -------------------------------------------------------------------------------
 
 class.interface( _M, 
-		 require "neolib.collection.IGenericQueue",
-		 require "neolib.collection.IGenericStack",
-	         require "neolib.collection.IReverseEnumerable" )
+		 require "xlib.collection.IGenericQueue",
+		 require "xlib.collection.IGenericStack",
+	         require "xlib.collection.IReverseEnumerable" )
  
 -------------------------------------------------------------------------------
 

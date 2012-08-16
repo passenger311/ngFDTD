@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.proto",
+FILE      = "xlib.proto",
 -------------------------------------------------------------------------------
 }
 
@@ -28,7 +28,7 @@ local _getmetatable, _setmetatable, _pairs, _rawget, _type =
 -- ancestor prototype. Tagging adds an identifier to the prototype which 
 -- enables isa-checks.
 --
-module( "neolib.proto" )
+module( "xlib.proto" )
 -------------------------------------------------------------------------------
 
 root = _M -- module itself is the root class

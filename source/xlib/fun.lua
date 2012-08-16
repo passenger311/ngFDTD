@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "13/06/2011",
@@ -25,7 +25,7 @@ local _insert = table.insert
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Functional extensions. </p>
 --
-module( "neolib.fun" )
+module( "xlib.fun" )
 ------------------------------------------------------------------------------
 
 module.imports{ 

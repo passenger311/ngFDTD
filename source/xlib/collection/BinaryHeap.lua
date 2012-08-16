@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.BinaryHeap
+$module      : xlib.collection.BinaryHeap
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,8 +7,8 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
     
-local class = require "neolib.oop.class"
-local table_utils = require "neolib.util.table"
+local class = require "xlib.oop.class"
+local table_utils = require "xlib.util.table"
 local toint = math.floor
 local table_remove = table.remove
 
@@ -21,17 +21,17 @@ local pairs, ipairs, require, assert = pairs, ipairs, require, assert
 -- <p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.IGenericPriorityQueue.html>IGenericPriorityQueue</a>,
--- <a href=neolib.generic.ICloneable.html>ICloneable</a>
+-- <a href=xlib.collection.IGenericPriorityQueue.html>IGenericPriorityQueue</a>,
+-- <a href=xlib.generic.ICloneable.html>ICloneable</a>
 -- </p>
 --
-module("neolib.collection.BinaryHeap")
+module("xlib.collection.BinaryHeap")
 
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.IGenericPriorityQueue",
-	   require "neolib.generic.ICloneable" )
+	   require "xlib.collection.IGenericPriorityQueue",
+	   require "xlib.generic.ICloneable" )
 
 -------------------------------------------------------------------------------
 

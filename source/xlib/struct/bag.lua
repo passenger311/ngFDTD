@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.struct.bag",
+FILE      = "xlib.struct.bag",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _type = type
 -- The bag holds a maximum of one item of a kind. Adding an item to bag which 
 -- is already in the bag will not alter the bag.
 -- </p>
-module("neolib.struct.bag")
+module("xlib.struct.bag")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

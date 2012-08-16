@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.class",
+FILE      = "xlib.class",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _rawget, _getmetatable, _setmetatable, _error, _pairs, _print =
 -- into a single base. Class creation is complex but instantiation is
 -- generally fast.
 --
-module( "neolib.class" )
+module( "xlib.class" )
 -------------------------------------------------------------------------------
 
 --- Return the abstract method. Abstract methods throw an error when invoked 

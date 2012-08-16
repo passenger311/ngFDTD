@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.struct.deque",
+FILE      = "xlib.struct.deque",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _min = math.min
 -- The deque is optimized to push/pop items at either end.
 -- </p>
 --
-module("neolib.struct.deque")
+module("xlib.struct.deque")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

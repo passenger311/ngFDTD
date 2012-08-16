@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.3",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.file.istream",
+FILE      = "xlib.file.istream",
 -------------------------------------------------------------------------------
 }
 
@@ -21,7 +21,7 @@ local _open = io.open
 --- <p><b>Prototype:</b> File input stream. </p>
 -- Stream that reads from file.
 -- </p>
-module("neolib.file.istream")
+module("xlib.file.istream")
 ----------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-module      : neolib.collection.ListSet
+module      : xlib.collection.ListSet
 version     : 0.9 
 date        : 8/5/2008
 author      : j.hamm
@@ -7,8 +7,8 @@ license     : x11
 lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
-local List = require "neolib.collection.List"
+local class = require "xlib.oop.class"
+local List = require "xlib.collection.List"
 
 local pairs, ipairs, require, assert =  pairs, ipairs, require, assert
 
@@ -20,16 +20,16 @@ local pairs, ipairs, require, assert =  pairs, ipairs, require, assert
 -- O(1) operation.</p>
 --
 -- <p><b>Implements:</b>
--- <a href=neolib.collection.List.html>List</a>,
--- <a href=neolib.collection.IGenericSet.html>IGenericSet</a>
+-- <a href=xlib.collection.List.html>List</a>,
+-- <a href=xlib.collection.IGenericSet.html>IGenericSet</a>
 -- </p>
-module("neolib.collection.ListSet")
+module("xlib.collection.ListSet")
 
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.List",
-	   require "neolib.collection.IGenericSet"  )
+	   require "xlib.collection.List",
+	   require "xlib.collection.IGenericSet"  )
 
 -------------------------------------------------------------------------------
 

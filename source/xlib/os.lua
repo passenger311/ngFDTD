@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.os",
+FILE      = "xlib.os",
 -------------------------------------------------------------------------------
 }
 
@@ -21,7 +21,7 @@ local _G, string, table, pairs, ipairs, io, tostring, type, require
 --- <p><b>Module:</b> os utility library. 
 -- </p>
 --
-module( "neolib.os" )
+module( "xlib.os" )
 ------------------------------------------------------------------------------
 
 module.extends("os")

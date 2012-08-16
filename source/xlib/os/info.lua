@@ -1,17 +1,17 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.os.info",
+FILE      = "xlib.os.info",
 -------------------------------------------------------------------------------
 }
 
 local L = require( _H.PROJECT )
 local module = L.module
-local core = module.load("neolib.core")
+local core = module.load("xlib.core")
 
 -------------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ local core = module.load("neolib.core")
 --- <p><b>Module:</b> OS info module. 
 -- </p>
 --
-module( "neolib.os.info" )
+module( "xlib.os.info" )
 ------------------------------------------------------------------------------
 
 --- OS type.

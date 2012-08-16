@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.IGenericContainer
+$module      : xlib.collection.IGenericContainer
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,7 +7,7 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
 local require = require
 
@@ -15,7 +15,7 @@ local require = require
 -- countable number of items.
 -- <p>
 --
-module("neolib.collection.IGenericContainer")
+module("xlib.collection.IGenericContainer")
 
 -------------------------------------------------------------------------------
 

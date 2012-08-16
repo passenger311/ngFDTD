@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.IGenericPriorityQueue
+$module      : xlib.collection.IGenericPriorityQueue
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,7 +7,7 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 local require = require
 
 --- <p><b>Interface:</b> 
@@ -16,16 +16,16 @@ local require = require
 -- the item in the queue which is smallest (according to __lt).<p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.IGenericContainer.html>IGenericContainer</a>,
--- <a href=neolib.collection.ISearchable.html>ISearchable</a>
+-- <a href=xlib.collection.IGenericContainer.html>IGenericContainer</a>,
+-- <a href=xlib.collection.ISearchable.html>ISearchable</a>
 -- </p>
-module("neolib.collection.IGenericPriorityQueue")
+module("xlib.collection.IGenericPriorityQueue")
 
 -------------------------------------------------------------------------------
 
 class.interface( _M, 
-		 require "neolib.collection.IGenericContainer",
-		 require "neolib.collection.ISearchable" )
+		 require "xlib.collection.IGenericContainer",
+		 require "xlib.collection.ISearchable" )
 
 -------------------------------------------------------------------------------
 

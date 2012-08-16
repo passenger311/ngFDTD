@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.string.stream",
+FILE      = "xlib.string.stream",
 -------------------------------------------------------------------------------
 }
 
@@ -23,7 +23,7 @@ local _G, _string, _table, _select, _type, _pairs, _ipairs, _assert, _require, _
 --- <p><b>Prototype:</b> String stream. </p>
 -- A string stream emulates operations of the standard lua file handler.
 -- </p>
-module( "neolib.string.stream" )
+module( "xlib.string.stream" )
 ----------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )

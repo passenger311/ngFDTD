@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math",
+FILE      = "xlib.math",
 -------------------------------------------------------------------------------
 }
 
@@ -21,7 +21,7 @@ local _socket = module.load("socket")
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> math utility library. </p>
 --
-module( "neolib.math" )
+module( "xlib.math" )
 -------------------------------------------------------------------------------
 
 module.extends("math")

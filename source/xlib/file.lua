@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.file",
+FILE      = "xlib.file",
 -------------------------------------------------------------------------------
 }
 
@@ -22,7 +22,7 @@ local _open = io.open
 --- <p><b>Module:</b> File operations.
 -- </p>
 --
-module( "neolib.file" )
+module( "xlib.file" )
 ------------------------------------------------------------------------------
 
 module.imports{ 

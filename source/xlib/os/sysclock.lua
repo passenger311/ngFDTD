@@ -1,17 +1,17 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.os.sysclock",
+FILE      = "xlib.os.sysclock",
 -------------------------------------------------------------------------------
 }
 
 local L = require( _H.PROJECT )
 local module = L.module
-local core = module.load("neolib.core")
+local core = module.load("xlib.core")
 
 -------------------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ local _floor = math.floor
 --- <p><b>Module:</b> Clock functions. 
 -- </p>
 --
-module( "neolib.os.sysclock" )
+module( "xlib.os.sysclock" )
 ------------------------------------------------------------------------------
 
 

@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-module      : neolib.collection.List
+module      : xlib.collection.List
 version     : 0.9 
 date        : 8/5/2008
 author      : j.hamm
@@ -7,7 +7,7 @@ license     : x11
 lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
 local pairs, ipairs, require, assert =  pairs, ipairs, require, assert
 
@@ -18,22 +18,22 @@ local pairs, ipairs, require, assert =  pairs, ipairs, require, assert
 -- </p>
 --
 -- <p><b>Implements:</b>
--- <a href=neolib.collection.IGenericDoubleEndedQueue.html>
+-- <a href=xlib.collection.IGenericDoubleEndedQueue.html>
 --                           IGenericDoubleEndedQueue</a>,
--- <a href=neolib.collection.ISortable.html>ISortable</a>, 
--- <a href=neolib.generic.IConvertible.html>IConvertible</a>, 
--- <a href=neolib.generic.ICloneable.html>ICloneable</a>, 
--- <a href=neolib.serialization.ISerializable.html>ISerializable</a>
+-- <a href=xlib.collection.ISortable.html>ISortable</a>, 
+-- <a href=xlib.generic.IConvertible.html>IConvertible</a>, 
+-- <a href=xlib.generic.ICloneable.html>ICloneable</a>, 
+-- <a href=xlib.serialization.ISerializable.html>ISerializable</a>
 -- </p>
-module("neolib.collection.List")
+module("xlib.collection.List")
 
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.IGenericDoubleEndedQueue",
-	   require "neolib.collection.ISortable",
-	   require "neolib.generic.ICloneable",
-	   require "neolib.generic.IConvertible"
+	   require "xlib.collection.IGenericDoubleEndedQueue",
+	   require "xlib.collection.ISortable",
+	   require "xlib.generic.ICloneable",
+	   require "xlib.generic.IConvertible"
        )
 
 -------------------------------------------------------------------------------

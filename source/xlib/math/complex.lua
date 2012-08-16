@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.complex",
+FILE      = "xlib.math.complex",
 -------------------------------------------------------------------------------
 }
 
@@ -28,7 +28,7 @@ local _pi_half = math.pi / 2
 -------------------------------------------------------------------------------
 --- <p><b>Prototype:</b> complex numbers. </p>
 --
-module("neolib.math.complex")
+module("xlib.math.complex")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

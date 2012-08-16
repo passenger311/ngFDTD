@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "13/06/2011",
@@ -23,7 +23,7 @@ local _tonumber = tonumber
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> ffi library extensions. </p>
 --
-module( "neolib.ffi" )
+module( "xlib.ffi" )
 ------------------------------------------------------------------------------
 
 module.extends("ffi")

@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.2",
 DATE      = "13/06/2011",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.table.serialize",
+FILE      = "xlib.table.serialize",
 -------------------------------------------------------------------------------
 }
 
@@ -23,7 +23,7 @@ local _G, _string, _table, _select, _type, _pairs, _ipairs, _assert, _require, _
 --- <p><b>Prototype:</b> Table serializer. </p>
 -- Allows to serialize/deserialize tables from io-stream.
 -- </p>
-module( "neolib.table.serialize" )
+module( "xlib.table.serialize" )
 
 ----------------------------------------------------------------------------
 

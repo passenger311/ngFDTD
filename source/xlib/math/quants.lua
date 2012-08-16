@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.quants",
+FILE      = "xlib.math.quants",
 -------------------------------------------------------------------------------
 }
 
@@ -24,7 +24,7 @@ local _sqrt = math.sqrt
 -------------------------------------------------------------------------------
 --- <p><b>Prototype:</b> A quantity is a value (magnitude) with units. </p>
 --
-module("neolib.math.quants")
+module("xlib.math.quants")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

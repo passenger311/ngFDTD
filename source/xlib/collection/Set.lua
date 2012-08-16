@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
--- neolib.collection.Set
+-- xlib.collection.Set
 --
 -- @copyright $date$
 -- @author    $author$
 -- @release   $release$
 -------------------------------------------------------------------------------
 
-local module = require "neolib.module"
-local class = require "neolib.oop.class"
+local module = require "xlib.module"
+local class = require "xlib.oop.class"
 
 -------------------------------------------------------------------------------
 
@@ -21,19 +21,19 @@ local table_insert = table.insert
 -- </p>
 --
 -- <p><b>Interface:</b>
--- <a href=neolib.collection.IGenericSet.html>IGenericSet</a>,
--- <a href=neolib.generic.ICloneable.html>ICloneable</a>, 
--- <a href=neolib.generic.IConvertible.html>IConvertible</a>, 
--- <a href=neolib.serialization.IPrintable.html>IPrintable</a>
+-- <a href=xlib.collection.IGenericSet.html>IGenericSet</a>,
+-- <a href=xlib.generic.ICloneable.html>ICloneable</a>, 
+-- <a href=xlib.generic.IConvertible.html>IConvertible</a>, 
+-- <a href=xlib.serialization.IPrintable.html>IPrintable</a>
 -- </p>
-module("neolib.collection.Set")
+module("xlib.collection.Set")
 -------------------------------------------------------------------------------
 
 class.def( _M, 
-	   require "neolib.collection.IGenericSet",
-	   require "neolib.generic.IConvertible",
-	   require "neolib.generic.ICloneable",
-	   require "neolib.generic.IPrintable" 
+	   require "xlib.collection.IGenericSet",
+	   require "xlib.generic.IConvertible",
+	   require "xlib.generic.ICloneable",
+	   require "xlib.generic.IPrintable" 
 	)
 
 --- Initializer.

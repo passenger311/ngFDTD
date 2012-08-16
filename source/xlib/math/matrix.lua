@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "31/08/2011 12:21",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.matrix",
+FILE      = "xlib.math.matrix",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _math_max = math.max
 -------------------------------------------------------------------------------
 --- <p><b>Prototype:</b> a matrix of numerical values. </p>
 -- </p>
-module("neolib.math.matrix")
+module("xlib.math.matrix")
 -------------------------------------------------------------------------------
 
 this = vector:_adopt( _M )

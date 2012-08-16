@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.utils
+$module      : xlib.collection.utils
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,7 +7,7 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
 
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
 local ipair = ipairs
 
@@ -15,7 +15,7 @@ local ipair = ipairs
 -- some general utilitiy functions which operate on containers.
 -- <p>
 --
-module("neolib.collection.utils")
+module("xlib.collection.utils")
 
 -------------------------------------------------------------------------------
 

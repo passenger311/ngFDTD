@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-module      : neolib.collection.AVLTree
+module      : xlib.collection.AVLTree
 version     : 0.9 
 date        : 8/5/2008
 author      : j.hamm
@@ -7,8 +7,8 @@ license     : x11
 lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
-local table_utils = require "neolib.util.table"
+local class = require "xlib.oop.class"
+local table_utils = require "xlib.util.table"
 local toint = math.floor
 local math_max = math.max
 local table_insert = table.insert
@@ -19,14 +19,14 @@ local pairs, require, assert, type =  pairs, require, assert, type
 -- <p>
 --
 -- <p><b>Implements:</b> 
--- <a href=neolib.collection.BinarySearchTree.html>BinarySearchTree</a>
+-- <a href=xlib.collection.BinarySearchTree.html>BinarySearchTree</a>
 -- </p>
-module("neolib.collection.AVLTree")
+module("xlib.collection.AVLTree")
 
 -------------------------------------------------------------------------------
 
 local AVLTree = class.def( _M, 
-			   require "neolib.collection.BinarySearchTree" )
+			   require "xlib.collection.BinarySearchTree" )
 
 -------------------------------------------------------------------------------
 

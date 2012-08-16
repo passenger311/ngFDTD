@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.math.units",
+FILE      = "xlib.math.units",
 -------------------------------------------------------------------------------
 }
 
@@ -22,7 +22,7 @@ local _concat, _insert = table.concat, table.insert
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> quantities. </p>
 --
-module("neolib.math.units")
+module("xlib.math.units")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

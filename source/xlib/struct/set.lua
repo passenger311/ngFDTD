@@ -1,11 +1,11 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "neolib",
+PROJECT   = "xlib",
 AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
-FILE      = "neolib.struct.set",
+FILE      = "xlib.struct.set",
 -------------------------------------------------------------------------------
 }
 
@@ -25,7 +25,7 @@ local _type = type
 -- The set holds a maximum of one item of a kind. Adding an item to set which 
 -- is already in the set will not alter the set.
 -- </p>
-module("neolib.struct.set")
+module("xlib.struct.set")
 -------------------------------------------------------------------------------
 
 this = proto:_adopt( _M )

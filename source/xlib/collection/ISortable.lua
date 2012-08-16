@@ -1,5 +1,5 @@
 --[[---------------------------------------------------------------------------
-$module      : neolib.collection.ISortable
+$module      : xlib.collection.ISortable
 $version     : 0.9 
 $date        : 8/5/2008
 $author      : j.hamm
@@ -7,16 +7,16 @@ $license     : x11
 $lua_ver     : 5.1
 ---------------------------------------------------------------------------]]--
       
-local class = require "neolib.oop.class"
+local class = require "xlib.oop.class"
 
-local IConvertible = require "neolib.generic.IConvertible"
+local IConvertible = require "xlib.generic.IConvertible"
 
 local require, table, assert = require, table, assert
 
 --- <p><b>Interface:</b> 
 -- mixin for containers which allow their content to be sorted.<p>
 --
-module("neolib.collection.ISortable")
+module("xlib.collection.ISortable")
 
 ---------------------------------------------------------------------------
 

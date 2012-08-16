@@ -1,12 +1,12 @@
 -------------------------------------------------------------------------------
--- neolib.table.expr
+-- xlib.table.expr
 --
 -- @copyright $date$
 -- @author    $author$
 -- @release   $release$
 -------------------------------------------------------------------------------
       
-local proto = require "neolib.proto"
+local proto = require "xlib.proto"
 
 -------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ local _type = type
 --- <p><b>Prototype:</b> array expressions using delayed evaluation.
 -- </p>
 --
-module("neolib.table.expr")
+module("xlib.table.expr")
 -------------------------------------------------------------------------------
 
 this = proto.clone( proto.root, _M )
