@@ -1,20 +1,50 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(LUAWRAP_SRC luawrap/LuaContext.cpp)
+set(LD_LIBS m)
 
-include_directories(${LUA_INCLUDE_DIR} ${BOOST_INCLUDE_DIR})
+#### defaults
 
-add_library(neo-lib STATIC ${LUAWRAP_SRC})
-set_target_properties(neo-lib 
+set(LD_LIBS ${LD_LIBS} dl readline)
+
+#### check architecture 
+## note: this is still very crude; FIXME set compiler flags properly as in
+## original Makefile
+
+if ( UNIX )
+  set(LD_LIBS ${LD_LIBS} dl readline)
+  set(C_FLAGS "${C_FLAGS} -DLUA_USE_LINUX" )
+endif()
+
+if( WIN32 )
+
+endif()
+
+if( APPLE )
+
+endif()
+
+#### sources
+
+include_directories(${LUAJIT_INCLUDE_DIR})
+
+add_executable(main-exe luajit.c lua_bytecode.c lua_preload.c)
+# add_executable(main-exe luajit.c  )
+
+set_target_properties(main-exe
   PROPERTIES 
-  COMPILE_FLAGS "${C_FLAGS} -std=c++0x"
-  OUTPUT_NAME "neofdtd"
+  LINK_FLAGS "${LD_FLAGS}"
+  OUTPUT_NAME neon
 )
 
-add_executable(test-exe luawrap/test.cxx ${LUAWRAP_SRC})
-set_target_properties(test-exe 
-  PROPERTIES 
-  COMPILE_FLAGS "${C_FLAGS} -std=c++0x"
-  OUTPUT_NAME "test"
+target_link_libraries(main-exe ${LUAJIT_ARCHIVES} ${LD_LIBS}) 
+
+### install
+
+install(TARGETS 
+  main-exe
+  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
+  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
+  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
 )
-target_link_libraries(test-exe lua-lib dl)
+
+#install(FILES ${DEV_HDRS} DESTINATION ${INSTALL_DIR_INCLUDE})
