@@ -10,8 +10,8 @@ FILE      = "fdtd",
 } 
 
 local _G = _G
-local X = require( "xlib" )
-local module = X.module
+local xlib = require( "xlib" )
+local module = xlib.module
 
 -------------------------------------------------------------------------------
 ---<p><b>Module</b>: Main module. </p>

@@ -158,7 +158,7 @@ static int docall(lua_State *L, int narg, int clear)
 static void print_version(void)
 {
   fprintf(stderr,
-    "neon fdtd engine " C_PROJECT_VERSION " -- " C_PROJECT_COPYRIGHT "\n");
+    "NEON engine v" C_PROJECT_VERSION " -- " C_PROJECT_COPYRIGHT "\n");
 }
 
 static void print_jit_status(lua_State *L)
@@ -566,19 +566,19 @@ static int pmain(lua_State *L)
   /* load startup code */
 
   lua_getglobal(L, "require");
-  lua_pushstring(L, "neon_start");
+  lua_pushstring(L, "neon.startup");
   lua_pcall(L, 1, 1, 0);
   lua_pop(L,1);
 
   /* ---- */
 
   if ((flags & FLAGS_INTERACTIVE)) {
-    /*    print_jit_status(L); */
+    print_jit_status(L);
     dotty(L);
   } else if (script == 0 && !(flags & (FLAGS_EXEC|FLAGS_VERSION))) {
     if (lua_stdin_is_tty()) {
       print_version();
-      /*      print_jit_status(L); */
+      print_jit_status(L); 
       dotty(L);
     } else {
       dofile(L, NULL);  /* executes stdin as a file */

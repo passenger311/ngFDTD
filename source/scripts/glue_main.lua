@@ -17,7 +17,7 @@ list_native = {
 
 -- Create list of lua modules to byte compile
 
-list_bytecode = { "neon_start" }
+list_bytecode = { "neon.startup" }
 
 c = lib.getcomps("xlib")
 for k,v in pairs(c) do

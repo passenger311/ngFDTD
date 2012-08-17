@@ -31,8 +31,6 @@ local _getmetatable, _setmetatable, _pairs, _rawget, _type =
 module( "xlib.proto" )
 -------------------------------------------------------------------------------
 
-root = _M -- module itself is the root class
-
 --- Root prototype. All prototypes are offsprings of <i>root</i>.
 -- @class table
 -- @name root

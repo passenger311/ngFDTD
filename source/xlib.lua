@@ -22,6 +22,7 @@ module( "xlib" )
 
 module.imports{
    "config",
+   "lib",
    "utils",
    "module",
    "object",

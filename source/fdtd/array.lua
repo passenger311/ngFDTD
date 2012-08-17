@@ -9,11 +9,11 @@ FILE      = "fdtd.array",
 -------------------------------------------------------------------------------
 }
 
-local _ffi = require "ffi"
-local X = require( "xlib" )
-local F = require( _H.PROJECT )
-local module = X.module
-local proto = X.proto
+local _G = _G
+local ffi = require "ffi"
+local xlib = require( "xlib" )
+local module = xlib.module
+local proto = xlib.proto
 
 -------------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ local _rawget = rawget
 module("fdtd.array")
 -------------------------------------------------------------------------------
 
-_ffi.cdef[[
+ffi.cdef[[
 void *memmove(void *dest, const void *src, size_t n);
 void *malloc(size_t size);
 void free(void *ptr);
@@ -44,9 +44,9 @@ this = proto:_adopt( _M )
 -- @return new array
 function new(ctype,size)
    size = size or 0
-   local rawptr = _ffi.gc(_ffi.C.malloc(size*_ffi.sizeof(ctype)), _ffi.C.free)
+   local rawptr = ffi.gc(ffi.C.malloc(size*ffi.sizeof(ctype)), ffi.C.free)
    _assert(rawptr ~= nil, "out of memory")
-   local data = _ffi.cast(ctype.." *", rawptr)
+   local data = ffi.cast(ctype.." *", rawptr)
    local ret = this:_adopt( { data = data, rawptr = rawptr, size = size, ctype=ctype } )
    return ret
 end 
@@ -58,7 +58,7 @@ end
 -- @return new array
 function free(self)
    if self.rawptr ~= nil then
-      _ffi.C.free(_ffi.gc(self.rawptr, nil))
+      ffi.C.free(ffi.gc(self.rawptr, nil))
       self.data = nil
       self.rawptr = nil
       self.size = 0
