@@ -1,9 +1,10 @@
 local _H = {
 -------------------------------------------------------------------------------
 PROJECT   = "xlib",
+AUTHOR    = "J Hamm",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
-COPYRIGHT = "(C) J Hamm, F Renn",
+COPYRIGHT = "GPL V2",
 FILE      = "xlib",
 -------------------------------------------------------------------------------
 }
@@ -20,13 +21,14 @@ module( "xlib" )
 -------------------------------------------------------------------------------
 
 module.imports{
+   "config",
    "lib",
    "utils",
    "module",
    "object",
    "proto",
-   "math"
-[[,
+   "class",
+   "math",
    "file",
    "io",
    "string",
@@ -38,7 +40,6 @@ module.imports{
    "debug",
    "coroutine",
    "unit"
-]]
 }
 
 
