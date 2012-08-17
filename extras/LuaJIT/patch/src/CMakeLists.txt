@@ -10,7 +10,7 @@ set(LJVM_MODE elfasm)
 set(LD_LIBS ${LD_LIBS} dl)
 
 #### check architecture 
-## note: this is still very crude; FIXME set compiler flags properly as in
+## note: this is still a bit crude; FIXME set compiler flags properly as in
 ## original Makefile
 
 if ( UNIX )
@@ -146,6 +146,9 @@ add_custom_target(luajit-gen-files
 set_source_files_properties(${GEN_SRCS}
   PROPERTIES GENERATED TRUE)
 
+
+if ( DEFINED LIBRARIES ) 
+
 add_library(luajit-dll SHARED ${LJVM_SRCS} ${LJCORE_SRCS})
 
 add_dependencies(luajit-dll luajit-gen-files)
@@ -160,6 +163,8 @@ set_target_properties(luajit-dll
   PROPERTIES 
   OUTPUT_NAME luajit
 )
+
+endif()
 
 add_library(luajit-lib STATIC ${LJVM_SRCS} ${LJCORE_SRCS})
 
@@ -176,7 +181,7 @@ set_target_properties(luajit-lib
   OUTPUT_NAME luajit
 )
 
-add_executable(luajit-exe luajit.c ${LJVM_SRCS} ${LJCORE_SRCS})
+add_executable(luajit-exe luajit.c )
 
 add_dependencies(luajit-exe luajit-gen-files)
 
@@ -187,17 +192,21 @@ set_target_properties(luajit-exe
   OUTPUT_NAME luajit
 )
 
-target_link_libraries(luajit-exe luajit-dll ${LD_LIBS})
+target_link_libraries(luajit-exe luajit-lib ${LD_LIBS})
 
-### install
+if ( INSTALL )
 
-#install(TARGETS 
-#  luajit-exe
-#  luajit-dll
-#  luajit-lib
-#  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
-#  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
-#  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
-#)
+install(TARGETS 
+  ${EXECUTABLES}
+  ${LIBRARIES}
+  ${ARCHIVES}
+  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
+  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
+  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
+)
 
-#install(FILES ${DEV_HDRS} DESTINATION ${INSTALL_DIR_INCLUDE})
+if ( HEADERS )
+  install(FILES ${HEADERS} DESTINATION ${INSTALL_DIR_INCLUDE})
+endif()
+
+endif()
