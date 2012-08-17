@@ -206,7 +206,7 @@ install(TARGETS
 )
 
 if ( HEADERS )
-  install(FILES ${HEADERS} DESTINATION ${INSTALL_DIR_INCLUDE})
+  install(FILES ${HEADERS} DESTINATION ${INSTALL_DIR_INCLUDE}/luajit )
 endif()
 
 endif()

@@ -13,7 +13,7 @@ set(LIBRARY_DIR src)
 set(LIBRARIES ) # luajit-dll)
 set(ARCHIVES luajit-lib)
 set(EXECUTABLES luajit-exe)
-set(HEADERS lua.h luajit.h lauxlib.h)
+set(HEADERS lua.h luajit.h luaconf.h lualib.h lauxlib.h lua.hpp)
 set(BUILD_IN_SOURCE off)
 
 ### build flags
