@@ -1,22 +1,16 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "xlib",
-AUTHOR    = "J Hamm",
-VERSION   = "0.1",
-DATE      = "14/08/2012 16:01",
-COPYRIGHT = "GPL V2",
 FILE      = "xlib.math",
+VERSION   = "0.1",
+DATE      = "17/08/2012 16:29",
+COPYRIGHT = "(C) 2012",
 -------------------------------------------------------------------------------
 }
 
-local L = require( _H.PROJECT )
-local module = L.module
-local proto = L.proto
-
--------------------------------------------------------------------------------
-
-local _floor, _randomseed, _clock = math.floor, math.randomseed, os.clock
-local _socket = module.load("socket")
+local _G = _G
+local xlib = require( "xlib" )
+local module = xlib.module
+local proto = xlib.proto
 
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> math utility library. </p>
@@ -25,15 +19,9 @@ module( "xlib.math" )
 -------------------------------------------------------------------------------
 
 module.extends("math")
+
 module.imports{ 
-   "consts",
-   "units",
-   "quants",
    "complex",
-   "vector",
---   "matrix",
-   "vec3",
-   "dists"
 }
 
 --- Truncate number to given precision.
@@ -42,7 +30,7 @@ module.imports{
 -- @return truncated number
 function trunc(num, prec)
   local e = 10^(prec or 0)
-  return _floor(num * e) / e
+  return _G.floor(num * e) / e
 end
 
 --- Round number to given precision.
@@ -51,7 +39,7 @@ end
 -- @return rounded number
 function round(num, prec)
   local e = 10^(prec or 0)
-  return _floor(num * e + 0.5) / e
+  return _G.floor(num * e + 0.5) / e
 end
 
 --- Check whether number is in range.
@@ -130,15 +118,6 @@ end
 function binomial( n, k )
    return factorial2( n, k ) / factorial2( n - k, 1 ) 
 end
-
---- Get time in seconds.
--- @class function 
--- @name gettime
--- @return system time in seconds 
-if _socket then
-   gettime = _socket.gettime
-end
-
 
 
 

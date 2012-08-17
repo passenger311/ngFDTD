@@ -1,11 +1,9 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "xlib",
-AUTHOR    = "J Hamm",
-VERSION   = "0.3",
-DATE      = "13/06/2011",
-COPYRIGHT = "GPL V2",
 FILE      = "xlib.lib",
+VERSION   = "0.1",
+DATE      = "17/08/2012 16:29",
+COPYRIGHT = "(C) 2012",
 -------------------------------------------------------------------------------
 }
 
@@ -30,40 +28,6 @@ PATH_MARK = '?'
 NAME = _NAME:gsub("%..*$","")
 IS_JIT = not not _G.jit
 
---- Substitute for module function.
--- @param M module name or header table
--- @param ... optional function arguments
--- @return module table 
-function module(M, ... )
-   local ns = _LOADED[M]
-   if ns ~= 'table' then 
-      ns = {} 
-      _LOADED[M] = ns
-   end
-   ns._M = ns
-   ns._NAME = M
-   _setfenv(2,ns)
-   for i=1,_select('#',...) do 
-      _select(i,...)(ns)
-   end
-   return ns
-end
-
---- Extend module with content of package.
--- @param M module
--- @param name package name
--- @return M
-function extend(M, name)
-   for k,v in _pairs(_LOADED[name]) do 
-      if not M[k] then 
-	 M[k] = v 
-      else
-	 _error(_format("extend: collision %s <- %s"), 
-		M[k], name..".".._tostring(v))
-      end
-   end
-   return M
-end
 
 local function _find(name, path)
    name = _gsub(name, "%.", DIRSEP)

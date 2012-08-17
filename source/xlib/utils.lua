@@ -1,28 +1,20 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "xlib",
-AUTHOR    = "J Hamm",
-VERSION   = "0.1",
-DATE      = "14/08/2012 16:01",
-COPYRIGHT = "GPL V2",
 FILE      = "xlib.utils",
+VERSION   = "0.1",
+DATE      = "17/08/2012 16:29",
+COPYRIGHT = "(C) 2012",
 -------------------------------------------------------------------------------
 }
 
 
-local module = require( _H.PROJECT..".module" )
+local module = require( "xlib.module" )
 
 -------------------------------------------------------------------------------
 
 local G = _G
-local _require, _pcall, _pairs, _assert, _type, _select, _setfenv, _loadfile
-   = require, pcall, pairs, assert, type, select, setfenv, loadfile
-local _getmetatable, _setmetatable = getmetatable, setmetatable
-local _error, _getfenv, _print, _exit = error, getfenv, print, exit
-local _package, _loaded = package, package.loaded
-local _gsub, _gfind, _format = string.gsub, string.gfind, string.format
-local _insert = table.insert
-local _open, _stderr, _stdout = io.open, io.stderr, io.stdout
+local _exit, _pairs, _type = exit, pairs, type
+local _stdout, _stderr, _format = io.stdout, io.stderr, string.format
 
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Generic (shared) utilities. </p>

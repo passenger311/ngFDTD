@@ -1,17 +1,15 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "xlib",
-AUTHOR    = "J Hamm",
-VERSION   = "0.1",
-DATE      = "14/08/2012 16:01",
-COPYRIGHT = "GPL V2",
 FILE      = "xlib.proto",
+VERSION   = "0.1",
+DATE      = "17/08/2012 16:29",
+COPYRIGHT = "(C) 2012",
 -------------------------------------------------------------------------------
 }
 
-local L = require( _H.PROJECT )
-local module = L.module
-local object = L.object
+local xlib = require( "xlib" )
+local module = xlib.module
+local object = xlib.object
 
 -------------------------------------------------------------------------------
 

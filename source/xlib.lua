@@ -1,15 +1,14 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "xlib",
-VERSION   = "0.1",
-DATE      = "14/08/2012 16:01",
-COPYRIGHT = "(C) J Hamm, F Renn",
 FILE      = "xlib",
+VERSION   = "0.1",
+DATE      = "17/08/2012 16:29",
+COPYRIGHT = "(C) 2012",
 -------------------------------------------------------------------------------
 }
 
 local _G = _G
-local module = require( _H.PROJECT..".module" )
+local module = require( "xlib.module" )
 
 -------------------------------------------------------------------------------
 ---<p><b>Module</b>: Main module. </p>
@@ -26,19 +25,6 @@ module.imports{
    "object",
    "proto",
    "math"
-[[,
-   "file",
-   "io",
-   "string",
-   "table",
-   "struct",
-   "os",
-   "table",
-   "string",
-   "debug",
-   "coroutine",
-   "unit"
-]]
 }
 
 

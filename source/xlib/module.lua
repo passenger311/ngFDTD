@@ -1,11 +1,9 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "xlib",
-AUTHOR    = "J Hamm",
-VERSION   = "0.1",
-DATE      = "14/08/2012 16:01",
-COPYRIGHT = "GPL V2",
 FILE      = "xlib.module",
+VERSION   = "0.1",
+DATE      = "17/08/2012 16:29",
+COPYRIGHT = "(C) 2012",
 -------------------------------------------------------------------------------
 }
 
@@ -39,7 +37,6 @@ IS_JIT = not not _G.jit
 
 _setmetatable(_M,_M)
 _M.index = _M
-
 
 __call = function(self, modname, ... )
 	    local ns = _loaded[modname]

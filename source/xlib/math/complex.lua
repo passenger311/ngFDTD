@@ -1,18 +1,16 @@
 local _H = {
 -------------------------------------------------------------------------------
-PROJECT   = "xlib",
-AUTHOR    = "J Hamm",
-VERSION   = "0.1",
-DATE      = "14/08/2012 16:01",
-COPYRIGHT = "GPL V2",
 FILE      = "xlib.math.complex",
+VERSION   = "0.1",
+DATE      = "17/08/2012 16:29",
+COPYRIGHT = "(C) 2012",
 -------------------------------------------------------------------------------
 }
 
-local L = require( _H.PROJECT )
-local module = L.module
-local proto = L.proto
-local math = L.math
+local xlib = require( "xlib" )
+local module = xlib.module
+local proto = xlib.proto
+local math = xlib.math
 
 -------------------------------------------------------------------------------
 
@@ -42,8 +40,8 @@ i = this:_adopt{ 0 , 1 }
 -- @param re real part
 -- @param im imaginary part
 -- @return complex number
-function new(self,re, im)
-   return self:_adopt{ re , im or 0 }
+function new(re, im)
+   return this:_adopt{ re , im or 0 }
 end
 
 --- Cast to complex number.
