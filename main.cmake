@@ -5,6 +5,14 @@
 ## global hook - include this file from any subdirectory!
 ##
 
+#### protect build
+
+if ( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeLists.txt" )
+  message(FATAL_ERROR "Found CMakelists.txt; Run cmake in build directory!!!")
+endif()
+
+####
+
 get_property(PROJECT_MAIN_GUARD GLOBAL PROPERTY PROJECT_MAIN_GUARD)
 
 if( NOT PROJECT_MAIN_GUARD )
