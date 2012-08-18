@@ -1,6 +1,7 @@
 project = select(1,...)
 
 L = require( project )
+xlib = require( "xlib" )
 
 print(">> test initial import()")
 t1 = os.clock()
@@ -11,7 +12,7 @@ print(">> test second import()")
 L.import() -- second
 t3 = os.clock() - t2
 print("-- in "..tostring(t3).." secs")
-tab = L.module.loaded
+tab = xlib.module.loaded
 print(">> imported modules:")
 for k,v in pairs(tab) do 
    print(k,v)

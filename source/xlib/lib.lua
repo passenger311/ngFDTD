@@ -88,25 +88,6 @@ function load(names)
    end
 end   
 
---- Import all components listed in M._IMPORT into module table.
--- @param M module
--- @return M
-function import( M )
-   local names = M._IMPORT or {}
-   local prefix = M._NAME
-   for i=1, #names do
-      local m = names[i]
-      local name = prefix.."."..m
-      local ret = _require( name )  
-      _assert(_type(ret) == 'table', "require failed on "..name)
-      if ret.import and ret._IMPORT then
-	 ret.import()
-      end
-      M[m] = ret 
-   end
-   return M
-end
-
 local function _getcomps( name, tab )
    local ok,ret = _pcall(_require,name)
    if ok and _type(ret) == 'table' then
