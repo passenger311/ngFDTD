@@ -37,10 +37,21 @@ set_target_properties(neon-exe
 
 target_link_libraries(neon-exe ${LUAJIT_ARCHIVES} ${LD_LIBS}) 
 
+add_executable(luajit-plain-exe luajit.c linenoise.c )
+
+set_target_properties(luajit-plain-exe
+  PROPERTIES 
+  LINK_FLAGS "${LD_FLAGS}"
+  OUTPUT_NAME luajit-plain
+)
+
+target_link_libraries(luajit-plain-exe ${LUAJIT_ARCHIVES} ${LD_LIBS}) 
+
 ### install
 
 install(TARGETS 
   neon-exe
+  luajit-plain-exe
   RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
   LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
   ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}

@@ -13,8 +13,6 @@
 
 #define luajit_c
 
-#include "../../../config.h"
-
 #include "lua.h"
 #include "lauxlib.h"
 #include "lualib.h"
@@ -22,9 +20,19 @@
 
 #include "lj_arch.h"
 
-/* ---- JH */
-
-#include "lua_preload.h" 
+#if LJ_TARGET_POSIX
+#include <unistd.h>
+#define lua_stdin_is_tty()	isatty(0)
+#elif LJ_TARGET_WINDOWS
+#include <io.h>
+#ifdef __BORLANDC__
+#define lua_stdin_is_tty()	isatty(_fileno(stdin))
+#else
+#define lua_stdin_is_tty()	_isatty(_fileno(stdin))
+#endif
+#else
+#define lua_stdin_is_tty()	1
+#endif
 
 #if defined(_WIN32)
 #define lua_readline(L,b,p)	\
@@ -42,21 +50,6 @@
 #define lua_freeline(L,b)	((void)L, free(b))
 #endif
 
-/* JH ---- */
-
-#if LJ_TARGET_POSIX
-#include <unistd.h>
-#define lua_stdin_is_tty()	isatty(0)
-#elif LJ_TARGET_WINDOWS
-#include <io.h>
-#ifdef __BORLANDC__
-#define lua_stdin_is_tty()	isatty(_fileno(stdin))
-#else
-#define lua_stdin_is_tty()	_isatty(_fileno(stdin))
-#endif
-#else
-#define lua_stdin_is_tty()	1
-#endif
 
 static lua_State *globalL = NULL;
 static const char *progname = LUA_PROGNAME;
@@ -157,8 +150,6 @@ static int docall(lua_State *L, int narg, int clear)
 
 static void print_version(void)
 {
-  fprintf(stderr,
-    "NEON engine v" C_PROJECT_VERSION " -- " C_PROJECT_COPYRIGHT "\n");
   fprintf(stderr,
     LUAJIT_VERSION " -- " LUAJIT_COPYRIGHT ". " LUAJIT_URL "\n");
 }
@@ -536,7 +527,6 @@ static int pmain(lua_State *L)
   LUAJIT_VERSION_SYM();  /* linker-enforced version check */
   lua_gc(L, LUA_GCSTOP, 0);  /* stop collector during initialization */
   luaL_openlibs(L);  /* open libraries */
-  lua_preload(L); /* JH / preload */
   lua_gc(L, LUA_GCRESTART, -1);
   s->status = handle_luainit(L);
   if (s->status != 0) return 0;
@@ -552,23 +542,13 @@ static int pmain(lua_State *L)
   if (script)
     s->status = handle_script(L, argv, script);
   if (s->status != 0) return 0;
-
-  /* load startup code */
-
-  lua_getglobal(L, "require");
-  lua_pushstring(L, "neon.startup");
-  lua_pcall(L, 1, 1, 0);
-  lua_pop(L,1);
-
-  /* ---- */
-
   if ((flags & FLAGS_INTERACTIVE)) {
     print_jit_status(L);
     dotty(L);
   } else if (script == 0 && !(flags & (FLAGS_EXEC|FLAGS_VERSION))) {
     if (lua_stdin_is_tty()) {
       print_version();
-      print_jit_status(L); 
+      print_jit_status(L);
       dotty(L);
     } else {
       dofile(L, NULL);  /* executes stdin as a file */
