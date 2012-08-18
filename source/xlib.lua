@@ -22,9 +22,9 @@ module.imports{
    "lib",
    "utils",
    "module",
-   "object",
    "proto",
-   "math"
+   "math",
+   "data"
 }
 
 

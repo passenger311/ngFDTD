@@ -29,19 +29,19 @@ local _pi_half = math.pi / 2
 module("xlib.math.complex")
 -------------------------------------------------------------------------------
 
-this = proto:_adopt( _M )
+this = proto:adopt( _M )
 
 _M[1] = 0
 _M[2] = 0
 
-i = this:_adopt{ 0 , 1 }
+i = this:adopt{ 0 , 1 }
 
 --- Create new complex number.
 -- @param re real part
 -- @param im imaginary part
 -- @return complex number
 function new(re, im)
-   return this:_adopt{ re , im or 0 }
+   return this:adopt{ re , im or 0 }
 end
 
 --- Cast to complex number.
@@ -401,6 +401,6 @@ function __tostring(self)
    return "(".._tostring(self[1])..",".._tostring(self[2])..")"
 end
 
-this:_seal()
+this:seal()
 
 -------------------------------------------------------------------------------

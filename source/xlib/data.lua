@@ -15,13 +15,13 @@ local proto = xlib.proto
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> data structures. </p>
 --
-module( "xlib.math" )
+module( "xlib.data" )
 -------------------------------------------------------------------------------
 
-module.extends("math")
 
 module.imports{ 
    "array",
+   "memblock"
 }
 
 
