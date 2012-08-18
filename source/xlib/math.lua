@@ -2,8 +2,8 @@ local _H = {
 -------------------------------------------------------------------------------
 FILE      = "xlib.math",
 VERSION   = "0.1",
-DATE      = "17/08/2012 16:29",
-COPYRIGHT = "(C) 2012",
+DATE      = "18/08/2012 16:09",
+COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
 }
 
@@ -30,7 +30,7 @@ module.imports{
 -- @return truncated number
 function trunc(num, prec)
   local e = 10^(prec or 0)
-  return _G.floor(num * e) / e
+  return floor(num * e) / e
 end
 
 --- Round number to given precision.
@@ -39,7 +39,7 @@ end
 -- @return rounded number
 function round(num, prec)
   local e = 10^(prec or 0)
-  return _G.floor(num * e + 0.5) / e
+  return floor(num * e + 0.5) / e
 end
 
 --- Check whether number is in range.
