@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
+set(BUILD_HOST_TOOLS on)
+
 include("../main.cmake")
 
 # tools required for build

@@ -2,16 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 include(./main.cmake)
 
-#### import build tools
-
-include("${PROJECT_HOME}/tools/build/ImportExecutables.cmake")
-
-#### build in source tree
+#### crawl down source tree
 
 require(source)
 
-
-# activate for testing purposes ...
+# uncomment for testing purposes ...
 #require(extras/srlua)
 #require(extras/lua)
 #require(extras/boost)

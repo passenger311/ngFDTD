@@ -8,6 +8,12 @@ execute_process(
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   RESULT_VARIABLE RET
   OUTPUT_VARIABLE OUT
+  ERROR_VARIABLE ERR
 )
+
+if ( ERR ) 
+  message("\n${OUT}")
+  message(FATAL_ERROR "*** LUA-IMPORT FAILED !!! ***")
+endif()
 
 require(source/neon)

@@ -8,7 +8,7 @@
 #### protect build
 
 if ( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/CMakeLists.txt" )
-  message(FATAL_ERROR "Found CMakelists.txt; Run cmake in build directory!!!")
+  message(FATAL_ERROR "*** RUN CMAKE IN A BUILD DIRECTORY !!! ***\n(you may want to remove CMakeCache.txt CMakeFiles)")
 endif()
 
 ####
@@ -34,6 +34,17 @@ function(find_top_dir CURRENT_DIR RESULT_NAME)
 endfunction()
 
 find_top_dir(${CMAKE_CURRENT_SOURCE_DIR} PROJECT_HOME)
+
+#### import build tools
+
+if ( NOT BUILD_HOST_TOOLS )
+  include("${PROJECT_HOME}/tools/build/ImportExecutables.cmake"
+    RESULT_VARIABLE RET)
+endif()
+
+if ( RET STREQUAL "NOTFOUND" )
+  message(FATAL_ERROR "*** BUILD TOOLS FIRST !!! ***")
+endif()
 
 #### set module directory
 
@@ -74,6 +85,8 @@ set(CMAKE_INSTALL_PREFIX ${PREFIX})
 #### select architecture file
 
 #### setup "distclean" target
+
+
 
 add_custom_target(distclean
   COMMAND ${CMAKE_MAKE_PROGRAM} clean

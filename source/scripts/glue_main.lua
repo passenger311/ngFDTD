@@ -21,13 +21,15 @@ list_bytecode = { "neon.startup" }
 
 c = lib.getcomps("xlib")
 for k,v in pairs(c) do
-   io.write("adding "..k.."\t"..tostring(v).."\n")
+   io.write("lua-import "..k.."\t"..tostring(v).."\n")
+   assert(type(v) == 'table')
    table.insert(list_bytecode,k)
 end
 
 c = lib.getcomps("fdtd")
 for k,v in pairs(c) do
-   io.write("adding "..k.."\t"..tostring(v).."\n")
+   io.write("lua-import "..k.."\t"..tostring(v).."\n")
+   assert(type(v) == 'table')
    table.insert(list_bytecode,k)
 end
 
