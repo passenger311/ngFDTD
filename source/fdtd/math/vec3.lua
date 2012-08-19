@@ -179,6 +179,13 @@ function dot(a,b)
    return a[1]*b[1] + a[2]*b[2] + a[3]*b[3]
 end
 
+--- Absolute square.
+-- @param self vector
+-- @return scalar
+function square(self)
+   return self[1]*self[1] + self[2]*self[2] + self[3]*self[3] 
+end
+
 --- Apply function to elements of vector.
 -- @param self vector
 -- @param fun function

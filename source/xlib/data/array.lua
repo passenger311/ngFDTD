@@ -33,7 +33,7 @@ local this = proto.adopt( xlib.data.memblock, _M )
 -- @param size size of arrays
 -- @return new array
 function new(ctype,size)
-   local self = proto.pnew(this,ctype,size)
+   local self = this:pnew(ctype,size)
    return self
 end 
 
