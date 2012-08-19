@@ -29,6 +29,7 @@ this = proto:adopt( _M )
 -- @param tab properties { at=[vec3] }
 -- @return primitive
 function new(tab)
+   tab.at = tab.at or {0,0,0}
    tab.at = vec3:adopt(tab.at)
    return this:adopt(tab)
 end

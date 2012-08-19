@@ -29,6 +29,7 @@ this = fdtd.shapes.primitive:adopt( _M )
 -- @return new shape
 function new(tab)
    local ret = this:pnew( tab )
+   tab.r = tab.r or 1
    _assert( _type(tab.r)=='number', "expects r=[number]" ) 
    return ret
 end
@@ -36,10 +37,16 @@ end
 --- Check whether point is inside object.
 -- @param self shape
 -- @return <tt>true</tt> or <tt>false</tt>
-function inside(self, point)
-  local d = (point - self.at)  
-  return d:square() <= self.r
+function contains(self, point)
+   local at, r = self.at, self.r
+   local d1 = at[1]-point[1]
+   local d2 = at[2]-point[2]
+   local d3 = at[3]-point[3]
+   return d1*d1+d2*d2+d3*d3 <= r*r
 end
+
+--function frame(self, point)
+
 
 --- Serialize in a string.
 -- @param self vector
