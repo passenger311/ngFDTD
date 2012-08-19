@@ -401,6 +401,6 @@ function __tostring(self)
    return "(".._tostring(self[1])..",".._tostring(self[2])..")"
 end
 
-this:seal()
+this:seal():fuse()
 
 -------------------------------------------------------------------------------

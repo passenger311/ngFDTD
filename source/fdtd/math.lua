@@ -1,32 +1,31 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "fdtd",
+FILE      = "fdtd.math",
 VERSION   = "0.1",
 DATE      = "18/08/2012 16:09",
 COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
-} 
+}
 
 local _G = _G
 local xlib = require( "xlib" )
 local module = xlib.module
 
 -------------------------------------------------------------------------------
----<p><b>Module</b>: Main module. </p>
+--- <p><b>Module:</b> Vector math etc. </p>
 -- </p>
--- @class module
--- @name fdtd
-module( "fdtd" )
+module("fdtd.math")
 -------------------------------------------------------------------------------
 
-module.imports{
-   "shapes",
-   "math"
+-- import shapes prototypes
+
+module.imports{ 
+   "vec3"
+--   "point3",
+--   "mat3",
+--   "mat4"
 }
 
--------------------------------------------------------------------------------
 
---- Project signature.
-signature = _H
 
 -------------------------------------------------------------------------------

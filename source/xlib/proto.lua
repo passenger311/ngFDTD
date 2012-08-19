@@ -52,6 +52,18 @@ end
 -- @return parent prototype
 parent = _getmetatable
 
+--- Create child by invoking parents new method before adopting it.
+-- Equivalent to this:adopt(this:parent().new(...)).
+-- @param this prototype
+-- @param ... arguments for new
+-- @return return child
+function pnew(this, ...)
+   local parent = _getmetatable(this) 
+   local child = parent.new(...)
+   child.__index = child
+   return _setmetatable(child, this)
+end
+
 local function _pfuse(child, parent)
    for k,v in _pairs(parent) do 
       if not _rawget(child,k) then _rawset(child,k,v) end

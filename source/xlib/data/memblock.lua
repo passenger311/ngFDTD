@@ -15,28 +15,30 @@ local proto = xlib.proto
 
 -------------------------------------------------------------------------------
 
+local _proto_adopt = proto.adopt
 local _pairs, _ipairs, _next, _tostring = pairs, ipairs, next, tostring
 local _assert, _require, _type = assert, require, type
 local _math = math
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> array. </p>
+--- <p><b>Prototype:</b> Memory block (requires ffi). </p>
 -- </p>
 module("xlib.data.memblock")
 -------------------------------------------------------------------------------
 
 ffi.cdef[[
 void *memmove(void *dest, const void *src, size_t n);
+void *memcpy(void *dest, const void *src, size_t n);
 void *malloc(size_t size);
 void free(void *ptr);
 ]]
 
 local this = proto:adopt( _M )
 
---- Create array.
--- @param ctype C-type of array ("double")
--- @param size size of arrays
--- @return new array
+--- Create memblock.
+-- @param ctype C-type of memblock ("double")
+-- @param size size of memblocks
+-- @return new memblock
 function new(ctype,size)
    size = size or 0
    local data 
@@ -47,9 +49,9 @@ function new(ctype,size)
    return ret
 end 
 
--- Clear array.
--- @param self array
--- @return array
+-- Clear memblock.
+-- @param self memblock
+-- @return memblock
 function clear(self)
    for i=0, self.size-1 do
       self.data[i] = 0
@@ -57,8 +59,19 @@ function clear(self)
    return self
 end
 
+-- Clone memblock
+-- @param self memblock
+-- @return memblock
+function clone(self)
+   _assert(self.data ~= nil, "data not allocated!")
+   local ret = new(self.ctype,self.size)
+   local nbytes = self.size*ffi.sizeof(self.ctype)
+   ffi.C.memcpy(ffi.cast("void*",ret.data), ffi.cast("void*", self.data), nbytes)
+   return ret
+end
+
 -- Save elements to table.
--- @param self array
+-- @param self memblock
 -- @return a item table
 function totable(self)
    local tab = {}
@@ -69,7 +82,7 @@ function totable(self)
 end
 
 --- Load elements from table. 
--- @param self array
+-- @param self memblock
 -- @param tab item table
 -- @return self
 function fromtable(self,tab)
@@ -82,7 +95,7 @@ function fromtable(self,tab)
 end
 
 
-this:seal()
+this:seal():fuse()
 
 
 -------------------------------------------------------------------------------

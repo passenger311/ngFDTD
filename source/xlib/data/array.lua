@@ -26,19 +26,18 @@ local _math = math
 module("xlib.data.array")
 -------------------------------------------------------------------------------
 
-local this = xlib.data.memblock:adopt( _M )
+local this = proto.adopt( xlib.data.memblock, _M )
 
 --- Create array.
 -- @param ctype C-type of array ("double")
 -- @param size size of arrays
 -- @return new array
 function new(ctype,size)
-   local self = this:parent().new(ctype,size)
-   return this:adopt(self)
+   local self = proto.pnew(this,ctype,size)
+   return self
 end 
 
 
-this:seal()
-
+this:seal():fuse()
 
 -------------------------------------------------------------------------------

@@ -29,5 +29,12 @@ function math(self)
    }
 end
 
+function data(self)
+   return self:launch{ 
+      prefix..".data.memblock"
+--      prefix..".data.array"
+   }
+end
+
 
 ------------------------------------------------------------------------------

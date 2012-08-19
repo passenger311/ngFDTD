@@ -1,39 +1,29 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "fdtd.array",
+FILE      = "fdtd.shapes",
 VERSION   = "0.1",
 DATE      = "18/08/2012 16:09",
 COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
 }
 
-local _G = _G
-local ffi = require "ffi"
 local xlib = require( "xlib" )
+local fdtd = require( "fdtd" )
 local module = xlib.module
 local proto = xlib.proto
 
 -------------------------------------------------------------------------------
 
-local _pairs, _ipairs, _next, _tostring = pairs, ipairs, next, tostring
-local _table_insert, _table_concat, _table_remove, _table_maxn 
-   = table.insert, table.concat, table.remove, table.maxn
-local _assert, _require, _type = assert, require, type
-local _math_max, _print = math.max, print
-local _rawget = rawget
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> array. </p>
+--- <p><b>Module:</b> Three-dimensional shapes. </p>
 -- </p>
-module("fdtd.array")
+module("fdtd.shapes")
 -------------------------------------------------------------------------------
 
--- array is now in xlib.data.array
-
-this = proto:adopt( _M )
-
-
-this:seal()
+module.imports{ 
+--   "sphere"
+}
 
 
 -------------------------------------------------------------------------------
