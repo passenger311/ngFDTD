@@ -40,31 +40,31 @@ if( LIBRARIES )
   
 endif()
 
-  if ( ARCHIVES )
+if ( ARCHIVES )
 
-    add_library(${NAME}-lib STATIC dummy.c)
-    set_target_properties(${NAME}-lib
+  add_library(${NAME}-lib STATIC dummy.c)
+  set_target_properties(${NAME}-lib
+    PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
+    VERSION ${BUILD_VERSION}
+    OUTPUT_NAME fftw3
+    )
+  
+  if ( FFTW_ENABLE_THREADS )
+    
+    add_library(${NAME}-threads-lib STATIC dummy.c)
+    set_target_properties(${NAME}-threads-lib
       PROPERTIES
       ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
       LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
       RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
       VERSION ${BUILD_VERSION}
-      OUTPUT_NAME fftw3
+      OUTPUT_NAME fftw3_threads
       )
-
-    if ( FFTW_ENABLE_THREADS )
-   
-      add_library(${NAME}-threads-lib STATIC dummy.c)
-      set_target_properties(${NAME}-threads-lib
-	PROPERTIES
-	ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
-	LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
-	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib
-	VERSION ${BUILD_VERSION}
-	OUTPUT_NAME fftw3
-	)
-
-    endif()
+    
+  endif()
 
   else()
     set(FFTW_CONFIGURE_OPTIONS ${FFTW_CONFIGURE_OPTIONS} --disable-static)
@@ -74,13 +74,12 @@ endif()
 ##   note: rpath is set to :::... as otherwise cmake can not change it during 
 ##   install
 
-file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/configure_complete_tag)
-file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag)
+# removing the tags here seems to cause problems during build (do we need it?)
+# file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/configure_complete_tag)
+# file(REMOVE ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag)
 
-# configure command
 
-
-#### package build settings
+#### configure settings
 
 if( FFTW_ENABLE_SIMD STREQUAL "SSE" )
   set( FFTW_CONFIGURE_OPTIONS --enable-sse )
@@ -99,6 +98,8 @@ if( FFTW_ENABLE_THREADS )
   set( FFTW_CONFIGURE_OPTIONS ${FFTW_CONFIGURE_OPTIONS} --enable-threads )
 endif() 
 
+#### configure command
+
 add_custom_command( 
   OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/configure_complete_tag
   COMMAND LDFLAGS=-Wl,-rpath=:::::::::::::: CC=${CMAKE_C_COMPILER} F77=${CMAKE_Fortan_COMPILER} ./configure -C ${FFTW_CONFIGURE_OPTIONS} --prefix=${CMAKE_CURRENT_SOURCE_DIR}
@@ -107,7 +108,7 @@ add_custom_command(
   VERBATIM
 )
 
-# build command
+#### build command
 
 add_custom_command( 
   OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/build_complete_tag
