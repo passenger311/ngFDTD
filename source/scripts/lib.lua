@@ -9,7 +9,7 @@ local _package, _loaded, _module = package, package.loaded, module
 local _gsub, _gfind, _format = string.gsub, string.gfind, string.format
 local _string = string
 local _insert = table.insert
-local _open = io.open
+local _open, _write = io.open, io.write
 
 -------------------------------------------------------------------------------
 ---<p><b>Module</b>: Library tools. </p>
@@ -101,10 +101,9 @@ local FUNC_SEP = "_"
 
 ------------------------------------------------------------------------------
 
-local function getbytecode(filepath)
-   local filepath = filepath:gsub("%.",DIRSEP)
-   local filename = filepath..".lua"
-   local file = _open(filepath..".lua")
+local function getbytecode(filename)
+   local filename = filename:gsub("%/",DIRSEP)
+   local file = _open(filename)
    _assert(file,"could not open "..filename)
    file:close()
    return _string.dump(_assert(_loadfile(filename)))
@@ -112,12 +111,13 @@ end
 
 ------------------------------------------------------------------------------
 
-function precompile(inputs, libname, outdir)
-   outdir = outdir:gsub("%.",DIRSEP)
-   local outc = _assert(_open(outdir..DIRSEP..libname..".c", "w"))
-   local outh = _assert(_open(outdir..DIRSEP..libname..".h", "w"))
+-- inputs is are (k,v) pairs with k="library name" and v="file name" 
+function precompile(inputs, outname, outdir)
+   outdir = outdir:gsub("/",DIRSEP)
+   local outc = _assert(_open(outdir..DIRSEP..outname..".c", "w"))
+   local outh = _assert(_open(outdir..DIRSEP..outname..".h", "w"))
 
-   local guard = libname:upper():gsub("[^%w]", "_")
+   local guard = outname:upper():gsub("[^%w]", "_")
 
 -- write <libname>.h file
 
@@ -138,14 +138,14 @@ function precompile(inputs, libname, outdir)
    outc:write([[
 #include <lua.h>
 #include <lauxlib.h>
-#include "]],libname,[[.h"
+#include "]],outname,[[.h"
 
 ]])
 
    local i = 0
-   for _,input in _ipairs(inputs) do
+   for lname,fname in _pairs(inputs) do
       i = i + 1
-      local bytecode = getbytecode(input)
+      local bytecode = getbytecode(fname)
       outc:write("static const unsigned char B",i,"[]={\n")
       for j = 1, #bytecode do
 	 outc:write(_string.format("%3u,", bytecode:byte(j)))
@@ -155,13 +155,13 @@ function precompile(inputs, libname, outdir)
    end
 
    local i = 0
-   for _,input in _ipairs(inputs) do
+   for lname,fname in _pairs(inputs) do
       i = i + 1
-      local func = input:gsub("%.", FUNC_SEP)
+      local func = lname:gsub("%.", FUNC_SEP)
       outh:write(PREFIX," int luaopen_",func,"(lua_State *L);\n")
       outc:write(PREFIX,[[ int luaopen_]],func,[[(lua_State *L) {
   int arg = lua_gettop(L);
-  luaL_loadbuffer(L,(const char*)B]],i,[[,sizeof(B]],i,[[),"]],input,[[");
+  luaL_loadbuffer(L,(const char*)B]],i,[[,sizeof(B]],i,[[),"]],lname,[[");
   lua_insert(L,1);
   lua_call(L,arg,1);
   return 1;
@@ -183,17 +183,18 @@ end
 
 ------------------------------------------------------------------------------
 
-function preloader(inputs, ldrname, outdir)
+-- inputs is an array of library names
+function preloader(inputs, outname, outdir)
 
-outdir = outdir:gsub("%.",DIRSEP)
+   outdir = outdir:gsub("/",DIRSEP)
 
-local funcname = ldrname
+   local funcname = outname
 
 -- write <ldrname>.h file
 
-local outh = _assert(_open(outdir..DIRSEP..ldrname..".h", "w"))
+local outh = _assert(_open(outdir..DIRSEP..outname..".h", "w"))
 
-local guard = ldrname:upper():gsub("[^%w]", "_")
+local guard = outname:upper():gsub("[^%w]", "_")
 
 outh:write([[
 #ifndef __]],guard,[[__
@@ -212,20 +213,20 @@ outh:close()
 
 -- write <ldrname>.c file
 
-local outc = _assert(_open(outdir..DIRSEP..ldrname..".c", "w"))
+local outc = _assert(_open(outdir..DIRSEP..outname..".c", "w"))
 outc:write([[
 #include <lua.h>
 #include <lauxlib.h>
 
 ]])
 
-for _, input in _ipairs(inputs) do
-   outc:write('int luaopen_',input:gsub("%.", FUNC_SEP),'(lua_State*);\n')
+for _,lname in _ipairs(inputs) do
+   outc:write('int luaopen_',lname:gsub("%.", FUNC_SEP),'(lua_State*);\n')
 end
 
 outc:write([[
 
-#include "]],ldrname,[[.h"
+#include "]],outname,[[.h"
 
 ]],PREFIX,[[ int ]],funcname,[[(lua_State *L) {
 	luaL_findtable(L, LUA_GLOBALSINDEX, "package.preload", ]], #inputs, [[);
@@ -235,8 +236,8 @@ local code = [[
 	lua_pushcfunction(L, luaopen_%s);
 	lua_setfield(L, -2, "%s");
 ]]
-for _, input in _ipairs(inputs) do
-   outc:write(code:format(input:gsub("%.", FUNC_SEP), input))
+for _, lname in _ipairs(inputs) do
+   outc:write(code:format(lname:gsub("%.", FUNC_SEP), lname))
 end
 outc:write([[
 	
@@ -249,7 +250,17 @@ outc:close()
 
 end
 
+------------------------------------------------------------------------------
 
+function autofetch( lname, precompile_list, preloader_list)
+   c = getcomps(lname)
+   for k,v in _pairs(c) do
+      _write("lua-import "..k.."\t".._tostring(v).."\n")
+      _assert(_type(v) == 'table')
+      precompile_list[k] = k:gsub("%.",DIRSEP)..".lua"
+      _insert(preloader_list, k)
+   end
+end
 
 ------------------------------------------------------------------------------
 

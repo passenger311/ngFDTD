@@ -47,6 +47,8 @@ if ( LIBRARIES )
   target_link_libraries(${NAME}-socket-dll ${LUA_LIBRARIES} ${NAME}-mime-dll ${LD_LIBS})
   set_target_properties(${NAME}-socket-dll
     PROPERTIES 
+    ARCHIVE_OUTPUT_DIRECTORY socket
+    LIBRARY_OUTPUT_DIRECTORY socket
     OUTPUT_NAME core
     PREFIX ""
     COMPILE_FLAGS "${C_FLAGS}"
@@ -56,7 +58,9 @@ if ( LIBRARIES )
   target_link_libraries(${NAME}-mime-dll ${LUA_LIBRARIES})
   set_target_properties(${NAME}-mime-dll
     PROPERTIES 
-    OUTPUT_NAME mine
+    ARCHIVE_OUTPUT_DIRECTORY mime
+    LIBRARY_OUTPUT_DIRECTORY mime
+    OUTPUT_NAME core
     PREFIX ""
     COMPILE_FLAGS "${C_FLAGS}"
     )
@@ -66,6 +70,8 @@ if ( LIBRARIES )
     target_link_libraries(${NAME}-unix-dll ${LD_LIBS})
     set_target_properties(${NAME}-unix-dll
       PROPERTIES 
+      ARCHIVE_OUTPUT_DIRECTORY socket
+      LIBRARY_OUTPUT_DIRECTORY socket
       OUTPUT_NAME unix
       PREFIX ""
       COMPILE_FLAGS "${C_FLAGS}"
@@ -79,7 +85,9 @@ if ( ARCHIVES )
   add_library(${NAME}-socket-lib STATIC ${SOCKET_SRCS})
   target_link_libraries(${NAME}-socket-lib ${LUA_LIBRARIES} ${NAME}-mime-lib ${LD_LIBS})
   set_target_properties(${NAME}-socket-lib
-    PROPERTIES 
+    PROPERTIES  
+    ARCHIVE_OUTPUT_DIRECTORY socket
+    LIBRARY_OUTPUT_DIRECTORY socket
     OUTPUT_NAME core
     PREFIX ""
     COMPILE_FLAGS "${C_FLAGS}"
@@ -89,7 +97,9 @@ if ( ARCHIVES )
   target_link_libraries(${NAME}-mime-lib ${LUA_LIBRARIES})
   set_target_properties(${NAME}-mime-lib
     PROPERTIES 
-    OUTPUT_NAME mine
+    ARCHIVE_OUTPUT_DIRECTORY mime
+    LIBRARY_OUTPUT_DIRECTORY mime
+    OUTPUT_NAME core
     PREFIX ""
     COMPILE_FLAGS "${C_FLAGS}"
     )
@@ -99,6 +109,8 @@ if ( ARCHIVES )
     target_link_libraries(${NAME}-unix-lib ${LD_LIBS})
     set_target_properties(${NAME}-unix-lib
       PROPERTIES 
+      ARCHIVE_OUTPUT_DIRECTORY socket
+      LIBRARY_OUTPUT_DIRECTORY socket
       OUTPUT_NAME unix
       PREFIX ""
       COMPILE_FLAGS "${C_FLAGS}"
@@ -146,9 +158,9 @@ if ( INSTALL )
     install(TARGETS 
       ${NAME}-unix-dll
       ${NAME}-unix-lib
-      RUNTIME DESTINATION ${INSTALL_DIR_BINARY}/unix
-      LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}/unix
-      ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}/unix
+      RUNTIME DESTINATION ${INSTALL_DIR_BINARY}/socket
+      LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}/socket
+      ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}/socket
       )
 
   endif()

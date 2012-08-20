@@ -25,7 +25,9 @@ endif()
 
 #### sources
 
-include_directories(${LUAJIT_INCLUDE_DIR})
+include_directories(
+  ${LUAJIT_INCLUDE_DIR}
+  )
 
 add_executable(neon-exe neon.c linenoise.c lua_bytecode.c lua_preload.c)
 
@@ -35,7 +37,11 @@ set_target_properties(neon-exe
   OUTPUT_NAME neon
 )
 
-target_link_libraries(neon-exe ${LUAJIT_ARCHIVES} ${LD_LIBS}) 
+target_link_libraries(neon-exe 
+  ${LUAJIT_ARCHIVES} 
+  ${LUAFILESYSTEM_ARCHIVES} 
+  ${LUASOCKET_ARCHIVES}
+  ${LD_LIBS}) 
 
 add_executable(luajit-plain-exe luajit.c linenoise.c )
 
