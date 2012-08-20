@@ -20,28 +20,54 @@ set(LUA_SRCS lua.c  )
 set(LUAC_SRCS luac.c )
 set(LIBLUA_SRCS ${CORE_SRCS} ${LIB_SRCS})
 
-add_library(lua-dll SHARED ${LIBLUA_SRCS} )
-set_target_properties(lua-dll 
-  PROPERTIES 
-  COMPILE_FLAGS "${C_FLAGS}"
-  OUTPUT_NAME "lua5.1"
-)
+if ( LIBRARIES )
 
-add_library(lua-lib STATIC ${LIBLUA_SRCS} )
-set_target_properties(lua-lib 
-  PROPERTIES 
-  COMPILE_FLAGS "${C_FLAGS}"
-  OUTPUT_NAME "lua5.1"
-)
+  add_library(lua-dll SHARED ${LIBLUA_SRCS} )
+  set_target_properties(lua-dll 
+    PROPERTIES 
+    COMPILE_FLAGS "${C_FLAGS}"
+    OUTPUT_NAME "lua5.1"
+    )
 
-add_executable(lua-exe ${LUA_SRCS} )
+endif()
 
-set_target_properties(lua-exe 
-  PROPERTIES 
-  OUTPUT_NAME "lua"
-  COMPILE_FLAGS "${C_FLAGS}"
-)
-target_link_libraries(lua-exe lua-dll ${LD_LIBS})
+if ( ARCHIVES )
 
-#macro_install_binaries( lua-exe lua-dll lua-lib )
-#macro_install_headers( ${DEV_HDRS} )
+  add_library(lua-lib STATIC ${LIBLUA_SRCS} )
+  set_target_properties(lua-lib 
+    PROPERTIES 
+    COMPILE_FLAGS "${C_FLAGS}"
+    OUTPUT_NAME "lua5.1"
+    )
+
+endif()
+
+if ( EXECUTABLES )
+
+  add_executable(lua-exe ${LUA_SRCS} )
+  set_target_properties(lua-exe 
+    PROPERTIES 
+    OUTPUT_NAME "lua"
+    COMPILE_FLAGS "${C_FLAGS}"
+    )
+  target_link_libraries(lua-exe lua-dll ${LD_LIBS})
+  
+endif()
+
+
+if ( INSTALL )
+
+  install(TARGETS 
+    ${EXECUTABLES}
+    ${LIBRARIES}
+    ${ARCHIVES}
+    RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
+    LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
+    ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
+    )
+  
+  if ( HEADERS )
+    install(FILES ${HEADERS} DESTINATION ${INSTALL_DIR_INCLUDE}/lua5.1 )
+  endif()
+  
+endif()

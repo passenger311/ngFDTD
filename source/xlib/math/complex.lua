@@ -7,6 +7,7 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
 }
 
+local ffi = require( "ffi" )
 local xlib = require( "xlib" )
 local module = xlib.module
 local proto = xlib.proto
@@ -44,7 +45,12 @@ function new(re, im)
    return this:adopt{ re , im or 0 }
 end
 
---- Cast to complex number.
+--- Convert to C data
+function toc(self)
+   return ffi.new("complex double", { self[1], self[2] } )
+end
+
+--- Cast real to complex number.
 -- @param z real or complex
 -- @return complex number
 function cast(z)

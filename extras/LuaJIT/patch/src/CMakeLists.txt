@@ -147,66 +147,65 @@ set_source_files_properties(${GEN_SRCS}
   PROPERTIES GENERATED TRUE)
 
 
-if ( DEFINED LIBRARIES ) 
+if ( LIBRARIES ) 
 
-add_library(luajit-dll SHARED ${LJVM_SRCS} ${LJCORE_SRCS})
-
-add_dependencies(luajit-dll luajit-gen-files)
-
-set_source_files_properties( ${LJCORE_SRCS}
-  PROPERTIES 
-  LINK_FLAGS "${LD_FLAGS}"
-  COMPILE_FLAGS "${C_FLAGS}"
-)
-
-set_target_properties(luajit-dll
-  PROPERTIES 
-  OUTPUT_NAME luajit
-)
+  add_library(luajit-dll SHARED ${LJVM_SRCS} ${LJCORE_SRCS})
+  add_dependencies(luajit-dll luajit-gen-files)
+  set_source_files_properties( ${LJCORE_SRCS}
+    PROPERTIES 
+    LINK_FLAGS "${LD_FLAGS}"
+    COMPILE_FLAGS "${C_FLAGS}"
+    )
+  set_target_properties(luajit-dll
+    PROPERTIES 
+    OUTPUT_NAME luajit
+    )
 
 endif()
 
-add_library(luajit-lib STATIC ${LJVM_SRCS} ${LJCORE_SRCS})
+if ( ARCHIVES ) 
 
-add_dependencies(luajit-lib luajit-gen-files)
+  add_library(luajit-lib STATIC ${LJVM_SRCS} ${LJCORE_SRCS})
+  add_dependencies(luajit-lib luajit-gen-files)
+  set_source_files_properties( ${LJCORE_SRCS}
+    PROPERTIES 
+    LINK_FLAGS "${LD_FLAGS}"
+    COMPILE_FLAGS "${C_FLAGS}"
+    )
+  set_target_properties(luajit-lib
+    PROPERTIES 
+    OUTPUT_NAME luajit
+  )
 
-set_source_files_properties( ${LJCORE_SRCS}
-  PROPERTIES 
-  LINK_FLAGS "${LD_FLAGS}"
-  COMPILE_FLAGS "${C_FLAGS}"
-)
+endif()
 
-set_target_properties(luajit-lib
-  PROPERTIES 
-  OUTPUT_NAME luajit
-)
+if ( EXECUTABLES )
 
-add_executable(luajit-exe luajit.c )
+  add_executable(luajit-exe luajit.c )
+  add_dependencies(luajit-exe luajit-gen-files)
+  set_target_properties(luajit-exe
+    PROPERTIES 
+    LINK_FLAGS "${LD_FLAGS}"
+    COMPILE_FLAGS "${C_FLAGS}"
+    OUTPUT_NAME luajit
+    )
+  target_link_libraries(luajit-exe luajit-lib ${LD_LIBS})
 
-add_dependencies(luajit-exe luajit-gen-files)
-
-set_target_properties(luajit-exe
-  PROPERTIES 
-  LINK_FLAGS "${LD_FLAGS}"
-  COMPILE_FLAGS "${C_FLAGS}"
-  OUTPUT_NAME luajit
-)
-
-target_link_libraries(luajit-exe luajit-lib ${LD_LIBS})
+endif()
 
 if ( INSTALL )
 
-install(TARGETS 
-  ${EXECUTABLES}
-  ${LIBRARIES}
-  ${ARCHIVES}
-  RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
-  LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
-  ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
-)
-
-if ( HEADERS )
-  install(FILES ${HEADERS} DESTINATION ${INSTALL_DIR_INCLUDE}/luajit )
-endif()
-
+  install(TARGETS 
+    ${EXECUTABLES}
+    ${LIBRARIES}
+    ${ARCHIVES}
+    RUNTIME DESTINATION ${INSTALL_DIR_BINARY}
+    LIBRARY DESTINATION ${INSTALL_DIR_LIBRARY}
+    ARCHIVE DESTINATION ${INSTALL_DIR_LIBRARY}
+    )
+  
+  if ( HEADERS )
+    install(FILES ${HEADERS} DESTINATION ${INSTALL_DIR_INCLUDE}/luajit2.0 )
+  endif()
+  
 endif()

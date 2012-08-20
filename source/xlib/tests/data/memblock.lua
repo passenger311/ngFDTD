@@ -96,11 +96,21 @@ function clone1(self)
 end
 
 function fibonacci1(self)
-   local a = memblock.new("double",1000000)
+   local N = 1000000
+   local a = memblock.new("double",N)
    a.data[0] = 1
    a.data[1] = 1
-   for i = 2, 1000000-1 do
+   for i = 2, N-1 do
       a.data[i] = a.data[i-1]+a.data[i-2]
+   end
+   for i = N-3,0,-1 do
+      a.data[i] = a.data[i+2]-a.data[i+1]
+   end
+   for i = 2, N-1 do
+      a.data[i] = a.data[i-1]+a.data[i-2]
+   end
+   for i = N-3,0,-1 do
+      a.data[i] = a.data[i+2]-a.data[i+1]
    end
 end
 

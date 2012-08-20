@@ -158,7 +158,7 @@ static int docall(lua_State *L, int narg, int clear)
 static void print_version(void)
 {
   fprintf(stderr,
-    "NEON engine v" C_PROJECT_VERSION " -- " C_PROJECT_COPYRIGHT "\n");
+    "NEON fdtd engine " C_PROJECT_VERSION " -- " C_PROJECT_COPYRIGHT "\n");
   fprintf(stderr,
     LUAJIT_VERSION " -- " LUAJIT_COPYRIGHT ". " LUAJIT_URL "\n");
 }

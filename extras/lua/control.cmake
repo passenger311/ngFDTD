@@ -11,7 +11,8 @@ set(INCLUDE_DIR src)
 set(LIBRARY_DIR src)
 set(LIBRARIES ${NAME}-dll)
 set(ARCHIVES ${NAME}-lib)
-set(HEADERS lua.h)
+set(EXECUTABLES ${NAME}-exe)
+set(HEADERS lua.h luaconf.h lauxlib.h lualib.h )
 set(BUILD_IN_SOURCE off)
 
 ### build flags

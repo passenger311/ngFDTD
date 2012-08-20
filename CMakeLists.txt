@@ -7,6 +7,7 @@ include(./main.cmake)
 require(source)
 
 # uncomment for testing purposes ...
+#require ( extras/luafilesystem )
 #require(extras/srlua)
 #require(extras/lua)
 #require(extras/boost)

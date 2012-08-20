@@ -35,6 +35,17 @@ endfunction()
 
 find_top_dir(${CMAKE_CURRENT_SOURCE_DIR} PROJECT_HOME)
 
+#### contains function
+
+function(contains VARS STRING FOUND)
+  unset(FOUND )
+  foreach(VAR ${${VARS}})
+    if ( ${STRING} STREQUAL ${VAR} )
+      set(${FOUND} true)
+    endif()
+  endforeach()
+endfunction()
+
 #### import build tools
 
 if ( NOT BUILD_HOST_TOOLS )
@@ -104,25 +115,27 @@ endif()
 
 macro(require PATH)
 
+  set(PREV_TARGET ${TARGET}) # save previous targets name
+
+
+
   message("-> require ${PATH}")
   set(TARGET_PATH ${PATH})
-  get_filename_component(TARGET_NAME ${TARGET_PATH} NAME)
+  get_filename_component(NAME ${TARGET_PATH} NAME)
   get_filename_component(TARGET_DIR ${PROJECT_HOME}/${TARGET_PATH} ABSOLUTE)
-  string(TOUPPER ${TARGET_NAME} TARGET)
-  set(NAME ${TARGET_NAME})
-  set(TARGET_NAME ${TARGET_NAME})
-  set(TARGET_PATH ${TARGET_PATH})
-  set(TARGET_DIR ${TARGET_DIR})
+  string(TOUPPER ${NAME} TARGET)
 
   get_property(${TARGET}_REQUIRE_GUARD GLOBAL PROPERTY ${TARGET}_REQUIRE_GUARD)
   
-  set(G_VARS BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES EXECUTABLES HEADERS PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE INSTALL)
+  set(G_VARS NAME TARGET TARGET_PATH TARGET_DIR BUILD SOURCE_NAME BUILD_VERSION FIND_VERSION UNTAR_CMD TARBALL INCLUDE_DIR LIBRARY_DIR LIBRARIES ARCHIVES EXECUTABLES HEADERS PATCH_DIR SOURCE_DIR BINARY_DIR BUILD_IN_SOURCE INSTALL)
 
-  # erase values
-  foreach(VAR ${G_VARS})
-    unset(${VAR} )
-  endforeach()
-    
+  unset(SOURCE_NAME )
+
+# erase values (no longer necessary)
+#  foreach(VAR ${G_VARS})
+#    unset(${VAR} )
+#  endforeach()
+
   set(BUILD on)
     
   if( EXISTS "${TARGET_DIR}/control.cmake" ) 
@@ -161,10 +174,10 @@ macro(require PATH)
     endif()
     
     # assign to target variables
-    foreach(VAR ${G_VARS})
+    foreach(VAR NAME ${G_VARS})
       set(${TARGET}_${VAR} ${${VAR}})
     endforeach()
-    
+
     # unpack tarball and patch source
     if ( TARBALL AND NOT EXISTS "${SOURCE_DIR}/")
       message("-> ${UNTAR_CMD} ${TARBALL} in ${CMAKE_BINARY_DIR}/unpack")
@@ -213,6 +226,10 @@ macro(require PATH)
   
   endif()
 
+  foreach(VAR ${G_VARS})
+    set(${VAR} ${${PREV_TARGET}_${VAR}} )
+#    message("RESTORED ${VAR} ${${PREV_TARGET}_${VAR}}")
+  endforeach()
 
   # endif()
   
