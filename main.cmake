@@ -117,8 +117,6 @@ macro(require PATH)
 
   set(PREV_TARGET ${TARGET}) # save previous targets name
 
-
-
   message("-> require ${PATH}")
   set(TARGET_PATH ${PATH})
   get_filename_component(NAME ${TARGET_PATH} NAME)
@@ -148,6 +146,7 @@ macro(require PATH)
   set(${TARGET}_BUILD ${BUILD})
   
   if( BUILD ) 
+
     if( EXISTS "${TARGET_DIR}/patch/" ) 
       if ( NOT ${TARGET}_REQUIRE_GUARD ) # check guard
 	message("-> ${TARGET_DIR}/patch/ exists")
@@ -155,7 +154,7 @@ macro(require PATH)
       set(PATCH_DIR ${TARGET_DIR}/patch/)
     endif()    
     if( TARBALL ) 
-      set(SOURCE_DIR ${CMAKE_BINARY_DIR}/unpack/${SOURCE_NAME})
+      set(SOURCE_DIR ${CMAKE_BINARY_DIR}/unpack/${NAME})
     else()
       set(SOURCE_DIR ${TARGET_DIR}/${SOURCE_NAME})
     endif()
@@ -184,13 +183,15 @@ macro(require PATH)
       file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/unpack)
       execute_process(COMMAND ${CMAKE_COMMAND} -E ${UNTAR_CMD} ${TARGET_DIR}/${TARBALL} 
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/unpack )
+      file(RENAME ${CMAKE_BINARY_DIR}/unpack/${SOURCE_NAME} ${SOURCE_DIR})
     endif()
     
-    if( PATCH_DIR ) 
-      file( COPY ${PATCH_DIR}/
-	DESTINATION ${SOURCE_DIR}/
-	PATTERN * ) 
+    if( PATCH_DIR AND EXISTS "${SOURCE_DIR}/")
+	file( COPY ${PATCH_DIR}/
+	  DESTINATION ${SOURCE_DIR}/
+	  PATTERN * ) 
     endif()
+
       
   else() # try to find package
     

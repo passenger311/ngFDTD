@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
 
+require("extras/LuaJIT")
+require("extras/luafilesystem")
+require("extras/luasocket")
 
 get_target_property(CMD host-luajit-exe  IMPORTED_LOCATION_NOCONFIG)
 
