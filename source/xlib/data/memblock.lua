@@ -65,7 +65,7 @@ function size(self)
 --   return xlib.types.allocsize(self.data)
 end
 
-function type(self)
+function elemtype(self)
    local ts, ps = xlib.types.info(self.data)
    return ts
 end
