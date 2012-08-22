@@ -103,7 +103,7 @@ function newptr(type, nelems)
       ptr = ffi.gc(ffi.cast(ts.." *",ffi.C.malloc(nelems*ffi.sizeof(type))), 
 		   ffi.C.free )
       _assert(ptr ~= nil, "out of memory")
---     __allocsize[ptr]=nelems -- register size info
+--    __allocsize[ptr]=nelems -- register size info
    else
       ptr = ffi.new(ts.." *")
    end

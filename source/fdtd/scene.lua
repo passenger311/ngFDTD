@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "fdtd.shapes.primitive",
+FILE      = "fdtd.scene",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
@@ -18,32 +18,42 @@ local vec3 = fdtd.math.vec3
 local _tostring = tostring
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> Primitive shape. </p>
--- </p>
-module("fdtd.shapes.primitive")
+--- <p><b>Prototype:</b> A scene is a collection of shapes with material ids.-- </p>
+module("fdtd.scene")
 -------------------------------------------------------------------------------
 
 local this = proto:adopt( _M )
 
---- Create new primitive.
--- @param tab properties { at=[vec3] }
--- @return primitive
-function new(tab)
-   tab.at = tab.at or {0,0,0}
-   tab.at = vec3:adopt(tab.at)
-   return this:adopt(tab)
+--- Create new scene.
+-- @return scene
+function new()
+   local self = {
+      mathash = {} -- shapes by matid
+      shapelist = {} -- collection of all shapes
+      matid = {}
+   }
+   return this:adopt(self)
 end
 
---- Move along vector.
--- @param move vec3 
+--- Add shape to scene.
+-- @param self self
+-- @param shape shape
+-- @param matid material id
 -- @return self
-function move(self,vec)
-   self.at = self.at + vec
+function add(self,shape, matid)
+   _insert(self.shapelist, shape)
+   self.matid[shape] = matid
+   if not self.mathash[matid] then
+      self.mathash[matid] = {}
+   end
+   _insert(self.mathash[matid], shape)
    return self
 end
 
 
-this:seal():fuse()
 
+
+
+this:seal():fuse()
 
 -------------------------------------------------------------------------------

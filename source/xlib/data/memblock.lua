@@ -99,8 +99,8 @@ end
 -- @return memblock
 function clone(self)
    _assert(self.data ~= nil, "data not allocated!")
-   local ret = new(self:type(),self:size())
-   local nbytes = self:size()*ffi.sizeof(self:type())
+   local ret = new(self:eltype(),self:size())
+   local nbytes = self:size()*ffi.sizeof(self:eltype())
    ffi.copy(ret.data,self.data,nbytes)
 --   ffi.C.memcpy(ffi.cast("void*",ret.data), ffi.cast("void*", self.data), nbytes)
    return ret

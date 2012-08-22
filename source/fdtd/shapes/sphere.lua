@@ -22,16 +22,17 @@ local _tostring, _assert, _type = tostring, assert, type
 module("fdtd.shapes.sphere")
 -------------------------------------------------------------------------------
 
-this = fdtd.shapes.primitive:adopt( _M )
+local parent = fdtd.shapes.primitive
+local this = parent:adopt( _M )
 
 --- Create and initialize with table.
 -- @param tab properties { at=[vec3], r=[number] }
 -- @return new shape
 function new(tab)
-   local ret = this:pnew( tab )
+   local ret = parent:new( tab )
    tab.r = tab.r or 1
    _assert( _type(tab.r)=='number', "expects r=[number]" ) 
-   return ret
+   return ret:adopt(this)
 end
 
 --- Check whether point is inside object.
@@ -46,7 +47,6 @@ function contains(self, point)
 end
 
 --function frame(self, point)
-
 
 --- Serialize in a string.
 -- @param self vector

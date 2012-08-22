@@ -45,6 +45,8 @@ function adopt(this, child)
    return _setmetatable(child, this)
 end
 
+cast = _setmetatable
+
 --- Get parent of prototype.
 -- @class function
 -- @name parent
@@ -60,7 +62,6 @@ parent = _getmetatable
 function pnew(this, ...)
    local parent = _getmetatable(this) 
    local child = parent.new(...)
-   child.__index = child
    return _setmetatable(child, this)
 end
 
