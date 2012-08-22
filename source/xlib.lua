@@ -23,6 +23,7 @@ module.imports{
    "utils",
    "module",
    "proto",
+   "types",
    "math",
    "data",
    "unit"

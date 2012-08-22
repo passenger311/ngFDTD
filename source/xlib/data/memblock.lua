@@ -18,17 +18,23 @@ local proto = xlib.proto
 local _proto_adopt = proto.adopt
 local _pairs, _ipairs, _next, _tostring = pairs, ipairs, next, tostring
 local _assert, _require, _type = assert, require, type
+local _string_match = string.match
+local _print = print
 local _math = math
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> Memory block (requires ffi). </p>
+--- <p><b>Prototype:</b> Memory block (requires ffi).
+-- Note 1: allocate using malloc overcomes LuaJITs 4GB limit
+-- Note 2: this is all terribly unsafe and that accessing data outside of
+-- the size limit will inevitably result in a segfault!
 -- </p>
 module("xlib.data.memblock")
 -------------------------------------------------------------------------------
 
+--void *memmove(void *dest, const void *src, size_t n);
+--void *memcpy(void *dest, const void *src, size_t n);
+
 ffi.cdef[[
-void *memmove(void *dest, const void *src, size_t n);
-void *memcpy(void *dest, const void *src, size_t n);
 void *malloc(size_t size);
 void free(void *ptr);
 ]]
@@ -40,21 +46,50 @@ local this = proto:adopt( _M )
 -- @param size size of memblocks
 -- @return new memblock
 function new(ctype,size)
-   size = size or 0
-   local data 
-      = ffi.gc(ffi.cast(ctype.." *",ffi.C.malloc(size*ffi.sizeof(ctype))), 
-	       ffi.C.free )
-   _assert(data ~= nil, "out of memory")
-   local ret = this:adopt{ data = data, size = size, ctype=ctype }
-   return ret
-end 
+   return this:adopt{ data = xlib.types.newptr(ctype, size),
+		      _immutable_size = size 
+		   } 
+end
 
 -- Clear memblock.
 -- @param self memblock
 -- @return memblock
 function clear(self)
-   for i=0, self.size-1 do
-      self.data[i] = 0
+   local nbytes = self:size()*ffi.sizeof(self:type())
+   ffi.fill(self.data,nbytes,0)
+   return self
+end
+
+function size(self)
+   return self._immutable_size
+--   return xlib.types.allocsize(self.data)
+end
+
+function type(self)
+   local ts, ps = xlib.types.info(self.data)
+   return ts
+end
+
+-- Fill memblock.
+-- @param self memblock
+-- @param val fill value
+-- @return memblock
+function fill(self,val)
+   local data = self.data
+   for i=0,self:size()-1 do
+      data[i] = val
+   end
+   return self
+end
+
+-- Apply function to each element.
+-- @param self memblock
+-- @param apply function
+-- @return memblock
+function apply(self,apply)
+   local data = self.data
+   for i=0,self:size()-1 do
+      data[i] = apply(data[i])
    end
    return self
 end
@@ -64,9 +99,10 @@ end
 -- @return memblock
 function clone(self)
    _assert(self.data ~= nil, "data not allocated!")
-   local ret = new(self.ctype,self.size)
-   local nbytes = self.size*ffi.sizeof(self.ctype)
-   ffi.C.memcpy(ffi.cast("void*",ret.data), ffi.cast("void*", self.data), nbytes)
+   local ret = new(self:type(),self:size())
+   local nbytes = self:size()*ffi.sizeof(self:type())
+   ffi.copy(ret.data,self.data,nbytes)
+--   ffi.C.memcpy(ffi.cast("void*",ret.data), ffi.cast("void*", self.data), nbytes)
    return ret
 end
 
@@ -75,8 +111,9 @@ end
 -- @return a item table
 function totable(self)
    local tab = {}
-   for i=0, self.size-1 do
-      tab[i+1] = self.data[i]
+   local data = self.data
+   for i=0, self:size()-1 do
+      tab[i+1] = data[i]
    end
    return { self[1], self[2], self[3] }
 end
@@ -86,10 +123,11 @@ end
 -- @param tab item table
 -- @return self
 function fromtable(self,tab)
-   local cnt = self.size
+   local cnt = self:size()
+   local data = self.data
    cnt = _math.min( cnt, #tab ) 
    for i=0, cnt-1 do
-      self.data[i] = tab[i+1]
+      data[i] = tab[i+1]
    end
    return self
 end
