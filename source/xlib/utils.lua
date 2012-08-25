@@ -8,7 +8,8 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 }
 
 
-local module = require( "xlib.module" )
+local xlib = require( "xlib" )
+local module = xlib.module
 
 -------------------------------------------------------------------------------
 
@@ -19,7 +20,7 @@ local _stdout, _stderr, _format = io.stdout, io.stderr, string.format
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Generic (shared) utilities. </p>
 --
-module( "xlib.utils" )
+module( _H.FILE )
 ------------------------------------------------------------------------------
 
 module.imports{ 

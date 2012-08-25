@@ -17,22 +17,23 @@ local proto = xlib.proto
 local _tostring, _assert, _type = tostring, assert, type
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> Sphere primitive. </p>
+--- <p><b>Prototype:</b> Sphere primitive. 
 -- </p>
-module("fdtd.shapes.sphere")
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 local parent = fdtd.shapes.primitive
-local this = parent:adopt( _M )
+local this = proto.clone( _M, parent )
 
 --- Create and initialize with table.
 -- @param tab properties { at=[vec3], r=[number] }
 -- @return new shape
 function new(tab)
-   local ret = parent:new( tab )
    tab.r = tab.r or 1
    _assert( _type(tab.r)=='number', "expects r=[number]" ) 
-   return ret:adopt(this)
+   local self = parent.new( tab )
+   self.r = tab.r
+   return proto.clone(self, this)
 end
 
 --- Check whether point is inside object.
@@ -46,16 +47,13 @@ function contains(self, point)
    return d1*d1+d2*d2+d3*d3 <= r*r
 end
 
---function frame(self, point)
-
 --- Serialize in a string.
 -- @param self vector
 -- @return string 
-function serialize(self)
+function stringify(self)
    return _H.FILE.."{ at=".._tostring(self.at)..", r=".._tostring(self.r).." }"
 end
 
-this:seal():fuse()
-
+proto.seal(this)
 
 -------------------------------------------------------------------------------

@@ -1,39 +1,30 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "xlib",
+FILE      = "fdtd.models",
 VERSION   = "0.1",
 DATE      = "18/08/2012 16:09",
 COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
 }
 
-local _G = _G
-local module = require( "xlib.module" )
+local xlib = require( "xlib" )
+local fdtd = require( "fdtd" )
+local module = xlib.module
 
 -------------------------------------------------------------------------------
----<p><b>Module</b>: Main module. </p>
+
+
+-------------------------------------------------------------------------------
+--- <p><b>Module:</b> Models. </p>
 -- </p>
--- @class module
--- @name xlib
 module( _H.FILE )
 -------------------------------------------------------------------------------
 
-module.imports{
-   "file",
-   "utils",
-   "module",
-   "proto",
-   "types",
-   "math",
-   "data",
-   "unit",
-   "os"
+module.imports{ 
+   "basetype",
+   "response",
+   nil
 }
 
-
--------------------------------------------------------------------------------
-
---- Project signature.
-signature = _H
 
 -------------------------------------------------------------------------------

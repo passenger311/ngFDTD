@@ -20,7 +20,7 @@ local _module, _select = module, select
 -------------------------------------------------------------------------------
 ---<p><b>Module</b>: Smart module handler. </p>
 --
-module( "xlib.module" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 policy = {
@@ -169,6 +169,25 @@ function extends(name)
    end
 end
 
+local function _getcomps( name, tab )
+   local ok,ret = _pcall(_require,name)
+   if ok and _type(ret) == 'table' then
+      local prefix = ret._NAME
+      local names = ret._IMPORT or {}
+      for i=1, #names do
+	 --      _print(prefix.."."..names[i])
+	 _getcomps(prefix.."."..names[i],tab)
+      end
+   end
+   tab[name] = ret
+   return tab
+end
+
+--- Get all components.
+-- @return table of modules
+function getcomps( name )
+   return _getcomps( name, {} )
+end
 
 ------------------------------------------------------------------------------
 

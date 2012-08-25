@@ -21,23 +21,24 @@ local _require = require
 local _math = math
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> array. </p>
+--- <p><b>Prototype:</b> Array. </p>
 -- </p>
-module("xlib.data.array")
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
-local this = proto.adopt( xlib.data.memblock, _M )
+local parent = xlib.data.memblock 
+local this = proto.clone( _M, parent )
 
 --- Create array.
 -- @param ctype C-type of array ("double")
 -- @param size size of arrays
 -- @return new array
 function new(ctype,size)
-   local self = this:pnew(ctype,size)
-   return self
+   local self = parent.new(ctype,size)
+   return proto.clone(self, this)
 end 
 
 
-this:seal():fuse()
+proto.seal(this)
 
 -------------------------------------------------------------------------------

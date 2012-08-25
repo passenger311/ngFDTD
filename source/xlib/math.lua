@@ -15,13 +15,14 @@ local proto = xlib.proto
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> math utility library. </p>
 --
-module( "xlib.math" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 module.extends("math")
 
 module.imports{ 
    "complex",
+   nil
 }
 
 --- Truncate number to given precision.

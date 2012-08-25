@@ -17,7 +17,7 @@ local complex = xlib.math.complex
 local _pcall, _print, _table, _ipairs = pcall, print, table, ipairs
 
 -------------------------------------------------------------------------------
-module( "xlib.tests.math.complex" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 this = unit.new(_M, { name = _H.FILE, repetition=100 } )

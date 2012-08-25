@@ -10,7 +10,6 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 local xlib = require( "xlib" )
 local fdtd = require( "fdtd" )
 local module = xlib.module
-local proto = xlib.proto
 
 -------------------------------------------------------------------------------
 
@@ -18,12 +17,14 @@ local proto = xlib.proto
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Three-dimensional shapes. </p>
 -- </p>
-module("fdtd.shapes")
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 module.imports{ 
+   "basetype",
    "primitive",
-   "sphere"
+   "sphere",
+   nil
 }
 
 

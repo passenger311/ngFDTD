@@ -7,11 +7,11 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
 }
 
-local ffi = require( "ffi" )
 local xlib = require( "xlib" )
-local module = xlib.module
 local proto = xlib.proto
+local module = xlib.module
 local math = xlib.math
+local ffi = require( "ffi" )
 
 -------------------------------------------------------------------------------
 
@@ -25,53 +25,84 @@ local _round, _trunc = math.round, math.trunc
 local _pi_half = math.pi / 2
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> complex numbers. </p>
+--- <p><b>Prototype:</b> complex number support. </p>
 --
 module( _H.FILE )
 -------------------------------------------------------------------------------
 
-local this = proto.clone( _M, proto.root ) 
+--- from complex.h
+ffi.cdef([[
+complex double csin(complex double arg);
+complex double ccos(complex double arg);
+double cimag(complex double arg);
+double creal(complex double arg);
+double cabs(complex double arg);
+double carg(complex double arg);
+complex double csqrt(complex double arg);
+complex double conj(complex double arg);
+complex double csin(complex double arg);
+complex double ccos(complex double arg);
+complex double ctan(complex double arg);
+complex double csinh(complex double arg);
+complex double ccosh(complex double arg);
+complex double ctanh(complex double arg);
+complex double clog(complex double arg);
+complex double cexp(complex double arg);
+complex double cpow(complex double arg1, complex double arg2);
+complex double casin(complex double arg);
+complex double cacos(complex double arg);
+complex double catan(complex double arg);
+complex double casinh(complex double arg);
+complex double cacosh(complex double arg);
+complex double catanh(complex double arg);
+]])
 
-_M[1] = 0
-_M[2] = 0
+-- complex arithmetic is currently not supported for luaJIT complex types.
+-- this workaround call's some c99 subroutines to do the operations 
 
-i = proto.clone({ 0 , 1 }, this)
+local this = proto.clone( _M, proto.root )
+
+_M[1] = ffi.new("complex double")
 
 --- Create new complex number.
 -- @param re real part
 -- @param im imaginary part
 -- @return complex number
 function new(re, im)
-   return proto.clone({ re , im or 0 }, this)
+   return this:adopt{ ffi.new("complex double", {re, im or 0}) }
 end
 
---- Convert to C data
-function toc(self)
-   return ffi.new("complex double", { self[1], self[2] } )
-end
+i = new( 0 , 1 )
 
---- Cast real to complex number.
+--- Cast to complex number.
 -- @param z real or complex
 -- @return complex number
 function cast(z)
    if _type(z) == 'number' then
-      return proto.clone(z,this)
+      return new(z)
    end
    return z
+end
+
+--- Box complex number.
+-- @param z comlex userdata
+-- @return complex number
+function box(z)
+   return this:adopt{ z }
 end
 
 --- Return real part.
 -- @param self complex number
 -- @return real part
 function re(self)
-   return self[1]
+   return self[1].re
 end
 
 --- Return imaginary part.
 -- @param self complex number
 -- @return imaginary part
 function im(self)
-   return self[2]
+   return self[1].im
 end
 
 --- Replace real and imaginary part.
@@ -80,8 +111,7 @@ end
 -- @param im imaginary part
 -- @return complex number
 function set(self, re, im)
-   self[1] = re
-   self[2] = im
+   self[1] = ffi.new("complex double", {re,im or 0} )
    return self
 end
 
@@ -89,29 +119,28 @@ end
 -- @param self complex number
 -- @return conjugate of complex number
 function conj(self)
-   return proto.clone({ self[1], -self[2] }, this)
+   return this:new{ self[1].re, -self[1].im }
 end
 
 --- Return absolute value (radius) of complex number.
 -- @param self complex number
 -- @return absolute value
 function abs(self) 
-   local re,im = self[1], self[2]
-   return _sqrt(re*re + im*im) 
+   return ffi.C.cabs(self[1]) 
 end
 
 --- Return argument (angle) of complex number.
 -- @param self complex number
 -- @return argument
 function arg(self) 
-   return _atan2(self[2],self[1]) 
+   return ffi.C.carg(self[1]) 
 end
 
 --- Unary minus operator.
 -- @param a complex number
 -- @return -a
 function __unm(a)
-   return proto.clone({ -a[1], -a[2] }, this)
+   return new( -a[1], -a[2] )
 end
 
 --- Addition operator.
@@ -120,11 +149,11 @@ end
 -- @return a+b
 function __add(a,b)
    if _type(a) == 'number' then
-      return proto.clone( {  a+b[1], b[2] }, this)  
-   elseif _type(b) == 'number' then 
-      return proto.clone( { a[1]+b, a[2] }, this)
+      return new( a+b[1].re, b[1].im )  
+   elseif _type(b) == 'number' then
+      return new( a[1].re+b, a[1].im )
    end
-   return proto.clone( { a[1]+b[1], a[2]+b[2] }, this )
+   return new( a[1].re+b[1].re, a[1].im+b[1].im )
 end
 
 --- Substraction operator.
@@ -133,11 +162,11 @@ end
 -- @return a-b
 function __sub(a,b) 
    if _type(a) == 'number' then
-      return proto.clone( { a-b[1], -b[2] }, this )  
+      return new( a-b[1].re, -b[1].im )  
    elseif _type(b) == 'number' then
-      return proto.clone( { a[1]-b, a[2] }, this )
+      return new( a[1].re-b, a[1].im )
    end
-   return proto.clone( {a[1]-b[1], a[2]-b[2] }, this)
+   return new( a[1].re-b[1].re, a[1].im-b[1].im )
 end
 
 --- Multiplication operator.
@@ -146,12 +175,12 @@ end
 -- @return a*b
 function __mul(a,b) 
    if _type(a) == 'number' then
-      return proto.clone( { b[1]*a, b[2]*a }, this )
+      return new(b[1].re*a,b[1].im*a)
    elseif _type(b) == 'number' then
-      return proto.clone( { b*a[1], b*a[2] }, this )
+      return new(b*a[1].re,b*a[1].im)
    end
-   local ar, ai, br, bi = a[1],a[2],b[1],b[2]
-   return proto.clone( { ar*br-ai*bi, ar*bi+ai*br }, this )
+   local ar, ai, br, bi = a[1].re,a[1].im,b[1].re,b[1].im
+   return new( ar*br-ai*bi, ar*bi+ai*br )
 end
 
 --- Division operator.
@@ -160,28 +189,28 @@ end
 -- @return a/b
 function __div(a,b) 
    if _type(a) == 'number' then 
-      local br, bi = b[1],b[2]
+      local br, bi = b[1].re,b[1].im
       local bn = br*br + bi*bi
-      return proto.clone( { a*br/bn, -a*bi/bn }, this ) 
+      return new( a*br/bn, -a*bi/bn ) 
    elseif _type(b) == 'number' then
-      return proto.clone( { a[1]/b, a[2]/b }, this)
+      return new(a[1].re/b,a[1].im/b)
    end
-   local ar, ai, br, bi = a[1],a[2],b[1],b[2]
+   local ar, ai, br, bi = a[1].re,a[1].im,b[1].re,b[1].im
    local bn = br*br + bi*bi
-   return proto.clone( { (ar*br+ai*bi)/bn, (-ar*bi+ai*br)/bn }, this )
+   return new( (ar*br+ai*bi)/bn, (-ar*bi+ai*br)/bn )
 end
 
---- Equality operator. 
+--- Equality operator.
 -- @param a complex number
 -- @param b complex number
 -- @return a == b
 function __eq(a,b)
-   return a[1]==b[1] and a[2]==b[2]
+   return a[1].re==b[1].re and a[1].im==b[1].im
 end
 
 --- Non-equality operator.
 -- @param a complex number
--- @param b comple number
+-- @param b complex number
 -- @return a ~= b
 function __ne(a,b)
    return not a==b
@@ -191,63 +220,42 @@ end
 -- @param self complex number
 -- @return result
 function cos(self)
-   local re,im = self[1], self[2]
-   return proto.clone( { _cos(re)*_cosh(im), -_sin(re)*_sinh(im) }, this )
+   return box( ffi.C.ccos(self[1]) )
 end
 
 --- Sine of complex number.
 -- @param self complex number
 -- @return result
 function sin(self)
-   local re,im = self[1], self[2]
-   return proto.clone( { _sin(re)*_cosh(im), _cos(re)*_sinh(im) }, this )
+   return box( ffi.C.csin(self[1]) )
 end
 
 --- Hyperbolic cosine of complex number.
 -- @param self complex number
 -- @return result
 function cosh(self)
-   local re,im = self[1], self[2]
-   return proto.clone( { _cosh(re)*_cos(im), _sinh(re)*_sin(im) }, this )
+   return box( ffi.C.ccosh(self[1]) )
 end
 
 --- Hyperbolic sine of complex number.
 -- @param self complex number
 -- @return result
 function sinh(self)
-   local re,im = self[1], self[2]
-   return proto.clone( { _sinh(re)*_cos(im), _cosh(re)*_sin(im) }, this )
+   return box( ffi.C.csinh(self[1]) )
 end
 
 --- Tangens of complex number.
 -- @param self complex number
 -- @return result
 function tan(self)
-   local r
-   local c = self:cos()
-   local inf = 1/0
-   if c[1] == 0 and c[2] == 0 then
-      return inf * self:sin()
-   elseif self[1] == 0 then
-      if self[2] == inf then
-	 return proto.clone( { 0, 1 }, this )
-      elseif self[2] == -inf then
-	 return proto.clone( { 0, -1 }, this )
-      end
-   end
-   return self:sin() / c
+   return box( ffi.C.ctan(self[1]) )
 end
 
 --- Hyperbolic tangens of complex number.
 -- @param self complex number
 -- @return result
 function tanh(self)
-   local c = self:cosh()
-   local inf = 1/0
-   if c[1] == 0 and c[2] == 0 then
-      return inf * self:sinh()
-   end
-   return self:sinh() / c
+   return box( ffi.C.ctanh(self[1]) )
 end
 
 --- Create complex from polar coordinates.
@@ -255,58 +263,28 @@ end
 -- @param angle angle
 -- @return complex number
 function polar(radius,angle)
-   return proto.clone( { radius*_cos(angle), radius*_sin(angle) }, this )
+   return new( radius*_cos(angle), radius*_sin(angle) )
 end
 
 --- Natural exponential of complex number.
 -- @param self complex number
 -- @return result
 function exp(self)
-   local re,im = self[1], self[2]
-   return polar( _exp(re), im )
+   return box( ffi.C.cexp(self[1]) )
 end
 
 --- Natural logarithm of complex number.
 -- @param self complex number
 -- @return result
 function log(self)
-   local re,im = self[1], self[2]
-   return proto.clone( { 0.5*_log(re*re+im*im), self:arg() }, this )
-end
-
---- Base-10 logarithm of complex number.
--- @param self complex number
--- @return result
-function log10(self)
-  local re,im = self[1], self[2]
-  return proto.clone( { 0.5*_log10(re*re+im*im), self:arg() }, this )
+   return box( ffi.C.clog(self[1]) )
 end
 
 --- Square root of complex numer. The branch cut is on the negative axis.
 -- @param self complex number
 -- @return result
 function sqrt(self)
-   local re,im = self[1], self[2]
-   if re == 0 then
-      local t = _sqrt( 0.5 * _abs(im) )
-      if im < 0 then
-	 return proto.clone( { t, -t }, this )
-      else
-	 return proto.clone( { t, t }, this )
-      end
-   else
-      local t = _sqrt( 2 * ( self:abs() + _abs(re) ) )
-      local u = 0.5 * t
-      if re > 0 then
-	 return proto.clone( { u, im/t }, this )
-      else
-	 if im < 0 then
-	    return proto.clone( { _abs(im)/t, - u }, this )
-	 else
-	    return proto.clone( { _abs(im)/t,  u }, this )
-	 end
-      end
-   end
+   return box( ffi.C.csqrt(self[1]) )
 end
 
 --- Power function.
@@ -314,16 +292,7 @@ end
 -- @param b complex number
 -- @return a^b
 function pow(a,b)
-   if _type(b) == 'number' then
-      if ( a[2] == 0 and a[1] > 0 ) then
-	 return new(_pow(a[1],b))
-      end
-      local t = a:log()
-      return polar( _exp(b*t[1]), b*t[2] )
-   elseif _type(a) == 'number' then
-      return ( b * _log(a) ):exp()
-   end
-   return ( b * a:log() ):exp()
+   return box( ffi.C.cpow(cast(a)[1],cast(b)[1]) )
 end
 
 --- Power operator.
@@ -336,52 +305,42 @@ __pow = pow
 -- @param self complex number
 -- @return result
 function acos(self)
-   local re, im = self[1], self[2]
-   local t = proto.clone( { 1 - re*re + im*im, - 2*re*im }, this )
-   return -i*log( self + i*sqrt(t) )
+   return box( ffi.C.cacos(self[1]) )
 end
 
 --- Inverse sine of complex number.
 -- @param self complex number
 -- @return result
 function asin(self)
-   local re, im = self[1], self[2]
-   local t = proto.clone( { 1 - re*re + im*im, - 2*re*im }, this )
-   return -i*log( i*self + sqrt(t) )
+   return box( ffi.C.casin(self[1]) )
 end
 
 --- Inverse tangens of complex number.
 -- @param self complex number
 -- @return result
 function atan(self)
-   local re, im = self[1], self[2]
-   if re == 0 and im*im == 1 then -- poles on imaginary axis
-      return proto.clone( { 0, _abs(im)/im/0 }, this )
-   else
-      local v = proto.clone( { -im,re }, this )
-      return 0.5*i*( log( 1 - v ) - log( 1 + v ) )
-   end
+   return box( ffi.C.catan(self[1]) )
 end
 
 --- Inverse hyperbolic sine.
 -- @param self complex number
 -- @return result
 function asinh(self)
-   return log(self+sqrt(self*self+1))
+   return box( ffi.C.casinh(self[1]) )
 end
 
 --- Inverse hyperbolic cosine.
 -- @param self complex number
 -- @return result
 function acosh(self)
-   return log(self+sqrt(self+1)*sqrt(self-1))
+   return box( ffi.C.cacosh(self[1]) )
 end
 
 --- Inverse hyperbolic tangens.
 -- @param self complex number
 -- @return result
 function atanh(self)   
-   return 0.5*(log( (1+self)/(1-self) ) )
+   return box( ffi.C.catanh(self[1]) )
 end
 
 
@@ -390,7 +349,7 @@ end
 -- @param prec precision
 -- @return result
 function round(self, prec)
-   return proto.clone( { _round(self[1],prec), _round(self[2],prec) }, this )
+   return new( _round(self[1].re,prec), _round(self[1].im,prec) )
 end
 
 --- Truncate complex number to given precision.
@@ -398,16 +357,17 @@ end
 -- @param prec precision
 -- @return result
 function trunc(self, prec)
-   return proto.clone( { _trunc(self[1],prec), _trunc(self[2],prec) }, this )
+   return new( _trunc(self[1].re,prec), _trunc(self[1].im,prec) )
 end
 
 --- <i>tostring()</i> operator.
 -- @param self complex number
 -- @return string which represents complex number
 function __tostring(self)
-   return "(".._tostring(self[1])..",".._tostring(self[2])..")"
+   return "(".._tostring(self[1].re)..",".._tostring(self[1].im)..")"
 end
 
 proto.seal(this)
 
 -------------------------------------------------------------------------------
+

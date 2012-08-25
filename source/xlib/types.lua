@@ -21,7 +21,7 @@ local _type, _assert = type, assert
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Type arithmetic (requires ffi). </p>
 --
-module( "xlib.types" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 module.imports{ 

@@ -1,39 +1,27 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "xlib",
+FILE      = "fdtd.models.response.basetype",
 VERSION   = "0.1",
-DATE      = "18/08/2012 16:09",
-COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
+DATE      = "14/08/2012 16:01",
+COPYRIGHT = "GPL V2",
 -------------------------------------------------------------------------------
 }
 
-local _G = _G
-local module = require( "xlib.module" )
+local xlib = require( "xlib" )
+local fdtd = require( "fdtd" )
+local module = xlib.module
+local proto = xlib.proto
 
 -------------------------------------------------------------------------------
----<p><b>Module</b>: Main module. </p>
+--- <p><b>Prototype:</b> Response model base type.
 -- </p>
--- @class module
--- @name xlib
 module( _H.FILE )
 -------------------------------------------------------------------------------
 
-module.imports{
-   "file",
-   "utils",
-   "module",
-   "proto",
-   "types",
-   "math",
-   "data",
-   "unit",
-   "os"
-}
+local parent = fdtd.models.basetype
+local this = proto.clone( _M, parent )
 
 
--------------------------------------------------------------------------------
-
---- Project signature.
-signature = _H
+proto.seal(this)
 
 -------------------------------------------------------------------------------

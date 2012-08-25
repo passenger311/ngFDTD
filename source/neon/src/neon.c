@@ -279,8 +279,16 @@ static int loadline(lua_State *L)
   return status;
 }
 
-static void dotty(lua_State *L)
+static void run_neon_startup_script(lua_State *L) 
 {
+  lua_getglobal(L, "require");
+  lua_pushstring(L, "neon.startup");
+  lua_pcall(L, 1, 1, 0);
+  lua_pop(L,1);
+}
+
+static void dotty(lua_State *L)
+{ 
   int status;
   const char *oldprogname = progname;
   progname = NULL;
@@ -553,24 +561,18 @@ static int pmain(lua_State *L)
     s->status = handle_script(L, argv, script);
   if (s->status != 0) return 0;
 
-  /* load startup code */
-
-  lua_getglobal(L, "require");
-  lua_pushstring(L, "neon.startup");
-  lua_pcall(L, 1, 1, 0);
-  lua_pop(L,1);
-
-  /* ---- */
-
   if ((flags & FLAGS_INTERACTIVE)) {
     print_jit_status(L);
+    run_neon_startup_script(L);
     dotty(L);
   } else if (script == 0 && !(flags & (FLAGS_EXEC|FLAGS_VERSION))) {
     if (lua_stdin_is_tty()) {
       print_version();
       print_jit_status(L); 
+      run_neon_startup_script(L);
       dotty(L);
     } else {
+      run_neon_startup_script(L);
       dofile(L, NULL);  /* executes stdin as a file */
     }
   }

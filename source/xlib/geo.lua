@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "xlib",
+FILE      = "xlib.geo",
 VERSION   = "0.1",
 DATE      = "18/08/2012 16:09",
 COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
@@ -8,32 +8,23 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 }
 
 local _G = _G
-local module = require( "xlib.module" )
+local xlib = require( "xlib" )
+local module = xlib.module
+local proto = xlib.proto
 
 -------------------------------------------------------------------------------
----<p><b>Module</b>: Main module. </p>
--- </p>
--- @class module
--- @name xlib
+--- <p><b>Module:</b> Geometry library. </p>
+--
 module( _H.FILE )
 -------------------------------------------------------------------------------
 
-module.imports{
-   "file",
-   "utils",
-   "module",
-   "proto",
-   "types",
-   "math",
-   "data",
-   "unit",
-   "os"
+module.extends("geo")
+
+module.imports{ 
+   "vec3",
+   nil
 }
 
 
--------------------------------------------------------------------------------
-
---- Project signature.
-signature = _H
 
 -------------------------------------------------------------------------------

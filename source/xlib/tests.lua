@@ -16,7 +16,7 @@ local unit = xlib.unit
 local _G, _print = _G, print
 
 -------------------------------------------------------------------------------
-module( "xlib.tests" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 local this = unit.new(_M, { name = "all", repetition=1 } )

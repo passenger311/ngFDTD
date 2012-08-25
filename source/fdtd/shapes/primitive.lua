@@ -11,7 +11,7 @@ local xlib = require( "xlib" )
 local fdtd = require( "fdtd" )
 local module = xlib.module
 local proto = xlib.proto
-local vec3 = fdtd.math.vec3
+local vec3 = xlib.math.vec3
 
 -------------------------------------------------------------------------------
 
@@ -20,10 +20,11 @@ local _tostring = tostring
 -------------------------------------------------------------------------------
 --- <p><b>Prototype:</b> Primitive shape. </p>
 -- </p>
-module("fdtd.shapes.primitive")
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
-local this = proto:adopt( _M )
+local parent = fdtd.shapes.basetype
+local this = proto.clone( _M, parent )
 
 --- Create new primitive.
 -- @param tab properties { at=[vec3] }
@@ -42,8 +43,9 @@ function move(self,vec)
    return self
 end
 
+getframe = proto.virtfun()
 
-this:seal():fuse()
 
+proto.seal(this)
 
 -------------------------------------------------------------------------------

@@ -16,6 +16,9 @@ local unpackdir = "../build/unpack/"
 
 preloader_list = {
 
+   -- startup script
+   "neon.startup",
+
    -- luasocket (core and lua modules)
    "socket.core",
    "mime.core",
@@ -30,7 +33,9 @@ preloader_list = {
    "socket.smtp",
 
    -- luafilesystem (works)
-   "lfs"           
+   "lfs",
+
+   nil
 }
 
 -------------------------------------
@@ -38,6 +43,7 @@ preloader_list = {
 -------------------------------------
 
 precompile_list = { 
+
    -- startup script
    ["neon.startup"] = "neon/startup.lua",
 
@@ -49,15 +55,18 @@ precompile_list = {
    ["socket.ftp"] = unpackdir.."luasocket/src/ftp.lua",
    ["socket.http"] = unpackdir.."luasocket/src/http.lua",
    ["socket.url"] = unpackdir.."luasocket/src/url.lua",
-   ["socket.smtp"] = unpackdir.."luasocket/src/smtp.lua"
+   ["socket.smtp"] = unpackdir.."luasocket/src/smtp.lua",
+
+   nil
 }
 
+-- autofetch libraries
 lib.autofetch( "xlib", precompile_list, preloader_list)
 lib.autofetch( "fdtd", precompile_list, preloader_list)
 
------------------------------
--- Byte compile and preloader
------------------------------
+--------------------------------------------
+-- Run byte compiler and create preload code
+--------------------------------------------
 
 lib.precompile(precompile_list,"lua_bytecode",outdir)
 lib.preloader(preloader_list,"lua_preload",outdir)

@@ -18,7 +18,7 @@ local _pcall, _print, _table, _ipairs = pcall, print, table, ipairs
 local _collectgarbage = collectgarbage
 
 -------------------------------------------------------------------------------
-module( "xlib.tests.data.memblock" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 this = unit.new(_M, { name = _H.FILE, repetition=10 } )

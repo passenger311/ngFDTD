@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "fdtd.math.vec3",
+FILE      = "xlib.math.vec3",
 VERSION   = "0.1",
 DATE      = "14/08/2012 16:01",
 COPYRIGHT = "GPL V2",
@@ -8,7 +8,6 @@ COPYRIGHT = "GPL V2",
 }
 
 local xlib = require( "xlib" )
-local fdtd = require( "fdtd" )
 local module = xlib.module
 local proto = xlib.proto
 
@@ -18,18 +17,18 @@ local _table_concat = table.concat
 local _tostring, _assert, _require, _type = tostring, assert, require, type
 
 -------------------------------------------------------------------------------
---- <p><b>Prototype:</b> 3-component vector. </p>
+--- <p><b>Prototype:</b> 3-component vector.
 -- </p>
-module("fdtd.math.vec3")
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
-this = proto:adopt( _M )
+local this = proto.clone( _M, proto.root )
 
 --- Create and initialize with table.
 -- @param tab table with items
 -- @return new vec3
 function new(tab)
-   local ret = proto.adopt( this, tab or { 0,0,0 } )
+   local ret = proto.clone( tab or { 0,0,0 }, this )
    return ret
 end
 
@@ -47,7 +46,7 @@ end
 -- @param self vector 
 -- @return clone of vector.
 function clone(self)
-   return proto.clone(this, { self[1], self[2], self[3] } )
+   return proto.clone( { self[1], self[2], self[3] }, this )
 end
 
 --- Number of columns.
@@ -199,7 +198,7 @@ end
 -- @param self vector
 -- @return matrix
 function tomatrix(self)
-   local mat3 = _require "fdtd.math.mat3"
+   local mat3 = _require "xlib.math.mat3"
    return mat3.new{ self } 
 end
 
@@ -232,7 +231,7 @@ function __tostring(self)
    return "{".._table_concat(self,",").."}"
 end
 
-this:seal()
+proto.seal(this)
 
 
 -------------------------------------------------------------------------------

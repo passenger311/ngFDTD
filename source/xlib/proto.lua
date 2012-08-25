@@ -24,28 +24,21 @@ local _getmetatable, _setmetatable, _pairs, _rawget, _rawset, _type, _error =
 -- for deep hierarchies. Fusion allows to flatten the hierarchy of ancestors.
 -- Tagging adds an identifier to the prototype enabling isa-checks.
 --
-module( "xlib.proto" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
-local this = _M
-
---- Root prototype. All prototypes are children of <i>root</i>.
--- @class table
--- @name root
-root = this
-root[root] = true
-root.__index = root
-
---- Adopt child by parent prototype. 
--- @param this parent prototype
+--- Create child from parent prototype. 
+-- @class function
+-- @name clone
 -- @param child child table
+-- @param parent prototype
 -- @return new child
-function adopt(this, child)
-   child.__index = child
-   return _setmetatable(child, this)
-end
+clone = _setmetatable
 
-cast = _setmetatable
+function adopt(self, child)
+   child.__index = child
+   return _setmetatable(child, self)
+end
 
 --- Get parent of prototype.
 -- @class function
@@ -78,20 +71,28 @@ end
 -- @param this prototype
 -- @return this
 function fuse(this)
-   return _pfuse( this, this:parent() ) 
+   return _pfuse( this, parent(this) ) 
 end
 
---- Seal prototype removing module related variables and setting id for isa
--- checks.
+--- Tag prototype setting __index and ids for isa checks.
 -- @param this prototype
 -- @return this
-function seal(this)
+function tag(this)
    this._M = nil
    this._PACKAGE = nil
    this._NAME = nil
    this[this] = true
+   this.__index = this
    return this
 end
+
+--- Seal prototype by tagging and fusing it.
+-- @param this prototype
+-- @return this
+function seal(this)
+   return fuse(tag(this))
+end
+
 
 --- Check whether prototype is a child of other prototype. Requires parent
 -- prototype to be tagged using <i>tag()</i> function.
@@ -104,7 +105,7 @@ function isa(this, other)
 end
 
 
-local _virtfun = function() _error("virtual function invoked!") end
+local _virtfun = function() _error("function not implemented (virtfun)!") end
 
 --- Returns a function that throws an error when invoked. 
 -- Used for defining interfaces.
@@ -113,7 +114,11 @@ function virtfun()
    return _virtfun
 end
 
+root = { 
+   isa = isa,
+   parent = parent
+}
 
-this:seal()
+tag(root)
  
 -------------------------------------------------------------------------------

@@ -1,39 +1,26 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "xlib",
+FILE      = "fdtd.shapes.basetype",
 VERSION   = "0.1",
-DATE      = "18/08/2012 16:09",
-COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
+DATE      = "14/08/2012 16:01",
+COPYRIGHT = "GPL V2",
 -------------------------------------------------------------------------------
 }
 
-local _G = _G
-local module = require( "xlib.module" )
+local xlib = require( "xlib" )
+local module = xlib.module
+local proto = xlib.proto
 
 -------------------------------------------------------------------------------
----<p><b>Module</b>: Main module. </p>
+--- <p><b>Prototype:</b> Shape base type.
 -- </p>
--- @class module
--- @name xlib
 module( _H.FILE )
 -------------------------------------------------------------------------------
 
-module.imports{
-   "file",
-   "utils",
-   "module",
-   "proto",
-   "types",
-   "math",
-   "data",
-   "unit",
-   "os"
-}
+local this = proto.clone( _M, proto.root )
 
+contains = proto.virtfun()
 
--------------------------------------------------------------------------------
-
---- Project signature.
-signature = _H
+proto.seal(this)
 
 -------------------------------------------------------------------------------

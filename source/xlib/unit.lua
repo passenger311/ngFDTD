@@ -25,10 +25,10 @@ local _require = require
 -- of a unit test form a collection of independent tests which are executed
 -- in order of definition. 
 --
-module( "xlib.unit" )
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
-this = proto:adopt( _M )
+local this = proto.clone(_M, proto.root)
 
 --- Run a test. This method is invoked by <i>runall()</i> for each test. If run
 -- seperately make sure to call <i>reset()</i> and <i>setup()</i> before the 
@@ -196,18 +196,19 @@ end
 -- <li><tt>repetition</tt>=<i>N</i> will cause each test to run <i>N</i> times
 -- <li><tt>name</tt>=<i>Name</i> set test unit name to <i>Name</i>
 -- </ul> 
--- @param offspring offspring unit table
+-- @param child child unit table
 -- @param parms parameter table [{}]
 -- @return unit table
-function new(offspring, parms)
-   this:adopt( offspring )
-   offspring.tests = {}
-   offspring.invoke = function(self)
+function new(child, parms)
+   proto.clone( child, this )
+   proto.seal( child )
+   child.tests = {}
+   child.invoke = function(self)
 		 self = self or {}
 		 for k,v in _pairs(parms or {}) do self[k] = v end
-		 return invoke(proto.adopt(offspring,self))
+		 return invoke( proto.clone(self,child) )
 	      end
-   return offspring
+   return child
 end
 
 local ignore = { setup = true, teardown = true, invoke = true, __call = true,
@@ -223,6 +224,6 @@ __newindex = function(self, k, v)
 	     end
 
 
-this:seal()
+proto.seal(this)
 
 -------------------------------------------------------------------------------

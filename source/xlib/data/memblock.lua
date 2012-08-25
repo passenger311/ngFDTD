@@ -15,7 +15,6 @@ local proto = xlib.proto
 
 -------------------------------------------------------------------------------
 
-local _proto_adopt = proto.adopt
 local _pairs, _ipairs, _next, _tostring = pairs, ipairs, next, tostring
 local _assert, _require, _type = assert, require, type
 local _string_match = string.match
@@ -28,7 +27,7 @@ local _math = math
 -- Note 2: this is all terribly unsafe and that accessing data outside of
 -- the size limit will inevitably result in a segfault!
 -- </p>
-module("xlib.data.memblock")
+module( _H.FILE )
 -------------------------------------------------------------------------------
 
 --void *memmove(void *dest, const void *src, size_t n);
@@ -39,16 +38,16 @@ void *malloc(size_t size);
 void free(void *ptr);
 ]]
 
-local this = proto:adopt( _M )
+local this = proto.clone( _M, proto.root )
 
 --- Create memblock.
 -- @param ctype C-type of memblock ("double")
 -- @param size size of memblocks
 -- @return new memblock
 function new(ctype,size)
-   return this:adopt{ data = xlib.types.newptr(ctype, size),
-		      _immutable_size = size 
-		   } 
+   return proto.clone( { data = xlib.types.newptr(ctype, size),
+			 _immutable_size = size 
+		      }, this ) 
 end
 
 -- Clear memblock.
@@ -132,8 +131,6 @@ function fromtable(self,tab)
    return self
 end
 
-
-this:seal():fuse()
-
+proto.seal(this)
 
 -------------------------------------------------------------------------------
