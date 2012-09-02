@@ -5,7 +5,7 @@ ffi.cdef[[
       int MPI_Finalize();
 ]]
 
-local mpi = ffi.load("mpi")
+local mpi = ffi.load("mpi", true) -- load libmpi into global namespace
 
 do
    local name = arg[0]
