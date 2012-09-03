@@ -35,13 +35,53 @@ module.imports{
 -------------------------------------------------------------------------------
 
 DIRSEP = _G.package.config:gsub("\n.*$","")
+PATHMARK = "?"
 
 --- A dofile version that takes arguments.
 -- @param name name of file
 -- @param ... arguments 
 -- @return return value of file
-function include(name, ...)
+function dofile(name, ...)
    local chunk, emsg = _loadfile(name)
+   if not chunk then _error(emsg,2) end
+   _setfenv(chunk, _getfenv(2))
+   return chunk(...)
+end
+
+local function _find(name, path)
+   name = _gsub(name, "%.", DIRSEP)
+   _assert(_type(path) == "string")
+   for c in _gfind (path, "[^;]+") do
+      c = _gsub(c, "%"..PATHMARK, name)
+      local f = _open(c)
+      if f then
+	 f:close()
+	 return c
+      end
+   end
+   return nil -- not found
+end
+
+--- Check for source or binary library in path.
+-- @param name name of library
+-- @return path encoded path or <tt>nil</tt> to search Lua path
+-- @return fully qualified file path to library or <tt>nil</tt>
+function find(name,path)
+   if not path then
+      return _find(name,_package.path) or find(name,_package.cpath)
+   else
+      return _find(name,path)
+   end
+end
+
+--- Include source into same environment.
+-- @param name name of file in module syntax
+-- @param ... arguments 
+-- @return return value of file
+function include(name, ...)
+   local fname = _find(name, _package.path)
+   if not fname then _error("not found", 2) end
+   local chunk, emsg = _loadfile(fname)
    if not chunk then _error(emsg,2) end
    _setfenv(chunk, _getfenv(2))
    return chunk(...)
