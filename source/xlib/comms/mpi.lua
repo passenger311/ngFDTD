@@ -16,6 +16,7 @@ local module = xlib.module
 
 local G = _G
 local _assert, _error, _pcall = assert, error, pcall
+local _tostring = tostring
 local _pairs = pairs
 local _print = print
 
@@ -137,6 +138,27 @@ function get_version()
    local minor = ffi.new("int[1]")
    mpicall("Get_version", major, minor)
    return major[0], minor[0]
+end
+
+function get_processor_name()
+   local name = ffi.new("char[?]", MPI_MAX_PROCESSOR_NAME)
+   local length = ffi.new("int[1]")
+   mpicall("Get_processor_name", name, length)
+   return ffi.string(name,length[0])
+end
+
+function wtime()
+   mpicall("Wtime") -- returns a double, not an error number 
+   local ret = errno
+   errno = 0
+   return ret
+end
+
+function wtick()
+   mpicall("Wtick") -- returns a double, not an error number 
+   local ret = errno
+   errno = 0
+   return ret
 end
 
 function barrier(comm)
