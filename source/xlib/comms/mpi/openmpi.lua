@@ -64,42 +64,6 @@ function inject(m)
 	 typedef struct ompi_request_t *MPI_Request;
 	 typedef struct ompi_status_public_t MPI_Status;
 	 typedef struct ompi_win_t *MPI_Win;
-
-   ]]
-
-   ffi.cdef[[
-
-typedef int (MPI_Copy_function)(MPI_Comm, int, void *,
-                                void *, void *, int *);
-typedef int (MPI_Delete_function)(MPI_Comm, int, void *, void *);
-typedef int (MPI_Datarep_extent_function)(MPI_Datatype, MPI_Aint *, void *);
-typedef int (MPI_Datarep_conversion_function)(void *, MPI_Datatype,
-					      int, void *, MPI_Offset, void *);
-typedef void (MPI_Comm_errhandler_function)(MPI_Comm *, int *, ...);
-
-typedef void (ompi_file_errhandler_fn)(MPI_File *, int *, ...);
-typedef ompi_file_errhandler_fn MPI_File_errhandler_function;
-typedef void (MPI_Win_errhandler_function)(MPI_Win *, int *, ...);
-typedef void (MPI_Handler_function)(MPI_Comm *, int *, ...);
-typedef void (MPI_User_function)(void *, void *, int *, MPI_Datatype *);
-typedef int (MPI_Comm_copy_attr_function)(MPI_Comm, int, void *,
-					  void *, void *, int *);
-typedef int (MPI_Comm_delete_attr_function)(MPI_Comm, int, void *, void *);
-typedef int (MPI_Type_copy_attr_function)(MPI_Datatype, int, void *,
-					  void *, void *, int *);
-typedef int (MPI_Type_delete_attr_function)(MPI_Datatype, int,
-					    void *, void *);
-typedef int (MPI_Win_copy_attr_function)(MPI_Win, int, void *,
-					 void *, void *, int *);
-typedef int (MPI_Win_delete_attr_function)(MPI_Win, int, void *, void *);
-typedef int (MPI_Grequest_query_function)(void *, MPI_Status *);
-typedef int (MPI_Grequest_free_function)(void *);
-typedef int (MPI_Grequest_cancel_function)(void *, int);
-
-   ]]
-
-
-   ffi.cdef[[
 	 
 	 extern struct ompi_communicator_t ompi_mpi_comm_world;
 	 extern struct ompi_communicator_t ompi_mpi_comm_self;
@@ -229,6 +193,8 @@ typedef int (MPI_Grequest_cancel_function)(void *, int);
 
    m.MPI_GROUP_EMPTY = l.ompi_mpi_group_empty
 
+   -- operators
+
    m.MPI_MAX = l.ompi_mpi_op_max
    m.MPI_MIN = l.ompi_mpi_op_min
    m.MPI_SUM = l.ompi_mpi_op_sum
@@ -242,6 +208,8 @@ typedef int (MPI_Grequest_cancel_function)(void *, int);
    m.MPI_MAXLOC = l.ompi_mpi_op_maxloc
    m.MPI_MINLOC = l.ompi_mpi_op_minloc
    m.MPI_REPLACE = l.ompi_mpi_op_replace
+
+   -- datatypes
    
    m.MPI_DATATYPE_NULL = l.ompi_mpi_datatype_null
    m.MPI_BYTE = l.ompi_mpi_byte
@@ -288,6 +256,8 @@ typedef int (MPI_Grequest_cancel_function)(void *, int);
    m.MPI_C_DOUBLE_COMPLEX = l.ompi_mpi_c_double_complex
    m.MPI_C_LONG_DOUBLE_COMPLEX = l.ompi_mpi_c_long_double_complex
    
+   -- error policy
+
    m.MPI_ERRORS_ARE_FATAL = l.ompi_mpi_errors_are_fatal
    m.MPI_ERRORS_RETURN = l.ompi_mpi_errors_return
 
@@ -351,8 +321,115 @@ typedef int (MPI_Grequest_cancel_function)(void *, int);
    errtab.MPI_ERR_LASTCODE=              54
    errtab.MPI_ERR_SYSRESOURCE=          -2
 
+   -- misc constants
 
-   --
+   local OPAL_MAX_DATAREP_STRING= 128
+   local OPAL_MAX_ERROR_STRING= 256
+   local OPAL_MAX_INFO_KEY= 36
+   local OPAL_MAX_INFO_VAL= 256
+   local OPAL_MAX_OBJECT_NAME= 64
+   local OPAL_MAX_PORT_NAME= 1024
+   local OPAL_MAX_PROCESSOR_NAME= 256
+
+   m.MPI_ANY_SOURCE=         -1
+   m.MPI_PROC_NULL=          -2
+   m.MPI_ROOT=               -4
+   m.MPI_ANY_TAG=            -1
+   m.MPI_MAX_PROCESSOR_NAME= OPAL_MAX_PROCESSOR_NAME
+   m.MPI_MAX_ERROR_STRING=   OPAL_MAX_ERROR_STRING
+   m.MPI_MAX_OBJECT_NAME=    OPAL_MAX_OBJECT_NAME
+   m.MPI_UNDEFINED=          -32766
+   m.MPI_CART=               1
+   m.MPI_GRAPH=              2
+   m.MPI_KEYVAL_INVALID=     -1
+
+   m.MPI_BOTTOM= ffi.cast("void *",0) 
+   m.MPI_IN_PLACE= ffi.cast("void *",1)
+   m.MPI_BSEND_OVERHEAD=       128
+   m.MPI_MAX_INFO_KEY=         OPAL_MAX_INFO_KEY
+   m.MPI_MAX_INFO_VAL=         OPAL_MAX_INFO_VAL
+   m.MPI_ARGV_NULL=            ffi.cast("char**",0)
+   m.MPI_ARGVS_NULL=           ffi.cast("char ***", 0)
+   m.MPI_ERRCODES_IGNORE=      ffi.cast("int *", 0)
+   m.MPI_MAX_PORT_NAME=        OPAL_MAX_PORT_NAME
+   m.MPI_MAX_NAME_LEN=         MPI_MAX_PORT_NAME
+   m.MPI_ORDER_C=              0
+   m.MPI_ORDER_FORTRAN=        1
+   m.MPI_DISTRIBUTE_BLOCK=     0
+   m.MPI_DISTRIBUTE_CYCLIC=    1
+   m.MPI_DISTRIBUTE_NONE=      2
+   m.MPI_DISTRIBUTE_DFLT_DARG= (-1)
+
+   m.MPI_MODE_CREATE           =   1
+   m.MPI_MODE_RDONLY           =   2
+   m.MPI_MODE_WRONLY           =   4
+   m.MPI_MODE_RDWR             =   8
+   m.MPI_MODE_DELETE_ON_CLOSE  =  16
+   m.MPI_MODE_UNIQUE_OPEN      =  32
+   m.MPI_MODE_EXCL             =  64
+   m.MPI_MODE_APPEND           = 128
+   m.MPI_MODE_SEQUENTIAL       = 256
+   
+   m.MPI_DISPLACEMENT_CURRENT  = -54278278
+   
+   m.MPI_SEEK_SET              = 600
+   m.MPI_SEEK_CUR              = 602
+   m.MPI_SEEK_END              = 604
+   
+   m.MPI_MAX_DATAREP_STRING= OPAL_MAX_DATAREP_STRING 
+
+   m.MPI_MODE_NOCHECK           =  1
+   m.MPI_MODE_NOPRECEDE         =  2
+   m.MPI_MODE_NOPUT             =  4
+   m.MPI_MODE_NOSTORE           =  8
+   m.MPI_MODE_NOSUCCEED         = 16
+   
+   m.MPI_LOCK_EXCLUSIVE         =  1
+   m.MPI_LOCK_SHARED            =  2
+   
+   m.MPI_TAG_UB = 0
+   m.MPI_HOST = 1
+   m.MPI_IO = 2
+   m.MPI_WTIME_IS_GLOBAL = 3
+   m.MPI_APPNUM = 4
+   m.MPI_LASTUSEDCODE = 5
+   m.MPI_UNIVERSE_SIZE = 6
+   m.MPI_WIN_BASE = 7
+   m.MPI_WIN_SIZE = 8
+   m.MPI_WIN_DISP_UNIT = 9
+   m.IMPI_CLIENT_SIZE = 10
+   m.IMPI_CLIENT_COLOR = 11
+   m.IMPI_HOST_SIZE = 12
+   m.IMPI_HOST_COLOR = 13
+
+  m.MPI_IDENT = 0
+  m.MPI_CONGRUENT= 1
+  m.MPI_SIMILAR = 2
+  m.MPI_UNEQUAL = 3
+
+  m.MPI_THREAD_SINGLE = 0
+  m.MPI_THREAD_FUNNELED = 1
+  m.MPI_THREAD_SERIALIZED = 2
+  m.MPI_THREAD_MULTIPLE = 3
+
+  m.MPI_COMBINER_NAMED = 0
+  m.MPI_COMBINER_DUP = 1
+  m.MPI_COMBINER_CONTIGUOUS = 2
+  m.MPI_COMBINER_VECTOR = 3
+  m.MPI_COMBINER_HVECTOR_INTEGER = 4
+  m.MPI_COMBINER_HVECTOR = 5
+  m.MPI_COMBINER_INDEXED = 6
+  m.MPI_COMBINER_HINDEXED_INTEGER = 7
+  m.MPI_COMBINER_HINDEXED = 8
+  m.MPI_COMBINER_INDEXED_BLOCK = 9
+  m.MPI_COMBINER_STRUCT_INTEGER = 10
+  m.MPI_COMBINER_STRUCT = 11
+  m.MPI_COMBINER_SUBARRAY = 12
+  m.MPI_COMBINER_DARRAY = 13
+  m.MPI_COMBINER_F90_REAL = 14
+  m.MPI_COMBINER_F90_COMPLEX = 15
+  m.MPI_COMBINER_F90_INTEGER = 16
+  m.MPI_COMBINER_RESIZED = 17
 
 end
 

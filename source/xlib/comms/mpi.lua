@@ -48,7 +48,6 @@ local known_mpi_flavors = {
    nil
 }
 
-
 function bind(_flavor, _profile)
    _flavor = _flavor or "openmpi"
    _assert(known_mpi_flavors[_flavor],"unknown MPI flavor")
@@ -70,11 +69,34 @@ function bind(_flavor, _profile)
    end
 end
 
-local mpi_init_guard = false
+-- mpi call wrapper
+local function mpicall(funstr,...)
+   _assert( lib, "not bound to an MPI library")
+   local fun
+   if profile then
+      fun = lib["PMPI_"..funstr]
+   else
+      fun = lib["MPI_"..funstr]
+   end
+   errno = fun(...)   -- set errno
+   return errno == 0  -- return true if no error occured
+end
+
+function initialized()
+   local flag = ffi.new("int[1]")
+   mpicall("Initialized", flag)
+   return flag[0] == 1
+end
+
+function finalized()
+   local flag = ffi.new("int[1]")
+   mpicall("Finalized", flag)
+   return flag[0] == 1
+end
 
 function init(args)
-   _assert( lib, "not bound to an MPI library")
-   _assert( not mpi_init_guard, "init() has already been called")
+   _assert( not initialized(), "already initialized")
+   -- handle command-line arguments
    args = args or { [0]="unknown" }
    local argc = #args+1
    local argv = ffi.new("char *[?]", argc+1 )
@@ -84,59 +106,42 @@ function init(args)
    argv[argc] = ffi.cast("char*", 0)
    local argcp = ffi.new("int[1]", argc)
    local argvp = ffi.new("char **[1]", argv)
-   errno = lib.MPI_Init(argcp,argvp)
-   if errno == 0 then
-      mpi_init_guard = true
-      return true
-   end
-   return false
+   return mpicall("Init",argcp, arvp)
 end
 
 function finalize()
-   _assert( lib, "not bound to an MPI library")
-   _assert( mpi_init_guard, "init(...) needs to be invoked before finalize()")
-   mpi_init_guard = false
-   errno = lib.MPI_Finalize()
-   return errno == 0
+   _assert( not finalized(), "already finalized")
+   return mpicall("Finalize")
 end
 
 function abort(comm, errorcode)
-   _assert( lib, "not bound to an MPI library")
-   lib.MPI_Abort(comm, errorcode)
+   return mpicall("Abort", comm, errorcode)
 end
 
 function comm_size(comm)
-   _assert( lib, "not bound to an MPI library")
+   _assert( initialized(), "mpi interface not initialized")
    local size = ffi.new("int[1]")
-   errno = lib.MPI_Comm_size(comm, size)
+   mpicall("Comm_size", comm, size)
    return size[0]
 end
 
 function comm_rank(comm)
-   _assert( lib, "not bound to an MPI library")
+   _assert( initialized(), "mpi interface not initialized")
    local rank = ffi.new("int[1]")
-   errno = lib.MPI_Comm_rank(comm, rank)
+   mpicall("Comm_rank", comm, rank)
    return rank[0]
 end
 
-function initialized()
-   _assert( lib, "not bound to an MPI library")
-   local flag = ffi.new("int[1]")
-   errno = lib.MPI_Initialized(flag)
-   return flag[0] == 1
-end
-
-function finalized()
-   _assert( lib, "not bound to an MPI library")
-   local flag = ffi.new("int[1]")
-   errno = lib.MPI_Finalized(flag)
-   return flag[0] == 1
+function get_version()
+   local major = ffi.new("int[1]")
+   local minor = ffi.new("int[1]")
+   mpicall("Get_version", major, minor)
+   return major[0], minor[0]
 end
 
 function barrier(comm)
-   _assert( lib, "not bound to an MPI library")
-   errno = lib.MPI_Barrier(comm)
-   return errno == 0
+   _assert( initialized(), "mpi interface not initialized")
+   return mpicall("Barrier", comm)
 end
 
 ------------------------------------------------------------------------------

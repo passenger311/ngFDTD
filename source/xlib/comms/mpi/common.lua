@@ -25,16 +25,42 @@ module( _H.FILE )
 
 function inject(m)
 
---[[   ffi.cdef[[
-	 int MPI_Init(int* argc, char*** argv);
-	 int MPI_Finalize();
-	 int MPI_Comm_size(MPI_Comm comm, int* size);
-	 int MPI_Comm_rank(MPI_Comm comm, int* rank);
-	 int MPI_Abort(MPI_Comm comm, int errorcode);
-   ]]
-   --]]
-   
- ffi.cdef[[
+   -- user functions
+
+   ffi.cdef[[
+
+typedef int (MPI_Copy_function)(MPI_Comm, int, void *,
+                                void *, void *, int *);
+typedef int (MPI_Delete_function)(MPI_Comm, int, void *, void *);
+typedef int (MPI_Datarep_extent_function)(MPI_Datatype, MPI_Aint *, void *);
+typedef int (MPI_Datarep_conversion_function)(void *, MPI_Datatype,
+					      int, void *, MPI_Offset, void *);
+typedef void (MPI_Comm_errhandler_function)(MPI_Comm *, int *, ...);
+
+typedef void (ompi_file_errhandler_fn)(MPI_File *, int *, ...);
+typedef ompi_file_errhandler_fn MPI_File_errhandler_function;
+typedef void (MPI_Win_errhandler_function)(MPI_Win *, int *, ...);
+typedef void (MPI_Handler_function)(MPI_Comm *, int *, ...);
+typedef void (MPI_User_function)(void *, void *, int *, MPI_Datatype *);
+typedef int (MPI_Comm_copy_attr_function)(MPI_Comm, int, void *,
+					  void *, void *, int *);
+typedef int (MPI_Comm_delete_attr_function)(MPI_Comm, int, void *, void *);
+typedef int (MPI_Type_copy_attr_function)(MPI_Datatype, int, void *,
+					  void *, void *, int *);
+typedef int (MPI_Type_delete_attr_function)(MPI_Datatype, int,
+					    void *, void *);
+typedef int (MPI_Win_copy_attr_function)(MPI_Win, int, void *,
+					 void *, void *, int *);
+typedef int (MPI_Win_delete_attr_function)(MPI_Win, int, void *, void *);
+typedef int (MPI_Grequest_query_function)(void *, MPI_Status *);
+typedef int (MPI_Grequest_free_function)(void *);
+typedef int (MPI_Grequest_cancel_function)(void *, int);
+
+    ]]
+    
+    -- MPI-2 API functions
+
+    ffi.cdef[[
 	 
 int MPI_Abort(MPI_Comm comm, int errorcode);
 int MPI_Accumulate(void *origin_addr, int origin_count, MPI_Datatype origin_datatype,
@@ -518,6 +544,9 @@ double MPI_Wtick(void);
 double MPI_Wtime(void);
 	
   ]]
+
+
+  -- MPI-2 Profiling Functions
 
   if m.profile then
 
