@@ -15,7 +15,10 @@ local module = xlib.module
 -------------------------------------------------------------------------------
 
 local G = _G
+local _getenv = os.getenv
 local _pcall = pcall
+local _assert = assert
+local _print = print
 
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> OpenMPI declarations. </p>
@@ -24,17 +27,21 @@ module( _H.FILE )
 ------------------------------------------------------------------------------
 
 
+-- get rank and size
+function detect(m)
+   m.rank = _getenv("OMPI_COMM_WORLD_RANK")
+   m.size = _getenv("OMPI_COMM_WORLD_SIZE")
+   return m.size ~= nil
+end
+
+-- inject definitions
 function inject(m)
 
    -- bind to MPI library
 
-   local ok, l = _pcall( ffi.load, "mpi", true )
-   if not ok then 
-      m.lib = nil
-      return 
-   else
-      m.lib = l
-   end
+   local ok, l = _pcall( ffi.load, "mpi", true )		   
+   _assert(ok, "failed to bind to MPI (openmpi) library") 
+   m.lib = l
 
    -- declarations
 
@@ -232,8 +239,6 @@ function inject(m)
    m.MPI_LONG_INT = l.ompi_mpi_long_int
    m.MPI_SHORT_INT = l.ompi_mpi_short_int
    m.MPI_2INT = l.ompi_mpi_2int
---   m.MPI_UB = l.ompi_mpi_ub
---   m.MPI_LB = l.ompi_mpi_lb
    m.MPI_WCHAR = l.ompi_mpi_wchar
    m.MPI_LONG_LONG_INT = l.ompi_mpi_long_long_int
    m.MPI_LONG_LONG = l.ompi_mpi_long_long_int
@@ -263,6 +268,7 @@ function inject(m)
 
    -- error table
 
+   m.errtab = {}
    local errtab = m.errtab
    errtab.MPI_SUCCESS=                   0
    errtab.MPI_ERR_BUFFER=                1

@@ -22,6 +22,9 @@ local G = _G
 module( _H.FILE )
 ------------------------------------------------------------------------------
 
+function detect(m)
+   -- do nothing
+end
 
 function inject(m)
 

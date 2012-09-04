@@ -40,34 +40,39 @@ lib = nil         -- handle for libmpi.so (nil if not bound)
 flavor = nil      -- MPI flavor ("openmpi", "mpich" ...)
 errtab = nil      -- table to associate MPI error codes <-> MPI error symbols
 profile = false   -- use MPI profiling routines
+rank = nil        -- rank (comm world size as set in environment)
+size = nil        -- size (comm world size as set in environment)
 
-local known_mpi_flavors = { 
-   ["openmpi"]=true, 
-   ["mpich"]=false, 
-   ["mvapich"]=false,			
-   ["lam"]=false,
-   nil
-}
+-- detect MPI version
+function detect()
+   local _flavor = nil
+   for i=1,#_IMPORT do
+      local k = _IMPORT[i]
+      if _M[k].detect(_M) then
+	 _flavor = k
+	 break
+      end
+   end
+   return _flavor
+end
 
-function bind(_flavor, _profile)
-   _flavor = _flavor or "openmpi"
-   _assert(known_mpi_flavors[_flavor],"unknown MPI flavor")
-   flavor = _flavor
+function bind(_profile)
+   flavor = detect()
+   if not flavor then return false end -- could not bind (running serial?)
    if _profile then
       profile = true
    else
       profile = false
    end
-   errno = 0
-   errtab = {}
-   _M[flavor].inject(_M) -- load flavor specific defs
-   if lib then
-      _M.common.inject(_M)
-      for k,v in _pairs(errtab) do
-	 errtab[v] = k
-      end
-      return true
+   -- inject flavor specific MPI definitions
+   _M[flavor].inject(_M)
+   -- inject common MPI definitions
+   _M.common.inject(_M)  
+   -- setup error table
+   for k,v in _pairs(errtab) do
+      errtab[v] = k
    end
+   return true
 end
 
 function abort(comm, errorcode)
@@ -83,9 +88,9 @@ function assert(cond) -- user abort
    end
 end
 
-function assertok(retval)
-   if retval ~= 0 then
-      abort(MPI_COMM_WORLD, retval)
+function assertok(errno)
+   if errno ~= 0 then
+      abort(MPI_COMM_WORLD, errno)
       _error()
    end
 end
