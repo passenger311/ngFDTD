@@ -11,6 +11,7 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 local ffi = require( "ffi" )
 local xlib = require( "xlib" )
 local module = xlib.module
+local types = xlib.types
 
 -------------------------------------------------------------------------------
 
@@ -37,7 +38,6 @@ module.imports{
 
 lib = nil         -- handle for libmpi.so (nil if not bound)
 flavor = nil      -- MPI flavor ("openmpi", "mpich" ...)
-errno = 0         -- last error
 errtab = nil      -- table to associate MPI error codes <-> MPI error symbols
 profile = false   -- use MPI profiling routines
 
@@ -70,6 +70,26 @@ function bind(_flavor, _profile)
    end
 end
 
+function abort(comm, errorcode)
+   comm = comm or MPI_COMM_WORLD
+   errorcode = errorcode or 999
+   lib.MPI_Abort(comm, errorcode)
+end
+
+function assert(cond) -- user abort
+   if cond then
+      abort(MPI_COMM_WORLD, 9999)
+      _error()
+   end
+end
+
+function assertok(retval)
+   if retval ~= 0 then
+      abort(MPI_COMM_WORLD, retval)
+      _error()
+   end
+end
+
 -- mpi call wrapper
 local function mpicall(funstr,...)
    _assert( lib, "not bound to an MPI library")
@@ -79,8 +99,7 @@ local function mpicall(funstr,...)
    else
       fun = lib["MPI_"..funstr]
    end
-   errno = fun(...)   -- set errno
-   return errno == 0  -- return true if no error occured
+   return fun(...)
 end
 
 function initialized()
@@ -96,7 +115,6 @@ function finalized()
 end
 
 function init(args)
-   _assert( not initialized(), "already initialized")
    -- handle command-line arguments
    args = args or { [0]="unknown" }
    local argc = #args+1
@@ -107,63 +125,95 @@ function init(args)
    argv[argc] = ffi.cast("char*", 0)
    local argcp = ffi.new("int[1]", argc)
    local argvp = ffi.new("char **[1]", argv)
-   return mpicall("Init",argcp, arvp)
+   assertok(mpicall("Init",argcp, arvp))
 end
 
 function finalize()
-   _assert( not finalized(), "already finalized")
-   return mpicall("Finalize")
-end
-
-function abort(comm, errorcode)
-   return mpicall("Abort", comm, errorcode)
+   assertok( mpicall("Finalize") )
 end
 
 function comm_size(comm)
-   _assert( initialized(), "mpi interface not initialized")
    local size = ffi.new("int[1]")
-   mpicall("Comm_size", comm, size)
+   assertok(mpicall("Comm_size", comm, size))
    return size[0]
 end
 
 function comm_rank(comm)
-   _assert( initialized(), "mpi interface not initialized")
    local rank = ffi.new("int[1]")
-   mpicall("Comm_rank", comm, rank)
+   assertok(mpicall("Comm_rank", comm, rank))
    return rank[0]
 end
 
 function get_version()
    local major = ffi.new("int[1]")
    local minor = ffi.new("int[1]")
-   mpicall("Get_version", major, minor)
+   assertok( mpicall("Get_version", major, minor) )
    return major[0], minor[0]
 end
 
 function get_processor_name()
    local name = ffi.new("char[?]", MPI_MAX_PROCESSOR_NAME)
    local length = ffi.new("int[1]")
-   mpicall("Get_processor_name", name, length)
+   assertok(mpicall("Get_processor_name", name, length))
    return ffi.string(name,length[0])
 end
 
 function wtime()
-   mpicall("Wtime") -- returns a double, not an error number 
-   local ret = errno
-   errno = 0
-   return ret
+   return mpicall("Wtime")
 end
 
 function wtick()
-   mpicall("Wtick") -- returns a double, not an error number 
-   local ret = errno
-   errno = 0
-   return ret
+   return mpicall("Wtick")
 end
 
 function barrier(comm)
-   _assert( initialized(), "mpi interface not initialized")
-   return mpicall("Barrier", comm)
+   assertok(mpicall("Barrier", comm))
 end
+
+datatype = {
+
+   ["bool"] = MPI_BOOL,
+   ["char"] = MPI_CHAR,
+   ["short"] = MPI_SHORT,
+   ["int"] = MPI_INT,
+   ["int64_t"] = MPI_LONG,
+   ["unsigned char"] = MPI_CHAR,
+   ["unsigned short"] = MPI_SHORT,
+   ["unsigned int"] = MPI_INT,
+   ["uint64_t"] = MPI_LONG,
+   ["float"] = MPI_FLOAT,
+   ["double"] = MPI_DOUBLE,
+   ["long double"] = MPI_LONG_DOUBLE,
+   ["complex float"] = MPI_C_FLOAT_COMPLEX,
+   ["complex"] = MPI_C_DOUBLE_COMPLEX,
+
+   nil
+}
+
+function send(buf, count, dest, tag, comm)
+   local t,p = types.info(buf) -- infer datatype for buffer type
+   _assert( p == "*", "arg1 (buf) must be a pointer type")
+   local dtype = datatypes[t]
+   _assert( dtype, "buffer has invalid data type")
+   assertok( 
+      mpicall("MPI_Send",ffi.cast("void *",buf), count, 
+	      dtype, dest, tag, comm)
+
+   )
+end
+
+function recv(buf, count, source, tag, comm)
+   local t,p = types.info(buf) -- infer datatype for buffer type
+   _assert( p == "*", "arg1 (buf) must be a pointer type")
+   local dtype = datatypes[t]
+   _assert( dtype, "buffer has invalid data type")
+   local stat = ffi.new("MPI_Status[1]")
+   assertok( 
+      mpicall("MPI_Recv",ffi.cast("void *",buf), count, 
+	      dtype, source, tag, comm, stat)
+   )
+   return stat
+end
+
 
 ------------------------------------------------------------------------------

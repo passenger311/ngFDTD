@@ -6,7 +6,7 @@ assert(mpi.bind("openmpi")) -- dynamically bind to openmpi
 local wtime = mpi.wtime()
 local major, minor = mpi.get_version()
 
-assert(mpi.init())
+mpi.init()
 assert(mpi.initialized())
 
 local procname = mpi.get_processor_name()
@@ -25,7 +25,7 @@ for i=0,size-1 do
    end
 end
 
-assert(mpi.finalize())
+mpi.finalize()
 assert(mpi.finalized())
 
 
