@@ -60,16 +60,7 @@ complex_double = ffi.typeof("complex double")
 function info( type )
    local tstr = _tostring(ffi.typeof(type))   
    local ts, ps = tstr:match("ctype<(%S+)%s*(.*)>")
-   ps = ps:gsub("[%[%]]","")
-   if ps ~= "*" then
-      ps = _tonumber(ps)
-   end
    return ts, ps
-end
-
-function isarray( type )
-   local ts,ps = info(type)
-   return _type(ps) == "number"
 end
 
 function isptr( type )
@@ -96,7 +87,7 @@ end
 
 function newptr(type, nelems)
    local ts, ps = info(type)
-   _assert( ps == nil, "new_ptr expects base type" )
+   _assert( ps == "", "newptr expects base type" )
    _assert( _type(ts) == "string" )
    local ptr
    if nelems then

@@ -27,7 +27,8 @@ module.imports{
    "math",
    "data",
    "unit",
-   "os"
+   "os",
+   "comms"
 }
 
 

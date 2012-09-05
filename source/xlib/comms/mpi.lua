@@ -33,21 +33,30 @@ module.imports{
    nil
 }
 
+local known_mpi_flavors = { 
+   "openmpi",
+--   "lam",
+--   "mpich",
+--   "mpich2",
+--   "mvapich",
+--   "",
+   nil
+}
+
 ------------------------------------------------------------------------------
 
 
 lib = nil         -- handle for libmpi.so (nil if not bound)
 flavor = nil      -- MPI flavor ("openmpi", "mpich" ...)
 errtab = nil      -- table to associate MPI error codes <-> MPI error symbols
-profile = false   -- use MPI profiling routines
 rank = nil        -- rank (comm world size as set in environment)
 size = nil        -- size (comm world size as set in environment)
 
 -- detect MPI version
 function detect()
    local _flavor = nil
-   for i=1,#_IMPORT do
-      local k = _IMPORT[i]
+   for i=1,#known_mpi_flavors do
+      local k = known_mpi_flavors[i]
       if _M[k].detect(_M) then
 	 _flavor = k
 	 break
@@ -56,20 +65,12 @@ function detect()
    return _flavor
 end
 
-function bind(_profile)
+function bind()
    flavor = detect()
    if not flavor then return false end -- could not bind (running serial?)
-   if _profile then
-      profile = true
-   else
-      profile = false
-   end
-   -- inject flavor specific MPI definitions
-   _M[flavor].inject(_M)
-   -- inject common MPI definitions
-   _M.common.inject(_M)  
-   -- setup error table
-   for k,v in _pairs(errtab) do
+   _M[flavor].inject(_M)    -- inject flavor specific MPI definitions
+   _M.common.inject(_M)     -- inject common MPI definitions
+   for k,v in _pairs(errtab) do    -- setup error table
       errtab[v] = k
    end
    return true
@@ -88,22 +89,21 @@ function assert(cond) -- user abort
    end
 end
 
-function assertok(errno)
+local function assertok(errno)
    if errno ~= 0 then
       abort(MPI_COMM_WORLD, errno)
       _error()
    end
 end
 
+local function seterrno(retval)
+   errno = retval
+end
+
 -- mpi call wrapper
 local function mpicall(funstr,...)
    _assert( lib, "not bound to an MPI library")
-   local fun
-   if profile then
-      fun = lib["PMPI_"..funstr]
-   else
-      fun = lib["MPI_"..funstr]
-   end
+   local fun = lib["MPI_"..funstr]
    return fun(...)
 end
 
@@ -177,20 +177,20 @@ end
 
 datatype = {
 
-   ["bool"] = MPI_BOOL,
-   ["char"] = MPI_CHAR,
-   ["short"] = MPI_SHORT,
-   ["int"] = MPI_INT,
-   ["int64_t"] = MPI_LONG,
-   ["unsigned char"] = MPI_CHAR,
-   ["unsigned short"] = MPI_SHORT,
-   ["unsigned int"] = MPI_INT,
-   ["uint64_t"] = MPI_LONG,
-   ["float"] = MPI_FLOAT,
-   ["double"] = MPI_DOUBLE,
-   ["long double"] = MPI_LONG_DOUBLE,
-   ["complex float"] = MPI_C_FLOAT_COMPLEX,
-   ["complex"] = MPI_C_DOUBLE_COMPLEX,
+   ["bool"] = "MPI_BOOL",
+   ["char"] = "MPI_CHAR",
+   ["short"] = "MPI_SHORT",
+   ["int"] = "MPI_INT",
+   ["int64_t"] = "MPI_LONG",
+   ["unsigned char"] = "MPI_CHAR",
+   ["unsigned short"] = "MPI_SHORT",
+   ["unsigned int"] = "MPI_INT",
+   ["uint64_t"] = "MPI_LONG",
+   ["float"] = "MPI_FLOAT",
+   ["double"] = "MPI_DOUBLE",
+   ["long double"] = "MPI_LONG_DOUBLE",
+   ["complex float"] = "MPI_C_FLOAT_COMPLEX",
+   ["complex"] = "MPI_C_DOUBLE_COMPLEX",
 
    nil
 }
@@ -198,11 +198,11 @@ datatype = {
 function send(buf, count, dest, tag, comm)
    local t,p = types.info(buf) -- infer datatype for buffer type
    _assert( p == "*", "arg1 (buf) must be a pointer type")
-   local dtype = datatypes[t]
+   local dtype = datatype[t]
    _assert( dtype, "buffer has invalid data type")
    assertok( 
-      mpicall("MPI_Send",ffi.cast("void *",buf), count, 
-	      dtype, dest, tag, comm)
+      mpicall("Send",ffi.cast("void *",buf), count, 
+	      _M[dtype], dest, tag, comm)
 
    )
 end
@@ -210,12 +210,12 @@ end
 function recv(buf, count, source, tag, comm)
    local t,p = types.info(buf) -- infer datatype for buffer type
    _assert( p == "*", "arg1 (buf) must be a pointer type")
-   local dtype = datatypes[t]
+   local dtype = datatype[t]
    _assert( dtype, "buffer has invalid data type")
    local stat = ffi.new("MPI_Status[1]")
    assertok( 
-      mpicall("MPI_Recv",ffi.cast("void *",buf), count, 
-	      dtype, source, tag, comm, stat)
+      mpicall("Recv",ffi.cast("void *",buf), count, 
+	      _M[dtype], source, tag, comm, stat)
    )
    return stat
 end
