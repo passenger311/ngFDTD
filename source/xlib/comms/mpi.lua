@@ -94,6 +94,7 @@ local function assertok(errno)
       abort(MPI_COMM_WORLD, errno)
       _error()
    end
+   return true
 end
 
 local function seterrno(retval)
@@ -105,6 +106,15 @@ local function mpicall(funstr,...)
    _assert( lib, "not bound to an MPI library")
    local fun = lib["MPI_"..funstr]
    return fun(...)
+end
+
+
+function create_status_array(count)
+   return ffi.new("MPI_Status[?]",count)
+end
+
+function create_request_array(count)
+   return ffi.new("MPI_Request[?]",count)
 end
 
 function initialized()
@@ -172,7 +182,7 @@ function wtick()
 end
 
 function barrier(comm)
-   assertok(mpicall("Barrier", comm))
+   return assertok(mpicall("Barrier", comm))
 end
 
 datatype = {
@@ -200,25 +210,60 @@ function send(buf, count, dest, tag, comm)
    _assert( p == "*", "arg1 (buf) must be a pointer type")
    local dtype = datatype[t]
    _assert( dtype, "buffer has invalid data type")
-   assertok( 
+   return assertok( 
       mpicall("Send",ffi.cast("void *",buf), count, 
 	      _M[dtype], dest, tag, comm)
 
    )
 end
 
-function recv(buf, count, source, tag, comm)
+function recv(buf, count, source, tag, comm, stat)
+   local t,p = types.info(buf) -- infer datatype for buffer type
+   _assert( p == "*", "arg1 (buf) must be a pointer type")
+   local dtype = datatype[t]
+   _assert( dtype, "buffer has invalid data type")
+   return assertok( 
+      mpicall("Recv",ffi.cast("void *",buf), count, 
+	      _M[dtype], source, tag, comm, stat)
+   )
+end
+
+
+function isend(buf, count, dest, tag, comm, request)
+   local t,p = types.info(buf) -- infer datatype for buffer type
+   _assert( p == "*", "arg1 (buf) must be a pointer type")
+   local dtype = datatype[t]
+   _assert( dtype, "buffer has invalid data type")
+   return assertok( 
+      mpicall("Isend",ffi.cast("void *",buf), count, 
+	      _M[dtype], dest, tag, comm, request)
+
+   )
+end
+
+function irecv(buf, count, source, tag, comm, request)
    local t,p = types.info(buf) -- infer datatype for buffer type
    _assert( p == "*", "arg1 (buf) must be a pointer type")
    local dtype = datatype[t]
    _assert( dtype, "buffer has invalid data type")
    local stat = ffi.new("MPI_Status[1]")
-   assertok( 
-      mpicall("Recv",ffi.cast("void *",buf), count, 
-	      _M[dtype], source, tag, comm, stat)
+   return assertok( 
+      mpicall("Irecv",ffi.cast("void *",buf), count, 
+	      _M[dtype], source, tag, comm, request)
    )
-   return stat
 end
 
+function wait(request, stat)
+   return assertok( 
+      mpicall("Wait", request, stat)
+   )
+end
+
+function waitall(count, requests, stats)
+   local stats = ffi.new("MPI_Status[?]",count)
+   return assertok( 
+      mpicall("Waitall",count, requests, stats)
+   )
+end
 
 ------------------------------------------------------------------------------

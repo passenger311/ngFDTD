@@ -12,6 +12,7 @@ local rank = mpi.comm_rank(mpi.MPI_COMM_WORLD)
 local size = mpi.comm_size(mpi.MPI_COMM_WORLD)
 local msgsize = 1
 local tag = 1
+local stat = mpi.create_status_array(1)
 
 for i = 1, 10 do
 
@@ -23,14 +24,14 @@ for i = 1, 10 do
    if rank == 0 then
       dest = 1 
       source = 1
-      mpi.send(ffi.cast("char*",outmsg),msgsize,dest,tag, mpi.MPI_COMM_WORLD)
-      stat = mpi.recv(ffi.cast("char*",inmsg),msgsize,source,tag, mpi.MPI_COMM_WORLD)
+      mpi.send(outmsg,msgsize,dest,tag, mpi.MPI_COMM_WORLD)
+      mpi.recv(inmsg,msgsize,source,tag, mpi.MPI_COMM_WORLD,stat)
       print("ping/pong "..tostring(msgsize).." bytes in "..tostring(mpi.wtime()-wtime).." secs")  
    elseif rank == 1 then
       dest = 0 
       source = 0
-      stat = mpi.recv(ffi.cast("char*",inmsg),msgsize,source,tag, mpi.MPI_COMM_WORLD)
-      mpi.send(ffi.cast("char*",outmsg),msgsize,dest,tag, mpi.MPI_COMM_WORLD)
+      mpi.recv(inmsg,msgsize,source,tag, mpi.MPI_COMM_WORLD,stat)
+      mpi.send(outmsg,msgsize,dest,tag, mpi.MPI_COMM_WORLD)
    end
 
    msgsize = msgsize*10
