@@ -58,6 +58,8 @@ function inject(m)
 	    size_t _ucount;
 	 };
 
+	 // type pointers
+
 	 typedef ptrdiff_t MPI_Aint;
 	 typedef long long MPI_Offset;
 	 typedef struct ompi_fortran_integer_t MPI_Fint;
@@ -71,17 +73,26 @@ function inject(m)
 	 typedef struct ompi_request_t *MPI_Request;
 	 typedef struct ompi_status_public_t MPI_Status;
 	 typedef struct ompi_win_t *MPI_Win;
+
+	 // null handlers
+
+	 extern struct ompi_group_t ompi_mpi_group_null;
+	 extern struct ompi_communicator_t ompi_mpi_comm_null;
+	 extern struct ompi_request_t ompi_request_null;
+	 extern struct ompi_op_t ompi_mpi_op_null;
+ 	 extern struct ompi_errhandler_t ompi_mpi_errhandler_null;
+	 extern struct ompi_info_t ompi_mpi_info_null;
+	 extern struct ompi_win_t ompi_mpi_win_null;
+	 extern struct ompi_file_t ompi_mpi_file_null;
 	 
+	 // predefined handlers
+
 	 extern struct ompi_communicator_t ompi_mpi_comm_world;
 	 extern struct ompi_communicator_t ompi_mpi_comm_self;
-	 extern struct ompi_communicator_t ompi_mpi_comm_null;
-	 
 	 extern struct ompi_group_t ompi_mpi_group_empty;
-	 extern struct ompi_group_t ompi_mpi_group_null;
-	 
-	 extern struct ompi_request_t ompi_request_null;
 
-	 extern struct ompi_op_t ompi_mpi_op_null;
+	 // operators
+
 	 extern struct ompi_op_t ompi_mpi_op_min;
 	 extern struct ompi_op_t ompi_mpi_op_max;
 	 extern struct ompi_op_t ompi_mpi_op_sum;
@@ -96,6 +107,8 @@ function inject(m)
 	 extern struct ompi_op_t ompi_mpi_op_minloc;
 	 extern struct ompi_op_t ompi_mpi_op_replace;
 	 
+	 // datatypes (omitted fortran, cxx and some misc types)
+
 	 extern struct ompi_datatype_t ompi_mpi_datatype_null;
 	 extern struct ompi_datatype_t ompi_mpi_char;
 	 extern struct ompi_datatype_t ompi_mpi_signed_char;
@@ -114,45 +127,8 @@ function inject(m)
 	 extern struct ompi_datatype_t ompi_mpi_long_double;
 	 extern struct ompi_datatype_t ompi_mpi_wchar;
 	 extern struct ompi_datatype_t ompi_mpi_packed;
-	 extern struct ompi_datatype_t ompi_mpi_cxx_bool;
-	 extern struct ompi_datatype_t ompi_mpi_cxx_cplex;
-	 extern struct ompi_datatype_t ompi_mpi_cxx_dblcplex;
-	 extern struct ompi_datatype_t ompi_mpi_cxx_ldblcplex;
-	 extern struct ompi_datatype_t ompi_mpi_logical;
-	 extern struct ompi_datatype_t ompi_mpi_character;
-	 extern struct ompi_datatype_t ompi_mpi_integer;
-	 extern struct ompi_datatype_t ompi_mpi_real;
-	 extern struct ompi_datatype_t ompi_mpi_dblprec;
-	 extern struct ompi_datatype_t ompi_mpi_cplex;
-	 extern struct ompi_datatype_t ompi_mpi_dblcplex;
-	 extern struct ompi_datatype_t ompi_mpi_ldblcplex;
-	 extern struct ompi_datatype_t ompi_mpi_2int;
-	 extern struct ompi_datatype_t ompi_mpi_2integer;
-	 extern struct ompi_datatype_t ompi_mpi_2real;
-	 extern struct ompi_datatype_t ompi_mpi_2dblprec;
-	 extern struct ompi_datatype_t ompi_mpi_2cplex;
-	 extern struct ompi_datatype_t ompi_mpi_2dblcplex;
-	 extern struct ompi_datatype_t ompi_mpi_float_int;
-	 extern struct ompi_datatype_t ompi_mpi_double_int;
-	 extern struct ompi_datatype_t ompi_mpi_longdbl_int;
 	 extern struct ompi_datatype_t ompi_mpi_short_int;
 	 extern struct ompi_datatype_t ompi_mpi_long_int;
-	 extern struct ompi_datatype_t ompi_mpi_logical1;
-	 extern struct ompi_datatype_t ompi_mpi_logical2;
-	 extern struct ompi_datatype_t ompi_mpi_logical4;
-	 extern struct ompi_datatype_t ompi_mpi_logical8;
-	 extern struct ompi_datatype_t ompi_mpi_integer1;
-	 extern struct ompi_datatype_t ompi_mpi_integer2;
-	 extern struct ompi_datatype_t ompi_mpi_integer4;
-	 extern struct ompi_datatype_t ompi_mpi_integer8;
-	 extern struct ompi_datatype_t ompi_mpi_integer16;
-	 extern struct ompi_datatype_t ompi_mpi_real2;
-	 extern struct ompi_datatype_t ompi_mpi_real4;
-	 extern struct ompi_datatype_t ompi_mpi_real8;
-	 extern struct ompi_datatype_t ompi_mpi_real16;
-	 extern struct ompi_datatype_t ompi_mpi_complex8;
-	 extern struct ompi_datatype_t ompi_mpi_complex16;
-	 extern struct ompi_datatype_t ompi_mpi_complex32;
 	 extern struct ompi_datatype_t ompi_mpi_int8_t;
 	 extern struct ompi_datatype_t ompi_mpi_uint8_t;
 	 extern struct ompi_datatype_t ompi_mpi_int16_t;
@@ -169,17 +145,14 @@ function inject(m)
 	 extern struct ompi_datatype_t ompi_mpi_c_double_complex;
 	 extern struct ompi_datatype_t ompi_mpi_c_long_double_complex;
 
-	 extern struct ompi_errhandler_t ompi_mpi_errhandler_null;
+	 // error policies
+
 	 extern struct ompi_errhandler_t ompi_mpi_errors_are_fatal;
 	 extern struct ompi_errhandler_t ompi_mpi_errors_return;
 	
-	 extern struct ompi_win_t ompi_mpi_win_null;
-	 extern struct ompi_file_t ompi_mpi_file_null;
-	 
-	 extern struct ompi_info_t ompi_mpi_info_null;
    ]]
 
-   -- null handles
+   -- null handlers
 
    m.MPI_GROUP_NULL = l.ompi_mpi_group_null
    m.MPI_COMM_NULL = l.ompi_mpi_comm_null
@@ -192,12 +165,10 @@ function inject(m)
    m.MPI_STATUS_IGNORE = ffi.cast("MPI_Status*",0)
    MPI_STATUSES_IGNORE = ffi.cast("MPI_Status*",0)
 
-   -- predefined handles
+   -- predefined handlers
 
    m.MPI_COMM_WORLD = l.ompi_mpi_comm_world
    m.MPI_COMM_SELF = l.ompi_mpi_comm_self
-   m.MPI_COMM_NULL = l.ompi_mpi_comm_null
-
    m.MPI_GROUP_EMPTY = l.ompi_mpi_group_empty
 
    -- operators
@@ -233,18 +204,12 @@ function inject(m)
    m.MPI_UNSIGNED_SHORT = l.ompi_mpi_unsigned_short
    m.MPI_UNSIGNED_LONG = l.ompi_mpi_unsigned_long
    m.MPI_UNSIGNED = l.ompi_mpi_unsigned
-   m.MPI_FLOAT_INT = l.ompi_mpi_float_int
-   m.MPI_DOUBLE_INT = l.ompi_mpi_double_int
-   m.MPI_LONG_DOUBLE_INT = l.ompi_mpi_longdbl_int
    m.MPI_LONG_INT = l.ompi_mpi_long_int
    m.MPI_SHORT_INT = l.ompi_mpi_short_int
-   m.MPI_2INT = l.ompi_mpi_2int
    m.MPI_WCHAR = l.ompi_mpi_wchar
    m.MPI_LONG_LONG_INT = l.ompi_mpi_long_long_int
    m.MPI_LONG_LONG = l.ompi_mpi_long_long_int
    m.MPI_UNSIGNED_LONG_LONG = l.ompi_mpi_unsigned_long_long
-   m.MPI_2COMPLEX = l.ompi_mpi_2cplex
-   m.MPI_2DOUBLE_COMPLEX = l.ompi_mpi_2dblcplex
    m.MPI_INT8_T = l.ompi_mpi_int8_t
    m.MPI_UINT8_T= l.ompi_mpi_uint8_t
    m.MPI_INT16_T= l.ompi_mpi_int16_t
