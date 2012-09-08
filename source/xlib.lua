@@ -19,15 +19,18 @@ module( _H.FILE )
 -------------------------------------------------------------------------------
 
 module.imports{
+   "string",
+   "table",
+   "math",
+   "ffi",
+   "os",
    "file",
    "utils",
    "module",
    "proto",
    "types",
-   "math",
    "data",
    "unit",
-   "os",
    "comms"
 }
 

@@ -29,17 +29,17 @@ module( _H.FILE )
 
 module.imports{ 
    "openmpi",
+   "mpich2",
+   "lam",
    "common",
    nil
 }
 
 local known_mpi_flavors = { 
    "openmpi",
+   "mpich2",
 --   "lam",
---   "mpich",
---   "mpich2",
 --   "mvapich",
---   "",
    nil
 }
 
@@ -73,7 +73,7 @@ function bind()
    for k,v in _pairs(errtab) do    -- setup error table
       errtab[v] = k
    end
-   return true
+   return lib
 end
 
 function abort(comm, errorcode)

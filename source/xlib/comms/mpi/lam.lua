@@ -1,6 +1,6 @@
 local _H = {
 -------------------------------------------------------------------------------
-FILE      = "xlib.comms.mpi.openmpi",
+FILE      = "xlib.comms.mpi.lam",
 VERSION   = "0.1",
 DATE      = "18/08/2012 16:09",
 COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
@@ -21,7 +21,7 @@ local _assert = assert
 local _print = print
 
 -------------------------------------------------------------------------------
---- <p><b>Module:</b> OpenMPI declarations. </p>
+--- <p><b>Module:</b> LAM/MPI declarations. </p>
 --
 module( _H.FILE )
 ------------------------------------------------------------------------------
@@ -29,9 +29,12 @@ module( _H.FILE )
 
 -- get rank and size
 function detect(m)
-   m.rank = _getenv("OMPI_COMM_WORLD_RANK")
-   m.size = _getenv("OMPI_COMM_WORLD_SIZE")
-   return m.size ~= nil
+   local v1 = _getenv("LAMKENYAPID")
+   local v2 = _getenv("LAMJOBID")
+   local v3 = _getenv("LAMPARENT")
+   m.rank = _getenv("LAMRANK")
+   m.size = _getenv("LAMWORLD")
+   return v1 and v2 and v3 and m.size and m.rank
 end
 
 -- inject definitions
@@ -39,8 +42,8 @@ function inject(m)
 
    -- bind to MPI library
 
-   local ok, l = _pcall( ffi.load, "mpi", true )		   
-   _assert(ok, "ffi failed to bind to MPI (openmpi) library") 
+   local ok, l = _pcall( ffi.load, "lam", true )		   
+   _assert(ok, "ffi failed to bind to MPI (lam) library") 
    m.lib = l
 
    -- declarations

@@ -552,6 +552,37 @@ double MPI_Wtime(void);
 	
   ]]
 
+
+   -- ADIO file io values; taken from OpenMPI mpi.h header but should be 
+  -- universal as they are identical to ROMIO values
+
+   m.MPI_MODE_CREATE           =   1
+   m.MPI_MODE_RDONLY           =   2
+   m.MPI_MODE_WRONLY           =   4
+   m.MPI_MODE_RDWR             =   8
+   m.MPI_MODE_DELETE_ON_CLOSE  =  16
+   m.MPI_MODE_UNIQUE_OPEN      =  32
+   m.MPI_MODE_EXCL             =  64
+   m.MPI_MODE_APPEND           = 128
+   m.MPI_MODE_SEQUENTIAL       = 256
+   
+   m.MPI_DISPLACEMENT_CURRENT  = -54278278
+   
+   m.MPI_SEEK_SET              = 600
+   m.MPI_SEEK_CUR              = 602
+   m.MPI_SEEK_END              = 604
+   
+   m.MPI_MAX_DATAREP_STRING= OPAL_MAX_DATAREP_STRING 
+
+   m.MPI_MODE_NOCHECK           =  1
+   m.MPI_MODE_NOPRECEDE         =  2
+   m.MPI_MODE_NOPUT             =  4
+   m.MPI_MODE_NOSTORE           =  8
+   m.MPI_MODE_NOSUCCEED         = 16
+   
+   m.MPI_LOCK_EXCLUSIVE         =  1
+   m.MPI_LOCK_SHARED            =  2
+
 end
 
 ------------------------------------------------------------------------------
