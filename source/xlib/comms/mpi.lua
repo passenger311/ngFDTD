@@ -199,8 +199,8 @@ datatype = {
    ["float"] = "MPI_FLOAT",
    ["double"] = "MPI_DOUBLE",
    ["long double"] = "MPI_LONG_DOUBLE",
-   ["complex float"] = "MPI_C_FLOAT_COMPLEX",
-   ["complex"] = "MPI_C_DOUBLE_COMPLEX",
+--   ["complex float"] = "MPI_C_FLOAT_COMPLEX",
+--   ["complex"] = "MPI_C_DOUBLE_COMPLEX",
 
    nil
 }

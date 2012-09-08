@@ -107,43 +107,38 @@ function inject(m)
 	 extern struct ompi_op_t ompi_mpi_op_minloc;
 	 extern struct ompi_op_t ompi_mpi_op_replace;
 	 
-	 // datatypes (omitted fortran, cxx and some misc types)
+	 // datatypes (omit fortran types)
 
 	 extern struct ompi_datatype_t ompi_mpi_datatype_null;
-	 extern struct ompi_datatype_t ompi_mpi_char;
-	 extern struct ompi_datatype_t ompi_mpi_signed_char;
-	 extern struct ompi_datatype_t ompi_mpi_unsigned_char;
 	 extern struct ompi_datatype_t ompi_mpi_byte;
+	 extern struct ompi_datatype_t ompi_mpi_packed;
+	 extern struct ompi_datatype_t ompi_mpi_char;
 	 extern struct ompi_datatype_t ompi_mpi_short;
-	 extern struct ompi_datatype_t ompi_mpi_unsigned_short;
 	 extern struct ompi_datatype_t ompi_mpi_int;
-	 extern struct ompi_datatype_t ompi_mpi_unsigned;
 	 extern struct ompi_datatype_t ompi_mpi_long;
-	 extern struct ompi_datatype_t ompi_mpi_unsigned_long;
-	 extern struct ompi_datatype_t ompi_mpi_long_long_int;
-	 extern struct ompi_datatype_t ompi_mpi_unsigned_long_long;
 	 extern struct ompi_datatype_t ompi_mpi_float;
 	 extern struct ompi_datatype_t ompi_mpi_double;
 	 extern struct ompi_datatype_t ompi_mpi_long_double;
-	 extern struct ompi_datatype_t ompi_mpi_wchar;
-	 extern struct ompi_datatype_t ompi_mpi_packed;
-	 extern struct ompi_datatype_t ompi_mpi_short_int;
+	 extern struct ompi_datatype_t ompi_mpi_unsigned_char;
+	 extern struct ompi_datatype_t ompi_mpi_signed_char;
+	 extern struct ompi_datatype_t ompi_mpi_unsigned_short;
+	 extern struct ompi_datatype_t ompi_mpi_unsigned_long;
+	 extern struct ompi_datatype_t ompi_mpi_unsigned;
+	 extern struct ompi_datatype_t ompi_mpi_float_int;
+	 extern struct ompi_datatype_t ompi_mpi_double_int;
+	 extern struct ompi_datatype_t ompi_mpi_longdbl_int;
 	 extern struct ompi_datatype_t ompi_mpi_long_int;
-	 extern struct ompi_datatype_t ompi_mpi_int8_t;
-	 extern struct ompi_datatype_t ompi_mpi_uint8_t;
-	 extern struct ompi_datatype_t ompi_mpi_int16_t;
-	 extern struct ompi_datatype_t ompi_mpi_uint16_t;
-	 extern struct ompi_datatype_t ompi_mpi_int32_t;
-	 extern struct ompi_datatype_t ompi_mpi_uint32_t;
-	 extern struct ompi_datatype_t ompi_mpi_int64_t;
-	 extern struct ompi_datatype_t ompi_mpi_uint64_t;
-	 extern struct ompi_datatype_t ompi_mpi_aint;
-	 extern struct ompi_datatype_t ompi_mpi_offset;
-	 extern struct ompi_datatype_t ompi_mpi_c_bool;
-	 extern struct ompi_datatype_t ompi_mpi_c_complex;
-	 extern struct ompi_datatype_t ompi_mpi_c_float_complex;
-	 extern struct ompi_datatype_t ompi_mpi_c_double_complex;
-	 extern struct ompi_datatype_t ompi_mpi_c_long_double_complex;
+	 extern struct ompi_datatype_t ompi_mpi_short_int;
+	 extern struct ompi_datatype_t ompi_mpi_2int;
+	 extern struct ompi_datatype_t ompi_mpi_ub;
+	 extern struct ompi_datatype_t ompi_mpi_lb;
+	 extern struct ompi_datatype_t ompi_mpi_wchar;
+	 extern struct ompi_datatype_t ompi_mpi_long_long_int;
+	 extern struct ompi_datatype_t ompi_mpi_unsigned_long_long;
+	 extern struct ompi_datatype_t ompi_mpi_2cplex;
+	 extern struct ompi_datatype_t ompi_mpi_2dblcplex;
+
+	 // note: mpi 2.1 specifies types that have been removed in 2.2
 
 	 // error policies
 
@@ -204,28 +199,23 @@ function inject(m)
    m.MPI_UNSIGNED_SHORT = l.ompi_mpi_unsigned_short
    m.MPI_UNSIGNED_LONG = l.ompi_mpi_unsigned_long
    m.MPI_UNSIGNED = l.ompi_mpi_unsigned
+   m.MPI_FLOAT_INT = l.ompi_mpi_float_int
+   m.MPI_DOUBLE_INT = l.ompi_mpi_double_int
+   m.MPI_LONG_DOUBLE_INT = l.ompi_mpi_longdbl_int
    m.MPI_LONG_INT = l.ompi_mpi_long_int
    m.MPI_SHORT_INT = l.ompi_mpi_short_int
+   m.MPI_2INT = l.ompi_mpi_2int
+   m.MPI_UB = l.ompi_mpi_ub
+   m.MPI_LB = l.ompi_mpi_lb
    m.MPI_WCHAR = l.ompi_mpi_wchar
    m.MPI_LONG_LONG_INT = l.ompi_mpi_long_long_int
    m.MPI_LONG_LONG = l.ompi_mpi_long_long_int
    m.MPI_UNSIGNED_LONG_LONG = l.ompi_mpi_unsigned_long_long
-   m.MPI_INT8_T = l.ompi_mpi_int8_t
-   m.MPI_UINT8_T= l.ompi_mpi_uint8_t
-   m.MPI_INT16_T= l.ompi_mpi_int16_t
-   m.MPI_UINT16_T = l.ompi_mpi_uint16_t
-   m.MPI_INT32_T= l.ompi_mpi_int32_t
-   m.MPI_UINT32_T = l.ompi_mpi_uint32_t
-   m.MPI_INT64_T= l.ompi_mpi_int64_t
-   m.MPI_UINT64_T = l.ompi_mpi_uint64_t
-   m.MPI_AINT = l.ompi_mpi_aint
-   m.MPI_OFFSET = l.ompi_mpi_offset
-   m.MPI_C_BOOL = l.ompi_mpi_c_bool
-   m.MPI_C_COMPLEX = l.ompi_mpi_c_complex
-   m.MPI_C_FLOAT_COMPLEX = l.ompi_mpi_c_float_complex
-   m.MPI_C_DOUBLE_COMPLEX = l.ompi_mpi_c_double_complex
-   m.MPI_C_LONG_DOUBLE_COMPLEX = l.ompi_mpi_c_long_double_complex
-   
+   m.MPI_2COMPLEX= l.ompi_mpi_2cplex
+   m.MPI_2DOUBLE_COMPLEX= l.ompi_mpi_2dblcplex
+
+   -- note: we do not interface Fortran datatypes.   
+
    -- error policy
 
    m.MPI_ERRORS_ARE_FATAL = l.ompi_mpi_errors_are_fatal
