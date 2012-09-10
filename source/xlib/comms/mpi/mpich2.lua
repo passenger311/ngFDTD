@@ -139,7 +139,7 @@ function inject(m)
    m.MPI_LONG_DOUBLE    = 0x4c00100c
    m.MPI_LONG_LONG_INT  = 0x4c000809
    m.MPI_UNSIGNED_LONG_LONG = 0x4c000819
-   m.MPI_LONG_LONG      MPI_LONG_LONG_INT
+   m.MPI_LONG_LONG =     MPI_LONG_LONG_INT
    m.MPI_PACKED         = 0x4c00010f
    m.MPI_LB             = 0x4c000010
    m.MPI_UB             = 0x4c000011
