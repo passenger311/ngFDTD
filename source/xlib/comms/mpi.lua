@@ -44,6 +44,12 @@ local known_mpi_flavors = {
    nil
 }
 
+local known_mpi_libnames = {
+    "mpi",
+    "mpi.so.0",
+    nil
+}
+
 ------------------------------------------------------------------------------
 
 
@@ -66,9 +72,26 @@ function detect()
    return _flavor
 end
 
-function bind()
-   flavor = detect()
+function loadlib(names)
+  local ok, lib
+  for i=1,#names do
+    ok, lib = _pcall( ffi.load, names[i], true )		   
+  end
+  if ok then
+    return lib
+  end
+end	
+
+function bind(names)
+  names = names or known_mpi_libnames
+  flavor = detect()
    if not flavor then return false end -- could not bind (running serial?)
+
+   -- bind to MPI library
+
+   lib = loadlib(names) 
+   _assert(lib, "ffi failed to bind to MPI library") 
+   
    _M[flavor].inject(_M)    -- inject flavor specific MPI definitions
    _M.common.inject(_M)     -- inject common MPI definitions
    for k,v in _pairs(errtab) do    -- setup error table

@@ -14,7 +14,7 @@ local msgsize = 1
 local tag = 1
 local stat = mpi.create_status_array(1)
 
-for i = 1, 10 do
+for i = 1, 9 do
 
    local inmsg = types.newptr("char", msgsize)
    local outmsg = types.newptr("char", msgsize)

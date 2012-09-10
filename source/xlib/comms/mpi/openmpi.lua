@@ -37,12 +37,8 @@ end
 -- inject definitions
 function inject(m)
 
-   -- bind to MPI library
-
-   local ok, l = _pcall( ffi.load, "mpi", true )		   
-   _assert(ok, "ffi failed to bind to MPI (openmpi) library") 
-   m.lib = l
-
+   l = m.lib
+  
    -- declarations
 
    ffi.cdef[[
@@ -135,8 +131,8 @@ function inject(m)
 	 extern struct ompi_datatype_t ompi_mpi_wchar;
 	 extern struct ompi_datatype_t ompi_mpi_long_long_int;
 	 extern struct ompi_datatype_t ompi_mpi_unsigned_long_long;
---	 extern struct ompi_datatype_t ompi_mpi_2cplex;
---	 extern struct ompi_datatype_t ompi_mpi_2dblcplex;
+//	 extern struct ompi_datatype_t ompi_mpi_2cplex;
+//	 extern struct ompi_datatype_t ompi_mpi_2dblcplex;
 
 	 // note: mpi 2.1 specifies types that have been removed in 2.2
 

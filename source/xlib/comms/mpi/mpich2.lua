@@ -40,12 +40,9 @@ end
 -- inject definitions
 function inject(m)
 
-   -- bind to MPI library
-
-   local ok, l = _pcall( ffi.load, "mpich", true )		   
-   _assert(ok, "ffi failed to bind to MPI (mpich) library") 
-   m.lib = l
-
+  
+   l = m.lib  
+  
    -- declarations
 
    ffi.cdef[[
@@ -82,6 +79,7 @@ function inject(m)
    ]]
 
    -- null handlers
+   
    m.MPI_COMM_NULL       = 0x04000000
    m.MPI_OP_NULL         = 0x18000000
    m.MPI_GROUP_NULL      = 0x08000000

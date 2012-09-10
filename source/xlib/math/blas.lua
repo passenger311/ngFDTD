@@ -160,10 +160,11 @@ void   dsyr2k(const char *uplo, const char *trans,
 ]]
 
 -- Bind to blas
-function bind()
-   local ok, l
-   for i=1, #known_blas_libnames do
-      local k = known_blas_libnames[i]
+function bind(names)
+  names = names or known_blas_libnames
+  local ok, l
+   for i=1, #names do
+      local k = names[i]
       ok, l = _pcall( ffi.load, k, true )		   
       if ok then 
 	 flavor = k
