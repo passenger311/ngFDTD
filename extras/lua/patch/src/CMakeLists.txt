@@ -1,10 +1,10 @@
 
 set(LD_LIBS m)
 
-if ( UNIX )
-  set(LD_LIBS ${LD_LIBS} dl readline)
-  set(C_FLAGS "${C_FLAGS} -DLUA_USE_LINUX" )
-endif()
+#if ( UNIX )
+#  set(LD_LIBS ${LD_LIBS} dl readline)
+#  set(C_FLAGS "${C_FLAGS} -DLUA_USE_LINUX" )
+#endif()
 
 
 set(CORE_SRCS 
