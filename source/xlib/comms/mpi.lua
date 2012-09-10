@@ -32,13 +32,14 @@ module.imports{
    "mpich2",
    "lam",
    "common",
+--   "mvapich",
    nil
 }
 
 local known_mpi_flavors = { 
    "openmpi",
    "mpich2",
---   "lam",
+   "lam",
 --   "mvapich",
    nil
 }

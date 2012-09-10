@@ -135,8 +135,8 @@ function inject(m)
 	 extern struct ompi_datatype_t ompi_mpi_wchar;
 	 extern struct ompi_datatype_t ompi_mpi_long_long_int;
 	 extern struct ompi_datatype_t ompi_mpi_unsigned_long_long;
-	 extern struct ompi_datatype_t ompi_mpi_2cplex;
-	 extern struct ompi_datatype_t ompi_mpi_2dblcplex;
+--	 extern struct ompi_datatype_t ompi_mpi_2cplex;
+--	 extern struct ompi_datatype_t ompi_mpi_2dblcplex;
 
 	 // note: mpi 2.1 specifies types that have been removed in 2.2
 
@@ -291,7 +291,6 @@ function inject(m)
 
    -- misc constants
 
-   local OPAL_MAX_DATAREP_STRING= 128
    local OPAL_MAX_ERROR_STRING= 256
    local OPAL_MAX_INFO_KEY= 36
    local OPAL_MAX_INFO_VAL= 256
@@ -337,15 +336,16 @@ function inject(m)
    m.MPI_IO = 2
    m.MPI_WTIME_IS_GLOBAL = 3
    m.MPI_APPNUM = 4
-   m.MPI_LASTUSEDCODE = 5
+--   m.MPI_LASTUSEDCODE = 5
    m.MPI_UNIVERSE_SIZE = 6
    m.MPI_WIN_BASE = 7
    m.MPI_WIN_SIZE = 8
    m.MPI_WIN_DISP_UNIT = 9
-   m.IMPI_CLIENT_SIZE = 10
-   m.IMPI_CLIENT_COLOR = 11
-   m.IMPI_HOST_SIZE = 12
-   m.IMPI_HOST_COLOR = 13
+
+--   m.IMPI_CLIENT_SIZE = 10
+--   m.IMPI_CLIENT_COLOR = 11
+--   m.IMPI_HOST_SIZE = 12
+--   m.IMPI_HOST_COLOR = 13
 
    m.MPI_CART=               1
    m.MPI_GRAPH=              2
