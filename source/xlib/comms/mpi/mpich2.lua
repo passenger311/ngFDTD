@@ -26,20 +26,20 @@ local _print = print
 module( _H.FILE )
 ------------------------------------------------------------------------------
 
+-- mpich2 does not autoload the mpl and opa libraries. 
+known_libnames = { "mpich", "mpl", "opa" }
 
 -- get rank and size
 function detect(m)
    -- check environment
-   local v1 = _getenv("HYDRA_CONTROL_FD")
-   local v2 = _getenv("MPICH_INTERFACE_HOSTNAME")
+   local v1 = _getenv("MPICH_INTERFACE_HOSTNAME")
    m.rank = _getenv("PMI_RANK")
    m.size = _getenv("PMI_SIZE")
-   return v1 and v2 and m.size and m.rank
+   return v1 and m.size and m.rank
 end
 
 -- inject definitions
 function inject(m)
-
   
    l = m.lib  
   
@@ -59,18 +59,33 @@ function inject(m)
 
 	 // types: mpich2 uses mostly integers
 
+	 typedef long long MPI_Offset;
 	 typedef int MPI_Datatype;
 	 typedef int MPI_Comm; 
 	 typedef long MPI_Aint;
 	 typedef long long MPI_Offset;
 	 typedef long MPI_Fint;
 	 typedef int MPI_Errhandler;
-	 typedef struct ADIOI_FileD *MPI_File;
 	 typedef int MPI_Group;
 	 typedef int *MPI_Info;
 	 typedef int *MPI_Op;
 	 typedef int MPI_Request;
 	 typedef int MPI_Win;
+	 typedef struct ADIOI_FileD *MPI_File;
+
+	 // file errhandler
+
+	 typedef void (MPI_File_errhandler_function)(MPI_File *, int *, ...);
+	 typedef MPI_File_errhandler_function MPI_File_errhandler_fn;
+
+	 // datarep
+
+	 typedef int (MPI_Datarep_extent_function)(MPI_Datatype datatype, 
+						   MPI_Aint *,
+						   void *);
+	 typedef int (MPI_Datarep_conversion_function)(void *, MPI_Datatype, 
+						       int, void *, 
+						       MPI_Offset, void *);
 
 	 // there are a few externals which might be used to id mpich library	
 	 extern int MPICH_ATTR_FAILED_PROCESSES;
@@ -79,7 +94,7 @@ function inject(m)
    ]]
 
    -- null handlers
-   
+
    m.MPI_COMM_NULL       = 0x04000000
    m.MPI_OP_NULL         = 0x18000000
    m.MPI_GROUP_NULL      = 0x08000000
@@ -89,6 +104,8 @@ function inject(m)
    m.MPI_INFO_NULL = 0x1c000000
    m.MPI_WIN_NULL = 0x20000000
    m.MPI_FILE_NULL = ffi.cast("MPI_File",0)
+   m.MPI_CONVERSION_FN_NULL = ffi.cast("MPI_Datarep_conversion_function *",0)
+
 
    m.MPI_STATUSES_IGNORE = ffi.cast("MPI_Status*",1)
    m.MPI_STATUS_IGNORE = ffi.cast("MPI_Status*",1)
@@ -147,12 +164,6 @@ function inject(m)
    m.MPI_SHORT_INT         = 0x8c000003
    m.MPI_2INT              = 0x4c000816
    m.MPI_LONG_DOUBLE_INT   = 0x8c000004
-
-   -- note: we do not interface Fortran datatypes.   
-
-   m.MPI_TYPECLASS_REAL = 1
-   m.MPI_TYPECLASS_INTEGER = 2
-   m.MPI_TYPECLASS_COMPLEX = 3
 
    -- error policy
 
@@ -230,7 +241,7 @@ function inject(m)
 
    m.MPI_MAX_PROCESSOR_NAME= 128
    m.MPI_MAX_ERROR_STRING=   1024
-   m.MPI_MAX_PORT_NAME=        256
+   m.MPI_MAX_PORT_NAME=      256
    m.MPI_MAX_OBJECT_NAME=    128
 
    m.MPI_UNDEFINED=          -32766
@@ -257,21 +268,12 @@ function inject(m)
 
    m.MPI_IN_PLACE= ffi.cast("void *",-1)
    
-   m.MPI_MODE_NOCHECK           =  1024
-   m.MPI_MODE_NOSTORE           =  2048
-   m.MPI_MODE_NOPUT             =  4096
-   m.MPI_MODE_NOPRECEDE         =  8192
-   m.MPI_MODE_NOSUCCEED         = 16384
-   
-   m.MPI_LOCK_EXCLUSIVE         =  234
-   m.MPI_LOCK_SHARED            =  235
-   
    m.MPI_TAG_UB = 064400001
    m.MPI_HOST = 0x64400003
    m.MPI_IO = 0x64400005
    m.MPI_WTIME_IS_GLOBAL = 0x64400007
    m.MPI_UNIVERSE_SIZE = 0x64400009
- --  m.MPI_LASTUSEDCODE = 0x6440000b
+   m.MPI_LASTUSEDCODE = 0x6440000b
    m.MPI_APPNUM = 0x6440000d
    
    m.MPI_WIN_BASE = 0x66000001
@@ -311,6 +313,15 @@ function inject(m)
    m.MPI_COMBINER_F90_INTEGER = 17
    m.MPI_COMBINER_RESIZED = 18
 
+   m.MPI_MODE_NOCHECK           =  1024
+   m.MPI_MODE_NOSTORE           =  2048
+   m.MPI_MODE_NOPUT             =  4096
+   m.MPI_MODE_NOPRECEDE         =  8192
+   m.MPI_MODE_NOSUCCEED         = 16384
+   
+   m.MPI_LOCK_EXCLUSIVE         =  234
+   m.MPI_LOCK_SHARED            =  235
+   
 end
 
 ------------------------------------------------------------------------------

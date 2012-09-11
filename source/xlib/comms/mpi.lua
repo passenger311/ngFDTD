@@ -2,15 +2,14 @@ local _H = {
 -------------------------------------------------------------------------------
 FILE      = "xlib.comms.mpi",
 VERSION   = "0.1",
-DATE      = "18/08/2012 16:09",
+MDATE      = "18/08/2012 16:09",
 COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
 }
 
-
-local ffi = require( "ffi" )
 local xlib = require( "xlib" )
 local module = xlib.module
+local ffi = xlib.ffi
 local types = xlib.types
 
 -------------------------------------------------------------------------------
@@ -30,7 +29,6 @@ module( _H.FILE )
 module.imports{ 
    "openmpi",
    "mpich2",
-   "lam",
    "common",
 --   "mvapich",
    nil
@@ -39,16 +37,10 @@ module.imports{
 local known_mpi_flavors = { 
    "openmpi",
    "mpich2",
-   "lam",
 --   "mvapich",
    nil
 }
 
-local known_mpi_libnames = {
-    "mpi",
-    "mpi.so.0",
-    nil
-}
 
 ------------------------------------------------------------------------------
 
@@ -72,32 +64,19 @@ function detect()
    return _flavor
 end
 
-function loadlib(names)
-  local ok, lib
-  for i=1,#names do
-    ok, lib = _pcall( ffi.load, names[i], true )		   
-  end
-  if ok then
-    return lib
-  end
-end	
-
 function bind(names)
-  names = names or known_mpi_libnames
-  flavor = detect()
+   flavor = detect()
    if not flavor then return false end -- could not bind (running serial?)
-
-   -- bind to MPI library
-
-   lib = loadlib(names) 
+   names = names or _M[flavor].known_libnames
+   local libs = ffi.tryload(names, true) 
+   lib = libs[1]  
    _assert(lib, "ffi failed to bind to MPI library") 
-   
    _M[flavor].inject(_M)    -- inject flavor specific MPI definitions
    _M.common.inject(_M)     -- inject common MPI definitions
    for k,v in _pairs(errtab) do    -- setup error table
       errtab[v] = k
-   end
-   return lib
+   end 
+   return true
 end
 
 function abort(comm, errorcode)
@@ -127,7 +106,7 @@ end
 
 -- mpi call wrapper
 local function mpicall(funstr,...)
-   _assert( lib, "not bound to an MPI library")
+   _assert( lib, "not bound to MPI library")
    local fun = lib["MPI_"..funstr]
    return fun(...)
 end
@@ -157,15 +136,16 @@ function init(args)
    -- handle command-line arguments
    args = args or { [0]="unknown" }
    local argc = #args+1
-   local argv = ffi.new("char *[?]", argc+1 )
+   local argv = ffi.new("char *[?]", argc+1)
    for i=0,argc-1 do
       argv[i] = ffi.new("char[?]", #args[i]+1, args[i])
    end
    argv[argc] = ffi.cast("char*", 0)
-   local argcp = ffi.new("int[1]", argc)
-   local argvp = ffi.new("char **[1]", argv)
-   assertok(mpicall("Init",argcp, arvp))
+   local argcp = ffi.new("int[1]",  argc )
+   local argvp = ffi.new("char **[1]",  argv )
+   assertok(mpicall("Init",argcp, argvp))
 end
+
 
 function finalize()
    assertok( mpicall("Finalize") )

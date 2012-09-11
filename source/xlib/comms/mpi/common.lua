@@ -8,8 +8,8 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 }
 
 
-local ffi = require( "ffi" )
 local xlib = require( "xlib" )
+local ffi = xlib.ffi
 local module = xlib.module
 
 -------------------------------------------------------------------------------
@@ -35,12 +35,7 @@ function inject(m)
 typedef int (MPI_Copy_function)(MPI_Comm, int, void *,
                                 void *, void *, int *);
 typedef int (MPI_Delete_function)(MPI_Comm, int, void *, void *);
-typedef int (MPI_Datarep_extent_function)(MPI_Datatype, MPI_Aint *, void *);
-typedef int (MPI_Datarep_conversion_function)(void *, MPI_Datatype,
-					      int, void *, MPI_Offset, void *);
 typedef void (MPI_Comm_errhandler_function)(MPI_Comm *, int *, ...);
-typedef void (ompi_file_errhandler_fn)(MPI_File *, int *, ...);
-typedef ompi_file_errhandler_fn MPI_File_errhandler_function;
 typedef void (MPI_Win_errhandler_function)(MPI_Win *, int *, ...);
 typedef void (MPI_Handler_function)(MPI_Comm *, int *, ...);
 typedef void (MPI_User_function)(void *, void *, int *, MPI_Datatype *);
@@ -59,9 +54,8 @@ typedef int (MPI_Grequest_free_function)(void *);
 typedef int (MPI_Grequest_cancel_function)(void *, int);
 
     ]]
-    
-    -- MPI-2 API functions
 
+    -- MPI-2 API functions
     ffi.cdef[[
 	 
 int MPI_Abort(MPI_Comm comm, int errorcode);
@@ -167,95 +161,6 @@ int MPI_Error_class(int errorcode, int *errorclass);
 int MPI_Error_string(int errorcode, char *string, int *resultlen);
 int MPI_Exscan(void *sendbuf, void *recvbuf, int count,
 		MPI_Datatype datatype, MPI_Op op, MPI_Comm comm);
-MPI_Fint MPI_File_c2f(MPI_File file);
-MPI_File MPI_File_f2c(MPI_Fint file);
-int MPI_File_call_errhandler(MPI_File fh, int errorcode);
-int MPI_File_create_errhandler(MPI_File_errhandler_function *func,
-			       MPI_Errhandler *errhandler);
-int MPI_File_set_errhandler( MPI_File file, MPI_Errhandler errhandler);
-int MPI_File_get_errhandler( MPI_File file, MPI_Errhandler *errhandler);
-int MPI_File_open(MPI_Comm comm, char *filename, int amode,
-		  MPI_Info info, MPI_File *fh);
-int MPI_File_close(MPI_File *fh);
-int MPI_File_delete(char *filename, MPI_Info info);
-int MPI_File_set_size(MPI_File fh, MPI_Offset size);
-int MPI_File_preallocate(MPI_File fh, MPI_Offset size);
-int MPI_File_get_size(MPI_File fh, MPI_Offset *size);
-int MPI_File_get_group(MPI_File fh, MPI_Group *group);
-int MPI_File_get_amode(MPI_File fh, int *amode);
-int MPI_File_set_info(MPI_File fh, MPI_Info info);
-int MPI_File_get_info(MPI_File fh, MPI_Info *info_used);
-int MPI_File_set_view(MPI_File fh, MPI_Offset disp, MPI_Datatype etype,
-		      MPI_Datatype filetype, char *datarep, MPI_Info info);
-int MPI_File_get_view(MPI_File fh, MPI_Offset *disp,
-		      MPI_Datatype *etype,
-		      MPI_Datatype *filetype, char *datarep);
-int MPI_File_read_at(MPI_File fh, MPI_Offset offset, void *buf,
-		     int count, MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_read_at_all(MPI_File fh, MPI_Offset offset, void *buf,
-			 int count, MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_write_at(MPI_File fh, MPI_Offset offset, void *buf,
-		      int count, MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_write_at_all(MPI_File fh, MPI_Offset offset, void *buf,
-			  int count, MPI_Datatype datatype, 
-			  MPI_Status *status);
-int MPI_File_iread_at(MPI_File fh, MPI_Offset offset, void *buf,
-		      int count, MPI_Datatype datatype, MPI_Request *request);
-int MPI_File_iwrite_at(MPI_File fh, MPI_Offset offset, void *buf,
-		       int count, MPI_Datatype datatype, MPI_Request *request);
-int MPI_File_read(MPI_File fh, void *buf, int count,			   
-		  MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_read_all(MPI_File fh, void *buf, int count,
-		      MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_write(MPI_File fh, void *buf, int count,
-		   MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_write_all(MPI_File fh, void *buf, int count,
-		       MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_iread(MPI_File fh, void *buf, int count,
-		   MPI_Datatype datatype, MPI_Request *request);
-int MPI_File_iwrite(MPI_File fh, void *buf, int count,
-		    MPI_Datatype datatype, MPI_Request *request);
-int MPI_File_seek(MPI_File fh, MPI_Offset offset, int whence);
-int MPI_File_get_position(MPI_File fh, MPI_Offset *offset);
-int MPI_File_get_byte_offset(MPI_File fh, MPI_Offset offset,
-			     MPI_Offset *disp);
-int MPI_File_read_shared(MPI_File fh, void *buf, int count,
-			 MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_write_shared(MPI_File fh, void *buf, int count,
-			  MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_iread_shared(MPI_File fh, void *buf, int count,
-			  MPI_Datatype datatype, MPI_Request *request);
-int MPI_File_iwrite_shared(MPI_File fh, void *buf, int count,
-			   MPI_Datatype datatype, MPI_Request *request);
-int MPI_File_read_ordered(MPI_File fh, void *buf, int count,
-			  MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_write_ordered(MPI_File fh, void *buf, int count,
-			    MPI_Datatype datatype, MPI_Status *status);
-int MPI_File_seek_shared(MPI_File fh, MPI_Offset offset, int whence);
-int MPI_File_get_position_shared(MPI_File fh, MPI_Offset *offset);
-int MPI_File_read_at_all_begin(MPI_File fh, MPI_Offset offset, void *buf,
-			       int count, MPI_Datatype datatype);
-int MPI_File_read_at_all_end(MPI_File fh, void *buf, MPI_Status *status);
-int MPI_File_write_at_all_begin(MPI_File fh, MPI_Offset offset, void *buf,
-				int count, MPI_Datatype datatype);
-int MPI_File_write_at_all_end(MPI_File fh, void *buf, MPI_Status *status);
-int MPI_File_read_all_begin(MPI_File fh, void *buf, int count,
-			    MPI_Datatype datatype);
-int MPI_File_read_all_end(MPI_File fh, void *buf, MPI_Status *status);
-int MPI_File_write_all_begin(MPI_File fh, void *buf, int count,
-			     MPI_Datatype datatype);
-int MPI_File_write_all_end(MPI_File fh, void *buf, MPI_Status *status);
-int MPI_File_read_ordered_begin(MPI_File fh, void *buf, int count,
-				MPI_Datatype datatype);
-int MPI_File_read_ordered_end(MPI_File fh, void *buf, MPI_Status *status);
-int MPI_File_write_ordered_begin(MPI_File fh, void *buf, int count,
-				 MPI_Datatype datatype);
-int MPI_File_write_ordered_end(MPI_File fh, void *buf, MPI_Status *status);
-int MPI_File_get_type_extent(MPI_File fh, MPI_Datatype datatype,
-			     MPI_Aint *extent);
-int MPI_File_set_atomicity(MPI_File fh, int flag);
-int MPI_File_get_atomicity(MPI_File fh, int *flag);
-int MPI_File_sync(MPI_File fh);
 int MPI_Finalize(void);
 int MPI_Finalized(int *flag);
 int MPI_Free_mem(void *base);
@@ -380,7 +285,7 @@ int MPI_Reduce_local(void *inbuf, void *inoutbuf, int count,
 		     MPI_Datatype datatype, MPI_Op op);
 int MPI_Reduce_scatter(void *sendbuf, void *recvbuf, int *recvcounts,
 		       MPI_Datatype datatype, MPI_Op op, MPI_Comm comm);
-int MPI_Register_datarep(char *datarep,
+int MPI_Register_datarep(char *datarep, 
 			 MPI_Datarep_conversion_function *read_conversion_fn,
 			 MPI_Datarep_conversion_function *write_conversion_fn,
 			 MPI_Datarep_extent_function *dtype_file_extent_fn,
@@ -427,15 +332,15 @@ int MPI_Status_f2c(MPI_Fint *f_status, MPI_Status *c_status);
 int MPI_Status_set_cancelled(MPI_Status *status, int flag);
 int MPI_Status_set_elements(MPI_Status *status, MPI_Datatype datatype,
 			    int count);
-int MPI_Testall(int count, MPI_Request array_of_requests[], int *flag,
-		MPI_Status array_of_statuses[]);
-int MPI_Testany(int count, MPI_Request array_of_requests[], int *index,
+int MPI_Testall(int count, MPI_Request* array_of_requests, int *flag,
+		MPI_Status* array_of_statuses);
+int MPI_Testany(int count, MPI_Request* array_of_requests, int *index,
 		int *flag, MPI_Status *status);
 int MPI_Test(MPI_Request *request, int *flag, MPI_Status *status);
 int MPI_Test_cancelled(MPI_Status *status, int *flag);
-int MPI_Testsome(int incount, MPI_Request array_of_requests[],
-		 int *outcount, int array_of_indices[],
-		 MPI_Status array_of_statuses[]);
+int MPI_Testsome(int incount, MPI_Request* array_of_requests,
+		 int *outcount, int* array_of_indices,
+		 MPI_Status* array_of_statuses);
 int MPI_Topo_test(MPI_Comm comm, int *status);
 MPI_Fint MPI_Type_c2f(MPI_Datatype datatype);
 int MPI_Type_commit(MPI_Datatype *type);
@@ -549,9 +454,102 @@ int MPI_Win_unlock(int rank, MPI_Win win);
 int MPI_Win_wait(MPI_Win win);
 double MPI_Wtick(void);
 double MPI_Wtime(void);
+
+]]
+
+ffi.cdef[[
+
+MPI_Fint MPI_File_c2f(MPI_File file);
+MPI_File MPI_File_f2c(MPI_Fint file);
+int MPI_File_call_errhandler(MPI_File fh, int errorcode);
+int MPI_File_create_errhandler(MPI_File_errhandler_fn *func,
+			       MPI_Errhandler *errhandler);
+int MPI_File_set_errhandler( MPI_File file, MPI_Errhandler errhandler);
+int MPI_File_get_errhandler( MPI_File file, MPI_Errhandler *errhandler);
+int MPI_File_open(MPI_Comm comm, char *filename, int amode,
+		  MPI_Info info, MPI_File *fh);
+int MPI_File_close(MPI_File *fh);
+int MPI_File_delete(char *filename, MPI_Info info);
+int MPI_File_set_size(MPI_File fh, MPI_Offset size);
+int MPI_File_preallocate(MPI_File fh, MPI_Offset size);
+int MPI_File_get_size(MPI_File fh, MPI_Offset *size);
+int MPI_File_get_group(MPI_File fh, MPI_Group *group);
+int MPI_File_get_amode(MPI_File fh, int *amode);
+int MPI_File_set_info(MPI_File fh, MPI_Info info);
+int MPI_File_get_info(MPI_File fh, MPI_Info *info_used);
+int MPI_File_set_view(MPI_File fh, MPI_Offset disp, MPI_Datatype etype,
+		      MPI_Datatype filetype, char *datarep, MPI_Info info);
+int MPI_File_get_view(MPI_File fh, MPI_Offset *disp,
+		      MPI_Datatype *etype,
+		      MPI_Datatype *filetype, char *datarep);
+int MPI_File_read_at(MPI_File fh, MPI_Offset offset, void *buf,
+		     int count, MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_read_at_all(MPI_File fh, MPI_Offset offset, void *buf,
+			 int count, MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_write_at(MPI_File fh, MPI_Offset offset, void *buf,
+		      int count, MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_write_at_all(MPI_File fh, MPI_Offset offset, void *buf,
+			  int count, MPI_Datatype datatype, 
+			  MPI_Status *status);
+int MPI_File_iread_at(MPI_File fh, MPI_Offset offset, void *buf,
+		      int count, MPI_Datatype datatype, MPI_Request *request);
+int MPI_File_iwrite_at(MPI_File fh, MPI_Offset offset, void *buf,
+		       int count, MPI_Datatype datatype, MPI_Request *request);
+int MPI_File_read(MPI_File fh, void *buf, int count,			   
+		  MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_read_all(MPI_File fh, void *buf, int count,
+		      MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_write(MPI_File fh, void *buf, int count,
+		   MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_write_all(MPI_File fh, void *buf, int count,
+		       MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_iread(MPI_File fh, void *buf, int count,
+		   MPI_Datatype datatype, MPI_Request *request);
+int MPI_File_iwrite(MPI_File fh, void *buf, int count,
+		    MPI_Datatype datatype, MPI_Request *request);
+int MPI_File_seek(MPI_File fh, MPI_Offset offset, int whence);
+int MPI_File_get_position(MPI_File fh, MPI_Offset *offset);
+int MPI_File_get_byte_offset(MPI_File fh, MPI_Offset offset,
+			     MPI_Offset *disp);
+int MPI_File_read_shared(MPI_File fh, void *buf, int count,
+			 MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_write_shared(MPI_File fh, void *buf, int count,
+			  MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_iread_shared(MPI_File fh, void *buf, int count,
+			  MPI_Datatype datatype, MPI_Request *request);
+int MPI_File_iwrite_shared(MPI_File fh, void *buf, int count,
+			   MPI_Datatype datatype, MPI_Request *request);
+int MPI_File_read_ordered(MPI_File fh, void *buf, int count,
+			  MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_write_ordered(MPI_File fh, void *buf, int count,
+			    MPI_Datatype datatype, MPI_Status *status);
+int MPI_File_seek_shared(MPI_File fh, MPI_Offset offset, int whence);
+int MPI_File_get_position_shared(MPI_File fh, MPI_Offset *offset);
+int MPI_File_read_at_all_begin(MPI_File fh, MPI_Offset offset, void *buf,
+			       int count, MPI_Datatype datatype);
+int MPI_File_read_at_all_end(MPI_File fh, void *buf, MPI_Status *status);
+int MPI_File_write_at_all_begin(MPI_File fh, MPI_Offset offset, void *buf,
+				int count, MPI_Datatype datatype);
+int MPI_File_write_at_all_end(MPI_File fh, void *buf, MPI_Status *status);
+int MPI_File_read_all_begin(MPI_File fh, void *buf, int count,
+			    MPI_Datatype datatype);
+int MPI_File_read_all_end(MPI_File fh, void *buf, MPI_Status *status);
+int MPI_File_write_all_begin(MPI_File fh, void *buf, int count,
+			     MPI_Datatype datatype);
+int MPI_File_write_all_end(MPI_File fh, void *buf, MPI_Status *status);
+int MPI_File_read_ordered_begin(MPI_File fh, void *buf, int count,
+				MPI_Datatype datatype);
+int MPI_File_read_ordered_end(MPI_File fh, void *buf, MPI_Status *status);
+int MPI_File_write_ordered_begin(MPI_File fh, void *buf, int count,
+				 MPI_Datatype datatype);
+int MPI_File_write_ordered_end(MPI_File fh, void *buf, MPI_Status *status);
+int MPI_File_get_type_extent(MPI_File fh, MPI_Datatype datatype,
+			     MPI_Aint *extent);
+int MPI_File_set_atomicity(MPI_File fh, int flag);
+int MPI_File_get_atomicity(MPI_File fh, int *flag);
+int MPI_File_sync(MPI_File fh);
 	
   ]]
-
 
    -- ADIO file io values; taken from OpenMPI mpi.h header but should be 
   -- universal as they are identical to ROMIO values
@@ -572,16 +570,8 @@ double MPI_Wtime(void);
    m.MPI_SEEK_CUR              = 602
    m.MPI_SEEK_END              = 604
    
-   m.MPI_MAX_DATAREP_STRING= OPAL_MAX_DATAREP_STRING 
+   m.MPI_MAX_DATAREP_STRING= 128
 
-   m.MPI_MODE_NOCHECK           =  1
-   m.MPI_MODE_NOPRECEDE         =  2
-   m.MPI_MODE_NOPUT             =  4
-   m.MPI_MODE_NOSTORE           =  8
-   m.MPI_MODE_NOSUCCEED         = 16
-   
-   m.MPI_LOCK_EXCLUSIVE         =  1
-   m.MPI_LOCK_SHARED            =  2
 
 end
 

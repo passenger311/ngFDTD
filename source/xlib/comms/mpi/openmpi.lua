@@ -7,17 +7,13 @@ COPYRIGHT = "(C) 2012 NEO·LIGHT Project",
 -------------------------------------------------------------------------------
 }
 
-
-local ffi = require( "ffi" )
 local xlib = require( "xlib" )
+local ffi = xlib.ffi
 local module = xlib.module
 
 -------------------------------------------------------------------------------
 
-local G = _G
 local _getenv = os.getenv
-local _pcall = pcall
-local _assert = assert
 local _print = print
 
 -------------------------------------------------------------------------------
@@ -26,6 +22,7 @@ local _print = print
 module( _H.FILE )
 ------------------------------------------------------------------------------
 
+known_libnames = { "mpi" }
 
 -- get rank and size
 function detect(m)
@@ -56,19 +53,19 @@ function inject(m)
 
 	 // type pointers
 
-	 typedef ptrdiff_t MPI_Aint;
 	 typedef long long MPI_Offset;
+	 typedef ptrdiff_t MPI_Aint;
 	 typedef struct ompi_fortran_integer_t MPI_Fint;
 	 typedef struct ompi_communicator_t *MPI_Comm; 
 	 typedef struct ompi_datatype_t *MPI_Datatype;
 	 typedef struct ompi_errhandler_t *MPI_Errhandler;
-	 typedef struct ompi_file_t *MPI_File;
 	 typedef struct ompi_group_t *MPI_Group;
 	 typedef struct ompi_info_t *MPI_Info;
 	 typedef struct ompi_op_t *MPI_Op;
 	 typedef struct ompi_request_t *MPI_Request;
 	 typedef struct ompi_status_public_t MPI_Status;
 	 typedef struct ompi_win_t *MPI_Win;
+	 typedef struct ompi_file_t *MPI_File;
 
 	 // null handlers
 
@@ -80,7 +77,7 @@ function inject(m)
 	 extern struct ompi_info_t ompi_mpi_info_null;
 	 extern struct ompi_win_t ompi_mpi_win_null;
 	 extern struct ompi_file_t ompi_mpi_file_null;
-	 
+
 	 // predefined handlers
 
 	 extern struct ompi_communicator_t ompi_mpi_comm_world;
@@ -115,8 +112,8 @@ function inject(m)
 	 extern struct ompi_datatype_t ompi_mpi_float;
 	 extern struct ompi_datatype_t ompi_mpi_double;
 	 extern struct ompi_datatype_t ompi_mpi_long_double;
-	 extern struct ompi_datatype_t ompi_mpi_unsigned_char;
 	 extern struct ompi_datatype_t ompi_mpi_signed_char;
+	 extern struct ompi_datatype_t ompi_mpi_unsigned_char;
 	 extern struct ompi_datatype_t ompi_mpi_unsigned_short;
 	 extern struct ompi_datatype_t ompi_mpi_unsigned_long;
 	 extern struct ompi_datatype_t ompi_mpi_unsigned;
@@ -131,8 +128,6 @@ function inject(m)
 	 extern struct ompi_datatype_t ompi_mpi_wchar;
 	 extern struct ompi_datatype_t ompi_mpi_long_long_int;
 	 extern struct ompi_datatype_t ompi_mpi_unsigned_long_long;
-//	 extern struct ompi_datatype_t ompi_mpi_2cplex;
-//	 extern struct ompi_datatype_t ompi_mpi_2dblcplex;
 
 	 // note: mpi 2.1 specifies types that have been removed in 2.2
 
@@ -140,6 +135,20 @@ function inject(m)
 
 	 extern struct ompi_errhandler_t ompi_mpi_errors_are_fatal;
 	 extern struct ompi_errhandler_t ompi_mpi_errors_return;
+
+	 // datarep
+
+	 typedef int (MPI_Datarep_extent_function)(MPI_Datatype, 
+						   MPI_Aint *, 
+						   void *);
+	 typedef int (MPI_Datarep_conversion_function)(void *, MPI_Datatype, 
+						       int, void *, 
+						       MPI_Offset, void *);
+	 
+	 // file errhandler
+
+	 typedef void (ompi_file_errhandler_fn)(MPI_File *, int *, ...);
+	 typedef ompi_file_errhandler_fn MPI_File_errhandler_fn;
 	
    ]]
 
@@ -153,6 +162,7 @@ function inject(m)
    m.MPI_INFO_NULL = l.ompi_mpi_info_null
    m.MPI_WIN_NULL = l.ompi_mpi_win_null
    m.MPI_FILE_NULL = l.ompi_mpi_file_null
+   m.MPI_CONVERSION_FN_NULL = ffi.cast("MPI_Datarep_conversion_function*", 0)
 
    m.MPI_STATUS_IGNORE = ffi.cast("MPI_Status*",0)
    MPI_STATUSES_IGNORE = ffi.cast("MPI_Status*",0)
@@ -212,12 +222,6 @@ function inject(m)
    m.MPI_LONG_LONG_INT = l.ompi_mpi_long_long_int
    m.MPI_LONG_LONG = l.ompi_mpi_long_long_int
    m.MPI_UNSIGNED_LONG_LONG = l.ompi_mpi_unsigned_long_long
-
-   -- note: we do not interface Fortran datatypes.   
-
-   m.MPI_TYPECLASS_INTEGER = 1
-   m.MPI_TYPECLASS_REAL = 2
-   m.MPI_TYPECLASS_COMPLEX = 3
 
    -- error policy
 
@@ -302,8 +306,7 @@ function inject(m)
    m.MPI_MAX_PROCESSOR_NAME= OPAL_MAX_PROCESSOR_NAME
    m.MPI_MAX_ERROR_STRING=   OPAL_MAX_ERROR_STRING
    m.MPI_MAX_OBJECT_NAME=    OPAL_MAX_OBJECT_NAME
-   m.MPI_MAX_PORT_NAME=        OPAL_MAX_PORT_NAME
---   m.MPI_MAX_NAME_LEN=         MPI_MAX_PORT_NAME  not part of standard.
+   m.MPI_MAX_PORT_NAME=      OPAL_MAX_PORT_NAME
 
    m.MPI_UNDEFINED=          -32766
    m.MPI_KEYVAL_INVALID=     -1
@@ -332,7 +335,7 @@ function inject(m)
    m.MPI_IO = 2
    m.MPI_WTIME_IS_GLOBAL = 3
    m.MPI_APPNUM = 4
---   m.MPI_LASTUSEDCODE = 5
+   m.MPI_LASTUSEDCODE = 5
    m.MPI_UNIVERSE_SIZE = 6
    m.MPI_WIN_BASE = 7
    m.MPI_WIN_SIZE = 8
@@ -374,7 +377,16 @@ function inject(m)
    m.MPI_COMBINER_F90_COMPLEX = 15
    m.MPI_COMBINER_F90_INTEGER = 16
    m.MPI_COMBINER_RESIZED = 17
+
+   m.MPI_MODE_NOCHECK           =  1
+   m.MPI_MODE_NOPRECEDE         =  2
+   m.MPI_MODE_NOPUT             =  4
+   m.MPI_MODE_NOSTORE           =  8
+   m.MPI_MODE_NOSUCCEED         = 16
    
+   m.MPI_LOCK_EXCLUSIVE         =  1
+   m.MPI_LOCK_SHARED            =  2
+
 end
 
 ------------------------------------------------------------------------------

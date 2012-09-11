@@ -106,6 +106,18 @@ function wrapf77defs(lib, extern_decls)
    return ffi.cdef( defs )
 end 
 
+--- Try ffi.load with a number of library names.
+function tryload(names, global)
+   local ok, libs = nil, {}
+   for i=1,#names do
+      ok, libs[i] = _pcall( ffi.load, names[i], global )		   
+--      _print(ok, libs[i])
+      if not ok then
+	 libs[i] = false
+      end
+   end
+   return libs
+end	
 
 
 -------------------------------------------------------------------------------

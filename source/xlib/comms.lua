@@ -13,9 +13,6 @@ local module = xlib.module
 
 -------------------------------------------------------------------------------
 
-local G = _G
-local _exit, _pairs, _type = exit, pairs, type
-local _stdout, _stderr, _format = io.stdout, io.stderr, string.format
 
 -------------------------------------------------------------------------------
 --- <p><b>Module:</b> Communication modules. </p>
@@ -24,7 +21,8 @@ module( _H.FILE )
 ------------------------------------------------------------------------------
 
 module.imports{ 
-   "mpi"
+   "mpi",
+   nil
 }
 
 ------------------------------------------------------------------------------

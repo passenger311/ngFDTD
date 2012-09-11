@@ -4,7 +4,7 @@ local xlib = require "xlib"
 local mpi = xlib.comms.mpi
 local types = xlib.types
 
-assert(mpi.bind()) -- dynamically bind to openmpi
+assert(mpi.bind()) -- dynamically bind to mpi
 
 mpi.init()
 
